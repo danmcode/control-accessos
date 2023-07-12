@@ -1,0 +1,175 @@
+<div class="row">
+    <div class="col-xl-4">
+        <div class="card">
+            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                <!-- show when the image is taken -->
+                <div id="capturedImageContainer"></div>
+
+                <!-- Show default or when is canceled -->
+                <div id="defaultImage">
+                    <img src="{{asset('images/default.png')}}">
+                </div>
+
+                <!-- Show streaming video to take a photo -->
+                <div class="cameraFeed" id="cameraFeed"></div>
+
+                <h2>
+                    <label id="labelName">
+                        Nombre
+                    </label>
+                    <label id="labelLastName">
+                        Visitante
+                    </label>
+                </h2>
+
+                <div class="mt-2">
+
+                    <!-- Show first time, open camera -->
+                    <a id="openCameraBtn" class="btn btn-primary">
+                        <i class="bi bi-camera"></i>
+                        {{ __('Capturar desde cámara') }}
+                    </a>
+
+                    <!-- Take a photo only show when the open Camera was pressed -->
+                    <a id="captureBtn" class="btn btn-primary captureBtn">
+                        <i class="bi bi-camera"></i>
+                        {{ __('Tomar fotografia') }}
+                    </a>
+
+                    <!-- Cancel a Photo -->
+                    <a id="cancelBtn" class="btn btn-danger">
+                        <i class="bi bi-x-circle"></i>
+                        {{ __('Cancelar') }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-8">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="form-heading mt-2 mb-2">Información básica</div>
+
+                <div class="row">
+                    <!-- Identification type -->
+                    <div class="col-6 mb-3">
+                        <label for="identification_type fw-bold" class="form-label">
+                            {{ __('Tipo de identificación:') }} <small> * </small>
+                        </label>
+                        <select name="identification_type" id="identification_type" class="form-select" required>
+                            <option value="" selected> {{ __('Seleccione...') }} </option>
+                            @if( isset($identificationTypes) && sizeof($identificationTypes) > 0 )
+                            @foreach( $identificationTypes as $key => $identificationType )
+                            <option value="{{ $identificationType->id }}"> {{ $identificationType->name  }}
+                            </option>
+                            @endforeach
+                            @endif
+                        </select>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ __('El tipo de identificación es requerido') }}</strong>
+                        </span>
+                    </div>
+
+                    <!-- identification -->
+                    <div class="col-6 mb-3">
+                        <label for="identification fw-bold" class="form-label">
+                            {{ __('Identificación:') }} <small> * </small>
+                        </label>
+                        <input type="text" name="identification" id="identification" class="form-control" required>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ __('La identificación es requerida') }}</strong>
+                        </span>
+                    </div>
+
+
+                    <!-- name -->
+                    <div class="col-4 mb-3">
+                        <label for="name fw-bold" class="form-label">
+                            {{ __('Nombres:') }} <small> * </small>
+                        </label>
+                        <input type="text" name="name" id="name" class="form-control" required>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ __('Los nombres son requeridos') }}</strong>
+                        </span>
+                    </div>
+
+                    <!-- last name -->
+                    <div class="col-4 mb-3">
+                        <label for="last_name fw-bold" class="form-label">
+                            {{ __('Apellidos:') }} <small> * </small>
+                        </label>
+                        <input type="text" name="last_name" id="last_name" class="form-control" required>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ __('Los apellidos son requeridos') }}</strong>
+                        </span>
+                    </div>
+
+                    <!-- last name -->
+                    <div class="col-4 mb-3">
+                        <label for="last_name fw-bold" class="form-label">
+                            {{ __('Tipo de visitante:') }} <small> * </small>
+                        </label>
+                        <select name="company_id" id="company_id" class="form-select" required>
+                            <option value="" selected> {{ __('Seleccione...') }} </option>
+                            @if( isset($companies) && sizeof($companies) > 0 )
+                            @foreach( $companies as $key => $company )
+                            <option value="{{ $company->id }}"> {{ $company->name  }} </option>
+                            @endforeach
+                            @endif
+                        </select>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ __('Los apellidos son requeridos') }}</strong>
+                        </span>
+                    </div>
+
+                    <!-- photo info -->
+                    <div class="col-4 mb-3">
+                        <input type="hidden" name="photoDataInput" id="photoDataInput" class="form-control">
+                    </div>
+
+                    <hr>
+                    <div class="form-heading mt-2 mb-2">Información Laboral</div>
+
+                    <!-- Company -->
+                    <div class="col-6 mb-3">
+                        <label for="company_id fw-bold" class="form-label">
+                            {{ __('Empresa:') }} <small> * </small>
+                        </label>
+                        <select name="company_id" id="company_id" class="form-select" required>
+                            <option value="" selected> {{ __('Seleccione...') }} </option>
+                            @if( isset($companies) && sizeof($companies) > 0 )
+                            @foreach( $companies as $key => $company )
+                            <option value="{{ $company->id }}"> {{ $company->name  }} </option>
+                            @endforeach
+                            @endif
+                        </select>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ __('La empresa es requerida') }}</strong>
+                        </span>
+                    </div>
+
+                    <!-- Area -->
+                    <div class="col-6 mb-3">
+                        <label for="area_id fw-bold" class="form-label">
+                            {{ __('ARL:') }} <small> * </small>
+                        </label>
+                        <select name="area_id" id="area_id" class="form-select" required>
+                            <option value="" selected> {{ __('Seleccione...') }} </option>
+                            @if( isset($areas) && sizeof($areas) > 0 )
+                            @foreach( $areas as $key => $area )
+                            <option value="{{ $area->id }}"> {{ $area->name  }} </option>
+                            @endforeach
+                            @endif
+                        </select>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ __('El área es requerida') }}</strong>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
