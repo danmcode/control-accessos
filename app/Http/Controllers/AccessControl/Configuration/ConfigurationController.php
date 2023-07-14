@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\AccessControl\Company;
 use App\Models\AccessControl\Area;
 use App\Models\AccessControl\Arl;
+use App\Models\AccessControl\EquipmentTypes;
 use App\Models\AccessControl\IdentificationType;
 use App\Models\AccessControl\JobTitle;
 use App\Models\AccessControl\Location;
+use App\Models\AccessControl\vehicleTypes;
 use App\Models\AccessControl\VisitorTypes;
 use Illuminate\Http\Request;
 
@@ -50,6 +52,15 @@ class ConfigurationController extends Controller
         //get all arls
         $arls = Arl::where('is_active', '=', true)
             ->get();
+        
+        //get all Equipments types
+        $equipmentsTypes = EquipmentTypes::where('is_active','=',true)
+        ->get();
+
+        //get all vehicles types
+        $vehiclesTypes = vehicleTypes::where('is_active','=',true)
+        ->get();
+        
     
         //return to view
         return view('AccessControl.Configuration.index', [
@@ -60,6 +71,8 @@ class ConfigurationController extends Controller
             'identificationTypes' => $identificationTypes,
             'visitorTypes' => $visitorTypes,
             'arls' => $arls,
+            'vehiclestypes'=> $vehiclesTypes,
+            'equipmentstypes'=>$equipmentsTypes
         ]);
     }
 

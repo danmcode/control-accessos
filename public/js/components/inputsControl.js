@@ -4,6 +4,9 @@ const inputLastName = document.getElementById('last_name');
 const labelName = document.getElementById('labelName');
 const labelLastName = document.getElementById('labelLastName');
 
+
+
+
 //Select and Job Title indicator
 const selectJobTitle = document.getElementById('job_title_id');
 const labelJobTitle = document.getElementById('job_title_label');
@@ -20,6 +23,11 @@ inputName.addEventListener('click', (event) =>{
     }
 });
 
+inputLastName.addEventListener('click', (event) =>{
+    if( labelLastName.textContent == "Colaborador" ){
+        labelLastName.textContent = "";
+    }
+});
 inputLastName.addEventListener('click', (event) =>{
     if( labelLastName.textContent == "Colaborador" ){
         labelLastName.textContent = "";
@@ -45,3 +53,4 @@ selectJobTitle.addEventListener('change', () =>{
         labelJobTitle.textContent = selected;
     }
 });
+

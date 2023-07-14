@@ -244,5 +244,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+<script src="{{ asset('js/components/camera.js') }}"></script>
+<script src="{{ asset('js/components/inputsControl.js') }}"></script>
 
 @endsection

@@ -230,10 +230,13 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                <i class="bi bi-door-open"></i> {{ __('Cerrar Sesióna') }}
-                            </a>
+                            <form action="{{route('logout')}}" method="post">
+                                @csrf
+                                <a class="dropdown-item" href="route('logout')" onclick="event.preventDefault();
+                                                     this.closest('form').submit();">
+                                    <i class="bi bi-door-open"></i> {{ __('Cerrar Sesión') }}
+                                </a>
+                            </form>
                         </li>
 
                     </ul><!-- End Profile Dropdown Items -->
@@ -289,6 +292,11 @@
                     <li>
                         <a href="{{ route('visitantes.index') }}">
                             <span>Ver visitantes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('registrar-visitante') }}">
+                            <span>Crear visitantes</span>
                         </a>
                     </li>
                 </ul>

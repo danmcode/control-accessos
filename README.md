@@ -64,3 +64,11 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Comands for start project
+
+- npm install datatables.net-dt
+- npm install
+- npm install jquery
+- composer require laravel/ui
+- composer install

@@ -248,6 +248,6 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('js/collaborators/camera.js') }}"></script>
-<script src="{{ asset('js/collaborators/inputsControl.js') }}"></script>
+<script src="{{ asset('js/components/camera.js') }}"></script>
+<script src="{{ asset('js/components/inputsControl.js') }}"></script>
 @endsection

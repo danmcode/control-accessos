@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -73,6 +74,12 @@ Route::resource('tipo-indentificaciones', 'App\Http\Controllers\AccessControl\Id
 
 //Visitors Types
 Route::resource('tipo-visitantes', 'App\Http\Controllers\AccessControl\VisitorTypesController');
+
+//Equipaments Types
+Route::resource('tipo-equipos','App\Http\Controllers\AccessControl\EquipmentTypeController');
+
+//vehicles Types
+Route::resource('tipo-vehiculos','App\Http\Controllers\AccessControl\VehicleTypeController');
 
 //arls
 Route::resource('arls', 'App\Http\Controllers\AccessControl\ArlController')

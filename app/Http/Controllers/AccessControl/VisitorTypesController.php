@@ -55,7 +55,7 @@ class VisitorTypesController extends Controller
     public function destroy(string $visitorTypes)
     {
         // Soft delete
-        $visitorTypeToDelete = VisitorTypes::find($visitorType);
+        $visitorTypeToDelete = VisitorTypes::find($visitorTypes);
         $visitorTypeToDelete->is_active = false;
         $visitorTypeToDelete->update();
 

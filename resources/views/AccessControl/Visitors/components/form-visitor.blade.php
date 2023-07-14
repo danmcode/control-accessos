@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-xl-4">
+    <div class="col-xl-5">
         <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                 <!-- show when the image is taken -->
@@ -21,7 +21,7 @@
                         Visitante
                     </label>
                 </h2>
-
+                
                 <div class="mt-2">
 
                     <!-- Show first time, open camera -->
@@ -30,11 +30,19 @@
                         {{ __('Capturar desde cámara') }}
                     </a>
 
+                    <!-- Upload a photo  -->
+                    <a id="uploadPhotoBtn" class="btn btn-secondary">
+                        <i class="bi bi-upload"></i>
+                        {{ __('Subir fotografía') }}
+                    </a>
+
                     <!-- Take a photo only show when the open Camera was pressed -->
                     <a id="captureBtn" class="btn btn-primary captureBtn">
                         <i class="bi bi-camera"></i>
                         {{ __('Tomar fotografia') }}
                     </a>
+
+
 
                     <!-- Cancel a Photo -->
                     <a id="cancelBtn" class="btn btn-danger">
@@ -46,7 +54,7 @@
         </div>
     </div>
 
-    <div class="col-xl-8">
+    <div class="col-xl-7">
         <div class="card">
             <div class="card-body">
 
@@ -62,7 +70,7 @@
                             <option value="" selected> {{ __('Seleccione...') }} </option>
                             @if( isset($identificationTypes) && sizeof($identificationTypes) > 0 )
                             @foreach( $identificationTypes as $key => $identificationType )
-                            <option value="{{ $identificationType->id }}"> {{ $identificationType->name  }}
+                            <option value="{{ $identificationType->id }}"> {{ $identificationType->name }}
                             </option>
                             @endforeach
                             @endif
@@ -115,7 +123,7 @@
                             <option value="" selected> {{ __('Seleccione...') }} </option>
                             @if( isset($companies) && sizeof($companies) > 0 )
                             @foreach( $companies as $key => $company )
-                            <option value="{{ $company->id }}"> {{ $company->name  }} </option>
+                            <option value="{{ $company->id }}"> {{ $company->name }} </option>
                             @endforeach
                             @endif
                         </select>
@@ -141,7 +149,7 @@
                             <option value="" selected> {{ __('Seleccione...') }} </option>
                             @if( isset($companies) && sizeof($companies) > 0 )
                             @foreach( $companies as $key => $company )
-                            <option value="{{ $company->id }}"> {{ $company->name  }} </option>
+                            <option value="{{ $company->id }}"> {{ $company->name }} </option>
                             @endforeach
                             @endif
                         </select>
@@ -159,7 +167,7 @@
                             <option value="" selected> {{ __('Seleccione...') }} </option>
                             @if( isset($areas) && sizeof($areas) > 0 )
                             @foreach( $areas as $key => $area )
-                            <option value="{{ $area->id }}"> {{ $area->name  }} </option>
+                            <option value="{{ $area->id }}"> {{ $area->name }} </option>
                             @endforeach
                             @endif
                         </select>
@@ -169,7 +177,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

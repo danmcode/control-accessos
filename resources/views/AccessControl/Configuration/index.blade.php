@@ -54,9 +54,22 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link" id="configuration-equipment-types-tab" data-bs-toggle="tab"
+                        href="#configuration-equipment-types" role="tab" aria-controls="configuration-equipment-types"
+                        aria-selected="false">Tipos de equipo</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" id="configuration-vehicle-types-tab" data-bs-toggle="tab"
+                        href="#configuration-vehicle-types" role="tab" aria-controls="configuration-vehicle-types"
+                        aria-selected="false">Tipos de Vehiculo</a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link" id="configuration-arl-tab" data-bs-toggle="tab" href="#configuration-arl"
                         role="tab" aria-controls="configuration-arl" aria-selected="false">ARL</a>
                 </li>
+
 
             </ul>
 
@@ -114,6 +127,20 @@
                     @include('AccessControl.Configuration.components.create-show-visitors-type')
                 </div>
 
+                <!-- equipament types -->
+                <div class="tab-pane fade p-3" id="configuration-equipment-types" role="tabpanel"
+                    aria-labelledby="configuration-equipment-types-tab">
+                    <!-- Contenido de la Tab 3 -->
+                    @include('AccessControl.Configuration.components.create-show-equipments-type')
+                </div>
+
+                <!-- vehicle types -->
+                <div class="tab-pane fade p-3" id="configuration-vehicle-types" role="tabpanel"
+                    aria-labelledby="configuration-vehicle-types-tab">
+                    <!-- Contenido de la Tab 3 -->
+                    @include('AccessControl.Configuration.components.create-show-vehicles-type')
+                </div>
+
                 <!-- arl -->
                 <div class="tab-pane fade p-3" id="configuration-arl" role="tabpanel"
                     aria-labelledby="configuration-arl-tab">
@@ -147,7 +174,7 @@
 
 @section('scripts')
 <script>
-/**
+    /**
  * Manage the tabs
  */
 document.addEventListener('DOMContentLoaded', function() {

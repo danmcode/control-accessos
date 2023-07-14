@@ -22,14 +22,14 @@
 <body>
     <div class="row">
         <!-- Image -->
-        <div class="col-6 image-login">
+        <div class="col-md-6   image-login">
             <div class="app-title">
 
             </div>
         </div>
 
         <!-- Login form -->
-        <div class="col-6 login-form">
+        <div class="col-md-6 col-sm-12 login-form">
             <form method="POST" action="{{ route('login') }}" novalidate>
 
                 <img src="{{ asset('images/prochem.png') }}" alt="" srcset="">
@@ -67,7 +67,7 @@
                             autocomplete="current-password">
 
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ __('La conraseña es requerida') }}</strong>
+                            <strong>{{ __('La contraseña es requerida') }}</strong>
                         </span>
                     </div>
                 </div>
