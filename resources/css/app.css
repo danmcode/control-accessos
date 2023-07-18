@@ -913,6 +913,14 @@ h6 {
     align-items: center;
 }
 
+.collaborator-info{
+    display: none;
+}
+
+.collaborator-create{
+    display: none;
+}
+
 /*----------------------------------
  # Visitors card
 *-----------------------------------*/

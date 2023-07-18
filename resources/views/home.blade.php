@@ -121,76 +121,119 @@
                                         <img src="{{ asset('images/pisa.png') }}" class="company-logo">
                                     </span>
 
-                                    <input class="form-control" list="datalistOptions" id="exampleDataList"
-                                        placeholder="Buscar colaborador, visitante ...">
+                                    <input class="form-control" list="collaborators" id="search"
+                                        placeholder="Buscar colaborador..">
 
-                                    <datalist id="datalistOptions">
-                                        <option value="Fabian Riquet">
-                                        <option value="Raquel Perez">
-                                        <option value="Jaider Vasquez">
-                                        <option value="Daniel Muelas">
+                                    <datalist id="collaborators">
+                                        @if( isset($users) && sizeof($users) > 0 )
+                                        @foreach( $users as $user )
+                                        <option id="collaboratorList" value="{{ $user->name }}  {{ $user->last_name }}"
+                                            data-id="{{ $user->id }}"
+                                            data-full-name="{{ $user->name }} {{ $user->last_name }}"
+                                            data-identification="{{ $user->identification }}"
+                                            data-area="{{ $user->collaborators->area->name }}"
+                                            data-job-title="{{ $user->collaborators->jobTitle->name }}"
+                                            data-location="{{ $user->collaborators->location->name }}"
+                                            data-photo-path="{{ $user->photo_path }}">
+                                            @endforeach
+                                            @endif
                                     </datalist>
 
                                     <span class="input-group-text">
                                         <i class="bi bi-search"></i>
                                     </span>
                                 </div>
-                            </div>
+                                <!-- User Information -->
+                                <div class="collaborator-info" id="collaborator-info">
+                                    <div class="row">
+                                        <div class="col-4 mt-4">
+                                            <div class="user-image">
+                                                <img id="photo" src="{{ asset('images/daniel_muelas.jpg') }}" alt="">
+                                            </div>
+                                        </div>
 
-                            <!-- User Information -->
-                            <div class="row">
-                                <div class="col-4 mt-4">
-                                    <div class="user-image">
-                                        <img src="{{ asset('images/daniel_muelas.jpg') }}" alt="">
+                                        <div class="col-4">
+                                            <div id="full-name" class="card-title mt-4">
+                                                DANIEL ALEXANDER MUELAS RIVERA
+                                            </div>
+                                            <div>
+                                                <i class="bi bi-person-vcard-fill"></i> <span id="identification">
+                                                    1144097956 </span>
+                                            </div>
+                                            <div>
+                                                <i class="bi bi-geo-alt-fill"></i> <span id="location"> Técnologia,
+                                                    Edificio Antiguo
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <i class="bi bi-person-fill"></i> <span id="job-title"> Coordinador de
+                                                    Técnologia
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-4 align-self-center">
+                                            <a href="" class="dashboard-user-door door-in">
+                                                <div class="content-icon"> <i class="bi bi-box-arrow-right"></i> </div>
+                                                <div class="content-text"> {{ __('Ingreso peatonal') }} </div>
+                                            </a>
+
+                                            <a href="" class="dashboard-user-door door-out mt-2">
+                                                <div class="content-icon"> <i class="bi bi-box-arrow-left"></i> </div>
+                                                <div class="content-text"> {{ __('Salida peatonal') }} </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- End user information -->
+                                    <hr>
+                                    <div class="d-flex justify-content-center">
+
+                                        <a href="{{ route('registrar-visitante') }}"
+                                            class="dashboard-user-action user-action-primary m-1">
+                                            <div class="content-icon"> <i class="bi bi-person-fill-add"></i> </div>
+                                            <div class="content-text"> {{ __('Registrar visitante') }} </div>
+                                        </a>
+
+                                        <a href="" class="dashboard-user-action user-action-warning m-1">
+                                            <div class="content-icon"> <i class="bi bi-person-video"></i> </div>
+                                            <div class="content-text"> {{ __('Ver colaborador') }} </div>
+                                        </a>
+
+                                        <a href="" class="dashboard-user-action user-action-success m-1">
+                                            <div class="content-icon"> <i class="bi bi-person-fill-check"></i> </div>
+                                            <div class="content-text"> {{ __('Ver permisos') }} </div>
+                                        </a>
                                     </div>
                                 </div>
 
-                                <div class="col-4">
-                                    <div class="card-title mt-4">
-                                        DANIEL ALEXANDER MUELAS RIVERA
+                                <div class="collaborator-create">
+                                    <div class="d-flex justify-content-center">
+                                        <div id="full-name" class="card-title mt-4">
+                                            El colaborador que buscas aún no esta registrado
+                                        </div>
                                     </div>
-                                    <div>
-                                        <i class="bi bi-person-vcard-fill"></i> <span> 1144097956 </span>
-                                    </div>
-                                    <div>
-                                        <i class="bi bi-geo-alt-fill"></i> <span> Técnologia, Edificio Antiguo </span>
-                                    </div>
-                                    <div>
-                                        <i class="bi bi-person-fill"></i> <span> Coordinador de Técnologia </span>
+                                    <!-- End user information -->
+
+                                    <div class="d-flex justify-content-center">
+                                        <a href="{{ route('registrar-visitante') }}"
+                                            class="dashboard-user-action user-action-primary m-1">
+                                            <div class="content-icon"> <i class="bi bi-person-fill-add"></i> </div>
+                                            <div class="content-text"> {{ __('Crear Colaborador') }} </div>
+                                        </a>
+
                                     </div>
                                 </div>
 
-                                <div class="col-4 align-self-center">
-                                    <a href="" class="dashboard-user-door door-in">
-                                        <div class="content-icon"> <i class="bi bi-box-arrow-right"></i> </div>
-                                        <div class="content-text"> {{ __('Ingreso peatonal') }} </div>
-                                    </a>
-
-                                    <a href="" class="dashboard-user-door door-out mt-2">
-                                        <div class="content-icon"> <i class="bi bi-box-arrow-left"></i> </div>
-                                        <div class="content-text"> {{ __('Salida peatonal') }} </div>
-                                    </a>
+                                <div class="collaborator-default" id="collaborator-default">
+                                    <div class="d-flex justify-content-center">
+                                        <div id="full-name" class="card-title mt-4">
+                                         Realiza la busqueda de un colaborador <i class="bi bi-search"></i>
+                                        </div>
+                                    </div>
+                                    <!-- End user information -->
                                 </div>
                             </div>
-                            <!-- End user information -->
-                            <hr>
-                            <div class="d-flex justify-content-center">
 
-                                <a href="{{ route('registrar-visitante') }}" class="dashboard-user-action user-action-primary m-1">
-                                    <div class="content-icon"> <i class="bi bi-person-fill-add"></i> </div>
-                                    <div class="content-text"> {{ __('Registrar visitante') }} </div>
-                                </a>
-
-                                <a href="" class="dashboard-user-action user-action-warning m-1">
-                                    <div class="content-icon"> <i class="bi bi-person-video"></i> </div>
-                                    <div class="content-text"> {{ __('Ver colaborador') }} </div>
-                                </a>
-
-                                <a href="" class="dashboard-user-action user-action-success m-1">
-                                    <div class="content-icon"> <i class="bi bi-person-fill-check"></i> </div>
-                                    <div class="content-text"> {{ __('Ver permisos') }} </div>
-                                </a>
-                            </div>
                         </div>
                         <hr>
                         <!-- End User search -->
@@ -394,4 +437,8 @@
         <!-- End Right side columns -->
     </div>
 </section>
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/collaborators/homeCollaborators.js') }}"></script>
 @endsection

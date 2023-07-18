@@ -24,7 +24,6 @@ class CollaboratorController extends Controller
     public function index()
     {
         // Get all user collaborator active
-        // TODO: Get all relationships
         $users = User::where('is_active', '=', true)
             ->where('id', '!=', 1)
             ->with('identificationTypes')
