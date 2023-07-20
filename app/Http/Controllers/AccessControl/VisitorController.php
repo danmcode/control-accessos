@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\AccessControl;
 
-use App\Http\Controllers\Controller;
-use App\Models\AccessControl\Visitor;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\AccessControl\Arl;
+use App\Models\AccessControl\Visitor;
+use App\Models\AccessControl\IdentificationType;
+use App\Models\AccessControl\Company;
 
 class VisitorController extends Controller
 {
@@ -22,7 +25,24 @@ class VisitorController extends Controller
      */
     public function create()
     {
-        //
+                //Get all identifications types
+                $identificationTypes = IdentificationType::where('is_active', '=', true)
+                ->get();
+        
+                //Get all companies
+                $companies = Company::where('is_active', '=', true)
+                ->get();
+
+                $arls = Arl::where('is_active','=',true)
+                ->get();
+        
+        
+                return view('AccessControl.Visitors.create',[
+                    'companies' => $companies,
+                    'identificationTypes' => $identificationTypes,
+                    'arls'=>$arls
+                ]); 
+
     }
 
     /**
@@ -69,7 +89,9 @@ class VisitorController extends Controller
      * See the view to add a visitor to a specific collaborator
      * TODO: Especificar el pk del usuario
      */
-    public function createVisitorToColabollator(){
+    public function createVisitorToColabollator()
+    {
+
 
         return view('AccessControl.Visitors.create');
     }

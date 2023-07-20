@@ -294,11 +294,6 @@
                             <span>Ver visitantes</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('registrar-visitante') }}">
-                            <span>Crear visitantes</span>
-                        </a>
-                    </li>
                 </ul>
             </li>
             <!-- End visitors Colaboradores -->

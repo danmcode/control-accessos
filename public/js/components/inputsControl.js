@@ -1,9 +1,10 @@
 //input text and label
+
+//Collabotors
 const inputName = document.getElementById('name');
 const inputLastName = document.getElementById('last_name');
 const labelName = document.getElementById('labelName');
 const labelLastName = document.getElementById('labelLastName');
-
 
 
 
@@ -15,6 +16,7 @@ labelName.textContent = (inputName.value) ? inputName.value : "Nombre";
 labelLastName.textContent = (inputLastName.value) ? labelLastName.value : "Colaborador";
 
 
+
 labelJobTitle.textContent = (selectJobTitle.value) ? selectJobTitle[selectJobTitle.selectedIndex].innerText  : "Cargo";
 
 inputName.addEventListener('click', (event) =>{
@@ -23,16 +25,13 @@ inputName.addEventListener('click', (event) =>{
     }
 });
 
+
 inputLastName.addEventListener('click', (event) =>{
     if( labelLastName.textContent == "Colaborador" ){
         labelLastName.textContent = "";
     }
 });
-inputLastName.addEventListener('click', (event) =>{
-    if( labelLastName.textContent == "Colaborador" ){
-        labelLastName.textContent = "";
-    }
-});
+
 
 // Agregar un evento 'input' al inputText
 inputName.addEventListener('input', (event) => {

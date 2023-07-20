@@ -23,7 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('location_id')->unsigned();
 
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->constrained()->onDelete('cascade');
             $table->foreign('company_id')->references('id')->on('companies');
             $table->foreign('area_id')->references('id')->on('areas');
             $table->foreign('job_title_id')->references('id')->on('job_titles');
