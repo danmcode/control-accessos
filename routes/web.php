@@ -34,6 +34,26 @@ Route::resource('configuration', 'App\Http\Controllers\AccessControl\Configurati
 Route::resource('colaboradores', 'App\Http\Controllers\AccessControl\CollaboratorController')
     ->middleware('auth');
 
+//in
+Route::post('registrar-ingreso/{id}',
+    [
+        App\Http\Controllers\AccessControl\IncomeExitCollaboratorsController::class,
+        'setIncomeCollaborator'
+    ])
+    ->name('registrar-ingreso')
+    ->middleware('auth');
+
+//Out
+//in
+Route::post('registrar-salida/{id}',
+    [
+        App\Http\Controllers\AccessControl\IncomeExitCollaboratorsController::class,
+        'setOutputCollaborator'
+    ])
+    ->name('registrar-salida')
+    ->middleware('auth');
+
+
 /**
  * visitors
  */

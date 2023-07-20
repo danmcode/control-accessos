@@ -17,7 +17,6 @@
 
         <!--  -->
         <div class="row">
-
             <!-- Visitors Card -->
             <div class="col-xxl-3 col-md-6">
                 <div class="card info-card sales-card">
@@ -173,12 +172,14 @@
                                         </div>
 
                                         <div class="col-4 align-self-center">
-                                            <a href="" class="dashboard-user-door door-in">
+                                            <a href="#" class="dashboard-user-door door-in" data-bs-toggle="modal"
+                                                data-bs-target="#modalInCollaborator" id="btnInCollaborator">
                                                 <div class="content-icon"> <i class="bi bi-box-arrow-right"></i> </div>
                                                 <div class="content-text"> {{ __('Ingreso peatonal') }} </div>
                                             </a>
 
-                                            <a href="" class="dashboard-user-door door-out mt-2">
+                                            <a href="#" class="dashboard-user-door door-out mt-2" data-bs-toggle="modal"
+                                                data-bs-target="#modalOutCollaborator" id="btnOutCollaborator">
                                                 <div class="content-icon"> <i class="bi bi-box-arrow-left"></i> </div>
                                                 <div class="content-text"> {{ __('Salida peatonal') }} </div>
                                             </a>
@@ -227,7 +228,7 @@
                                 <div class="collaborator-default" id="collaborator-default">
                                     <div class="d-flex justify-content-center">
                                         <div id="full-name" class="card-title mt-4">
-                                         Realiza la busqueda de un colaborador <i class="bi bi-search"></i>
+                                            Realiza la busqueda de un colaborador <i class="bi bi-search"></i>
                                         </div>
                                     </div>
                                     <!-- End user information -->
@@ -308,6 +309,7 @@
                                     <div class="card-visitor-title">
                                         ROBERTO CARLOS HUDSON NELSON
                                     </div>
+
 
                                     <div class="row card-visitor-body">
                                         <div class="col-6">
@@ -436,9 +438,85 @@
         </div>
         <!-- End Right side columns -->
     </div>
-</section>
-@endsection
 
-@section('scripts')
-<script src="{{ asset('js/collaborators/homeCollaborators.js') }}"></script>
-@endsection
+    <!-- Modal -->
+    <div class="modal fade" id="modalInCollaborator" tabindex="-1" aria-labelledby="modalTitle" data-type="income"
+        aria-hidden="true">
+
+        <form id="form-in-collaborator" method="POST" action="#">
+            @csrf
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalTitle">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="observation" class="form-label">Observaciones de ingreso: </label>
+                            <textarea class="form-control" id="observation" name="observation" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">{{ _('Cerrar') }}</button>
+                        <button type="submit" class="btn btn-primary"> {{ _('Registrar Ingreso') }} </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalOutCollaborator" tabindex="-1" aria-labelledby="modalTitle" data-type="outcome"
+        aria-hidden="true">
+
+        <form id="formInCollaborator">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalTitle">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="observation" class="form-label">Observaciones de ingreso: </label>
+                            <textarea class="form-control" id="observation" name="observation" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">{{ _('Cerrar') }}</button>
+                        <button type="button" class="btn btn-primary"> {{ _('Registrar Ingreso') }} </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    @endsection
+
+    @section('scripts')
+    @if (session('success'))
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+            icon: 'success',
+            title: '¡Éxito!',
+            text: ` {{ session('success') }} `,
+        });
+    });
+    </script>
+    @elseif( session('success') )
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+            icon: 'error',
+            title: '¡Error!',
+            text: ` {{ session('error') }} `,
+        });
+    });
+    </script>
+    @endif
+    <script src="{{ asset('js/collaborators/homeCollaborators.js') }}"></script>
+    @endsection
