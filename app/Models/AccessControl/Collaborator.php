@@ -50,4 +50,9 @@ class Collaborator extends Model
     {
         return $this->belongsTo(IdentificationType::class);
     }
+
+    public function incomeExitCollaborator()
+    {
+        return $this->hasMany(IncomeExitCollaborators::class);
+    }
 }

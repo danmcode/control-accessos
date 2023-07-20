@@ -10,6 +10,12 @@ const photo =document.getElementById('photo');
 const divUserInfo = document.getElementById('collaborator-info');
 const divUserDefault = document.getElementById('collaborator-default');
 
+const btnIn = document.getElementById('btnInCollaborator');
+const btnOut = document.getElementById('btnOutCollaborator');
+
+const modalIncome = document.getElementById('modalInCollaborator');
+const modalOutcome = document.getElementById('modalOutCollaborator');
+
 input.addEventListener('input', () => {
     let selectedOption = null;
     let inputValue = input.value.toLowerCase();
@@ -38,6 +44,22 @@ input.addEventListener('input', () => {
         jobTitleDiv.innerText = collaboratorJobTile;
         photo.src = collaboratorPhoto;
         divUserInfo.style.display = 'block';
+
+        btnIn.addEventListener('click', ()=>{
+            
+            let modalTitle = modalIncome.querySelector('.modal-title');
+            let getFormIn = modalIncome.querySelector('#form-in-collaborator');
+
+            modalTitle.textContent = `Registrar el ingreso a: ${ collaboratorFullName }`;
+
+            getFormIn.action = `registrar-ingreso/${collaboratorId}`;
+
+        });
+
+        btnOut.addEventListener('click', ()=>{
+            console.log('out');
+        });
+
     }else{
 
     }
