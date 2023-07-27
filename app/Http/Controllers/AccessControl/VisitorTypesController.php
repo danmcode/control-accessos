@@ -39,7 +39,7 @@ class VisitorTypesController extends Controller
         $visitorTypeToUpdate = VisitorTypes::find($visitorTypes);
         $data = $request->all();
 
-        $visitorTypeToUpdate->name = $data['name'];
+        $visitorTypeToUpdate->name = $data['type_visitors'];
         $visitorTypeToUpdate->updated_by = auth()->user()->id;
 
         $visitorTypeToUpdate->update();

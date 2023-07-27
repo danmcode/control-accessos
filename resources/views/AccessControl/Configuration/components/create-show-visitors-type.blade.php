@@ -37,7 +37,7 @@
                     <div class="row">
                         <div class="col-4">
                             <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#modalUpdateVisitorType" 
+                                data-bs-target="#modalUpdateVisitor" 
                                 data-bs-visitor-type-id="{{ $visitorType->id }}"
                                 data-bs-visitor-type-name="{{ $visitorType->name }}"
                                 >
@@ -46,7 +46,7 @@
                             </a>
                         </div>
                         <div class="col-4">
-                            <form action="#" method="post">
+                            <form action="{{ route('tipo-visitantes.destroy', $visitorType->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
 
@@ -66,7 +66,7 @@
     </table>
 </div>
 
-<!-- Modal update Job Title -->
-<div class="modal fade" id="modalUpdateIdentificationType" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    @include('AccessControl.Configuration.components.modals.edit-identification-type-modal')
+<!-- Modal update type Visitor -->
+<div class="modal fade" id="modalUpdateVisitor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    @include('AccessControl.Configuration.components.modals.edit-type-visitor-modal')
 </div>

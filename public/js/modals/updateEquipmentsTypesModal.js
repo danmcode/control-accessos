@@ -2,8 +2,8 @@
  * Code for modals
  * dmr
  */
-let modalUpdateUser = document.getElementById('modalUpdateEquipmentsTypes')
-modalUpdateEquipmentsTypes.addEventListener('show.bs.modal', function(event) {
+let modalUpdatetypeEquipment = document.getElementById('modalUpdatetypeEquipment')
+modalUpdatetypeEquipment.addEventListener('show.bs.modal', function(event) {
     // Button that triggered the modal
     let button = event.relatedTarget
     // Extract info from data-bs-* attributes
@@ -15,16 +15,15 @@ modalUpdateEquipmentsTypes.addEventListener('show.bs.modal', function(event) {
     // and then do the updating in a callback.
     //
     // Update the modal's content.
-    let modalTitle = modalUpdateEquipmentsTypes.querySelector('.modal-title');
-    let userId = modalUpdateEquipmentsTypes.querySelector('#id');
-    let inputName = modalUpdateEquipmentsTypes.querySelector('#name');
+    let modalTitle = modalUpdatetypeEquipment.querySelector('.modal-title');
+    let inputName = modalUpdatetypeEquipment.querySelector('#name');
 
 
     modalTitle.textContent = `Editar Tipo de Equipo: ${name}`;
 
     inputName.value = name;
 
-    let getFormUpdate = modalUpdateEquipmentsTypes.querySelector('.update-empresa-form');
+    let getFormUpdate = modalUpdatetypeEquipment.querySelector('.update-equipment-form');
     getFormUpdate.action = `tipo-equipos/${id}`;
 
 

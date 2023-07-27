@@ -170,6 +170,8 @@
     @include('AccessControl.Configuration.components.modals.edit-job-title-modal')
 </div>
 
+
+
 @endsection
 
 @section('scripts')
@@ -200,4 +202,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <script src="js/modals/updateLocationModal.js"></script>
 <script src="js/modals/updateIdentificationTypeModal.js"></script>
 <script src="js/modals/updateArlModal.js"></script>
+<script src="js/modals/updateTypeVisitorModal.js"></script>
+<script src="js/modals/updateVehiclesTypesModal.js"></script>
+<script src="js/modals/updateEquipmentsTypesModal.js"></script>
 @endsection

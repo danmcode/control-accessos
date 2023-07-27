@@ -459,8 +459,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
-                            data-bs-dismiss="modal">{{ _('Cerrar') }}</button>
-                        <button type="submit" class="btn btn-primary"> {{ _('Registrar Ingreso') }} </button>
+                            data-bs-dismiss="modal">{{ __('Cerrar') }}</button>
+                        <button type="submit" class="btn btn-primary"> {{ __('Registrar Ingreso') }} </button>
                     </div>
                 </div>
             </div>
@@ -486,8 +486,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
-                            data-bs-dismiss="modal">{{ _('Cerrar') }}</button>
-                        <button type="button" class="btn btn-primary"> {{ _('Registrar Ingreso') }} </button>
+                            data-bs-dismiss="modal">{{ __('Cerrar') }}</button>
+                        <button type="button" class="btn btn-primary"> {{ __('Registrar Ingreso') }} </button>
                     </div>
                 </div>
             </div>

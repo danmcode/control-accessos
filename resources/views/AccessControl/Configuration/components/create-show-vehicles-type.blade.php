@@ -37,7 +37,7 @@
                     <div class="row">
                         <div class="col-4">
                             <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#modalUpdateVehiclesTypes" 
+                                data-bs-target="#modalUpdatetypeVehicle" 
                                 data-bs-id="{{ $VehiclesTypes->id }}"
                                 data-bs-name="{{ $VehiclesTypes->name }}"
                                 >
@@ -46,7 +46,7 @@
                             </a>
                         </div>
                         <div class="col-4">
-                            <form action="#" method="post">
+                            <form action="{{ route('tipo-vehiculos.destroy', $VehiclesTypes->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
 
@@ -64,4 +64,9 @@
             @endif()
         </tbody>
     </table>
+</div>
+
+<!-- Modal update type vehicles -->
+<div class="modal fade" id="modalUpdatetypeVehicle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    @include('AccessControl.Configuration.components.modals.edit-vehicles-modal')
 </div>
