@@ -32,7 +32,12 @@ class IncomeExitCollaboratorsController extends Controller
         }
 
         // Obetener los ingresos y salidas actuales del colaborador
+        $incomeOutPut = IncomeExitCollaborators::where('collaborator_id', '=', $collaborator->id)
+            ->whereDate('date_time_in', '=', now()->toDateString())
+            ->orWhereDate('date_time_out', '=', null)
+            ->get();
         
+        dd($incomeOutPut);
 
         $observation = isset($request->all()['observation']) 
         ? $request->all()['observation']

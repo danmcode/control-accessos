@@ -504,6 +504,8 @@
             icon: 'success',
             title: '¡Éxito!',
             text: ` {{ session('success') }} `,
+            showConfirmButton: false,
+            timer: 1500
         });
     });
     </script>
@@ -514,6 +516,8 @@
             icon: 'error',
             title: '¡Error!',
             text: ` {{ session('error') }} `,
+            showConfirmButton: false,
+            timer: 1500
         });
     });
     </script>
