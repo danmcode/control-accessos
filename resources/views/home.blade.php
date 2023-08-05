@@ -471,23 +471,24 @@
     <div class="modal fade" id="modalOutCollaborator" tabindex="-1" aria-labelledby="modalTitle" data-type="outcome"
         aria-hidden="true">
 
-        <form id="formInCollaborator">
+        <form id="form-out-collaborator" method="POST" action="#">
+            @csrf
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="modalTitle">Modal title</h1>
+                        <h1 class="modal-title fs-5" id="modalTitle">Registrar salida</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="observation" class="form-label">Observaciones de ingreso: </label>
+                            <label for="observation" class="form-label">Observaciones de salida: </label>
                             <textarea class="form-control" id="observation" name="observation" rows="3"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
                             data-bs-dismiss="modal">{{ __('Cerrar') }}</button>
-                        <button type="button" class="btn btn-primary"> {{ __('Registrar Ingreso') }} </button>
+                        <button type="submit" class="btn btn-primary"> {{ __('Registrar Salida') }} </button>
                     </div>
                 </div>
             </div>
@@ -509,15 +510,16 @@
         });
     });
     </script>
-    @elseif( session('success') )
+    @elseif( session('error') )
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         Swal.fire({
             icon: 'error',
             title: '¡Error!',
             text: ` {{ session('error') }} `,
-            showConfirmButton: false,
-            timer: 1500
+            showConfirmButton: true,
+            confirmButtonColor: '#0d489a',
+            confirmButtonText: 'Aceptar'     
         });
     });
     </script>
