@@ -31,17 +31,7 @@
                 </div>
             </div>
             <hr>
-            @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @elseif(session('error'))
-            <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                {{ session('error') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
+
             <div class="table-responsive">
                 <table class="table table-hover table-colaborator" id="dataTable">
                     <thead>
@@ -60,12 +50,12 @@
                         @if( isset($users) && sizeof($users) > 0 )
                         @foreach( $users as $key => $user )
                         <tr>
-                            <th scope="row"> 1 </th>
+                            <th scope="row"> {{ $key + 1 }}</th>
                             <td>
                                 <img src="{{ asset($user->photo_path) }}">
                             </td>
                             <td>
-                                <div class="card-title">
+                                <div class="title-sm">
                                     {{ strtoupper($user->name) }} {{ strtoupper($user->last_name) }}
                                 </div>
                                 {{ $user->identificationTypes->initials }} {{ $user->identification }}
@@ -85,17 +75,18 @@
                             <td>
                                 <a href="" class="btn btn-primary">
                                     <i class="bi bi-eye"></i>
-                                    {{ __('Ver más') }}
                                 </a>
 
                                 <a href="{{ route('colaboradores.edit', '1') }}" class="btn btn-secondary">
                                     <i class="bi bi-pencil"></i>
-                                    {{ __('Editar') }}
                                 </a>
 
-                                <a href="" class="btn btn-danger">
+                                <a href="" class="btn btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#modalDeleteCollaborator"
+                                    data-full-name="{{ strtoupper($user->name) }} {{ strtoupper($user->last_name) }}"
+                                    data-id="{{$user->id}}">
+
                                     <i class="bi bi-trash"></i>
-                                    {{ __('Eliminar') }}
                                 </a>
                             </td>
                         </tr>
@@ -108,8 +99,40 @@
     </div>
 </section>
 
+<!-- Modal delete collaborator -->
+<div class="modal fade" id="modalDeleteCollaborator" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    @include('AccessControl.Collaborators.components.delete-collaborator-modal')
+</div>
+<!--  -->
 @endsection
 
 @section('scripts')
-
+@if (session('success'))
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    Swal.fire({
+        icon: 'success',
+        title: '¡Éxito!',
+        text: ` {{ session('success') }} `,
+        showConfirmButton: false,
+        timer: 1500
+    });
+});
+</script>
+@elseif( session('error') )
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    Swal.fire({
+        icon: 'error',
+        title: '¡Error!',
+        text: ` {{ session('error') }} `,
+        showConfirmButton: true,
+        confirmButtonColor: '#0d489a',
+        confirmButtonText: 'Aceptar'
+    });
+});
+</script>
+@endif
+<script src="js/collaborators/deleteCollaborator.js"></script>
 @endsection

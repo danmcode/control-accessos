@@ -193,8 +193,20 @@ class CollaboratorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Collaborator $collaborator)
+    public function destroy(string $collaborator)
     {
-        //
+        $collaboratorToDelete = User::find($collaborator);
+
+        if( $collaboratorToDelete ){
+            $collaboratorToDelete->is_active = false;
+            $collaboratorToDelete->update();
+
+            return redirect()->route('colaboradores.index')
+            ->with('success', 'Se eliminó el colaborador correctamente');
+
+        }else{
+            return redirect()->route('colaboradores.index')
+            ->with('error', 'No se encontró el usuario');
+        }
     }
 }
