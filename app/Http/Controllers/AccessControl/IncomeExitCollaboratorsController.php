@@ -65,7 +65,7 @@ class IncomeExitCollaboratorsController extends Controller
             'collaborator_id' => $collaborator->id,
             'created_by' => auth()->user()->id,
             'registered_in_by' => auth()->user()->id,
-            'observation' => $observation,
+            'observation' => "Ingreso: \n" . $observation . "\n",
             'out_of_time' => 0,
         ]);
 
@@ -102,9 +102,14 @@ class IncomeExitCollaboratorsController extends Controller
                 return redirect()->route('home')->with('error', $lastIncome);
             }
 
-            $incomeOutPut[0]->date_time_out = date_create()->format('Y-m-d H:i:s');
-            $incomeOutPut[0]->updated_by = auth()->user()->id;
+            $observation = isset($request->all()['observation'])
+            ? $request->all()['observation']
+            : '';
 
+            $incomeOutPut[0]->date_time_out = date_create()->format('Y-m-d H:i:s');
+            $incomeOutPut[0]->observation = $incomeOutPut[0]->observation . 
+            "\nSalida: \n" . $observation; 
+            $incomeOutPut[0]->updated_by = auth()->user()->id;
             $incomeOutPut[0]->update();
 
             return redirect()->route('home')->with('success', 'Se ha registrado la salida');
