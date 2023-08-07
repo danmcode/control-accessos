@@ -1174,6 +1174,24 @@ table th{
     border-radius: 10px;
 }
 
+#defaultImage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-default{
+    border-radius: 10px;
+    width: 240px !important;
+    height: 200px;
+}
+
+.center-css{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /*
  - Visitors
 */

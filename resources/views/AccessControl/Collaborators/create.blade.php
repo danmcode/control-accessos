@@ -25,49 +25,60 @@
                         
                         <!-- Show default or when is canceled -->
                         <div id="defaultImage">
-                            <img src="{{asset('images/default.png')}}">
+                            <img class="image-default" src="{{asset('images/default.png')}}">
                         </div>
                         
                         <!-- Show streaming video to take a photo -->
                         <div class="cameraFeed" id="cameraFeed"></div>
                         
                         <h2>
-                            <label id="labelName">
-                                Nombre
-                            </label>
-                            <label id="labelLastName">
-                                Colaborador
-                            </label>
+                            <div class="center-css">
+                                <label id="labelName">
+                                    Nombre
+                                </label>
+                            </div>
+                            <div class="center-css">
+                                <label id="labelLastName">
+                                    Colaborador
+                                </label>
+                            </div>
                         </h2>
-                        <h3>
+
+                        <h3 class="center-css">
                             <label id="job_title_label"> Cargo </label> 
                         </h3>
 
-                        <div class="mt-2">
-                            
-                            <!-- Show first time, open camera -->
-                            <a id="openCameraBtn" class="btn btn-primary">
-                                <i class="bi bi-camera"></i>
-                                {{ __('Capturar desde cámara') }}
-                            </a>
+                        <div class="row">
+                            <div class="center-css col-sm-12 mb-1">
+                                <a id="openCameraBtn" class="btn btn-primary">
+                                    <i class="bi bi-camera"></i>
+                                    {{ __('Capturar desde cámara') }}
+                                </a>
+                            </div>
 
                             <!-- Upload a photo  -->
-                            <a id="uploadPhotoBtn" class="btn btn-secondary">
-                                <i class="bi bi-upload"></i>
-                                {{ __('Subir fotografía') }}
-                            </a>
+                            <div class="center-css col-sm-12 mb-1">
+                                <a id="uploadPhotoBtn" class="btn btn-secondary">
+                                    <i class="bi bi-upload"></i>
+                                    {{ __('Subir fotografía') }}
+                                </a>
+                            </div>
 
-                            <!-- Take a photo only show when the open Camera was pressed -->
-                            <a id="captureBtn" class="btn btn-primary captureBtn">
-                                <i class="bi bi-camera"></i>
-                                {{ __('Tomar fotografia') }}
-                            </a>
+                            <div class="center-css mb-1">
+                                <!-- Take a photo only show when the open Camera was pressed -->
+                                <a id="captureBtn" class="btn btn-primary captureBtn">
+                                    <i class="bi bi-camera"></i>
+                                    {{ __('Tomar fotografia') }}
+                                </a>
+                            </div>
 
-                            <!-- Cancel a Photo -->
-                            <a id="cancelBtn" class="btn btn-danger">
-                                <i class="bi bi-x-circle"></i>
-                                {{ __('Cancelar') }}
-                            </a>
+                            <div class="center-css mb-1">
+                                <!-- Cancel a Photo -->
+                                <a id="cancelBtn" class="btn btn-danger">
+                                    <i class="bi bi-x-circle"></i>
+                                    {{ __('Cancelar') }}
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

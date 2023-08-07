@@ -64,8 +64,6 @@ captureBtn.addEventListener('click', () => {
 cancelBtn.addEventListener('click', () => {
     closeCamera(); // Stop video streaming
 
-    //TODO: Empty captureImageContainer to empty
-
     captureBtn.style.display = "none";// Hide captureBtn
     cancelBtn.style.display = "none";// Hide cancelBtn
     openCameraBtn.style.display = "inline-block";// Show openCameraBtn

@@ -77,7 +77,7 @@
                                     <i class="bi bi-eye"></i>
                                 </a>
 
-                                <a href="{{ route('colaboradores.edit', '1') }}" class="btn btn-secondary">
+                                <a href="{{ route('colaboradores.edit', $user->id) }}" class="btn btn-secondary">
                                     <i class="bi bi-pencil"></i>
                                 </a>
 
