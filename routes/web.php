@@ -61,7 +61,11 @@ Route::post('registrar-salida/{id}',
 
 Route::get('/listar-visitantes',[VisitorController::class,'index'])->name('visitantes.index')->middleware('auth');
 
-route::get('/crear-visitante/{id}',[App\Http\Controllers\AccessControl\VisitorController::class,'create'])->name('crear-visitante')->middleware('auth');
+Route::get('/crear-visitante/{id}',[VisitorController::class,'create'])->name('crear-visitante')->middleware('auth');
+
+Route::post('/crear-visitante',[VisitorController::class,'store'])->name('crear-visitante.store')->middleware('auth');
+
+
 
 
 

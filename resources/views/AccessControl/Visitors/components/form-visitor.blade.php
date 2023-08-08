@@ -134,6 +134,11 @@
                         <input type="hidden" name="photoDataInput" id="photoDataInput" class="form-control">
                     </div>
 
+                    <!-- photo info -->
+                    <div class="col-4 mb-3">
+                        <input type="hidden" value={{$id}} name="id-creator" id="id-creator" class="form-control">
+                    </div>
+
                     <hr>
                     <div class="form-heading mt-2 mb-2">Información Laboral</div>
 

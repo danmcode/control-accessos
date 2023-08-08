@@ -127,8 +127,8 @@
             <div class="card">
                 <div class="card-body">
 
-                    <form class="needs-validation" novalidate>
-
+                    <form action="{{ route('crear-visitante.store') }}" method="POST" class="needs-validation" novalidate>
+                        @csrf
                         <h5>
                             <i class="bi bi-person card-title"></i>
                             <span class="card-title">{{ __('DANIEL ALEXANDER MUELAS RIVERA,') }}</span>

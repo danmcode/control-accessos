@@ -11,6 +11,10 @@
                         </label>
                         <select name="equipment_type" id="equipment_type" class="form-select" required>
                             <option value="" selected> {{ __('Seleccione...') }} </option>
+                            @foreach( $equipmentsTypes as $key => $equipmentsType )
+                            <option value="{{ $equipmentsType->id }}"> {{ $equipmentsType->name }}
+                            </option>
+                            @endforeach
                         </select>
                     </div>
 

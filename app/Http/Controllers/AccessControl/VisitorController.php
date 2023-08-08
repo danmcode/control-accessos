@@ -8,6 +8,8 @@ use App\Models\AccessControl\Arl;
 use App\Models\AccessControl\Visitor;
 use App\Models\AccessControl\IdentificationType;
 use App\Models\AccessControl\Company;
+use App\Models\AccessControl\EquipmentTypes;
+use App\Models\AccessControl\vehicleTypes;
 use App\Models\AccessControl\VisitorTypes;
 
 class VisitorController extends Controller
@@ -37,15 +39,21 @@ class VisitorController extends Controller
                 $arls = Arl::where('is_active','=',true)
                 ->get();
 
-                $visitorTypes = VisitorTypes::where('is_active','=',true);
+                $visitorTypes = VisitorTypes::where('is_active','=',true)->get();
+
+                $equipmentsTypes = EquipmentTypes::where('is_active','=',true)->get();
+
+                $vehiclestypes = vehicleTypes::where('is_active','=',true)->get();
          
                 return view('AccessControl.Visitors.create',[
                     
                     'companies' => $companies,
                     'identificationTypes' => $identificationTypes,
                     'arls'=>$arls,
-                    'id'=>$id,
                     'visitorTypes'=>$visitorTypes,
+                    'equipmentsTypes'=>$equipmentsTypes,
+                    'vehiclestypes'=>$vehiclestypes,
+                    'id'=>$id,
                 ]);  
 
     }
@@ -55,7 +63,7 @@ class VisitorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return dd($request->all());
     }
 
     /**
