@@ -13,7 +13,7 @@ const selectJobTitle = document.getElementById('job_title_id');
 const labelJobTitle = document.getElementById('job_title_label');
 
 labelName.textContent = (inputName.value) ? inputName.value : "Nombre";
-labelLastName.textContent = (inputLastName.value) ? labelLastName.value : "Colaborador";
+labelLastName.textContent = (inputLastName.value) ? inputLastName.value : "Colaborador";
 
 
 

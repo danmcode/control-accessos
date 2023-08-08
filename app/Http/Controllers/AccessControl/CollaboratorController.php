@@ -165,21 +165,49 @@ class CollaboratorController extends Controller
         
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Collaborator $collaborator)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Collaborator $collaborator)
+    public function edit(string $collaborator)
     {
-        //
-        return view('AccessControl.Collaborators.edit');
+        //Get all identifications types
+        $identificationTypes = IdentificationType::where('is_active', '=', true)
+        ->get();
+
+        //Get all companies
+        $companies = Company::where('is_active', '=', true)
+        ->get();
+
+        //Get all Áreas
+        $areas = Area::where('is_active', '=', true)
+        ->get();
+
+        //Get all Cargos
+        $jobTitles = JobTitle::where('is_active', '=', true)
+        ->get();
+
+        //Get all Locations
+        $locations = Location::where('is_active', '=', true)
+            ->get();
+
+        $user = User::where('is_active', '=', true)
+            ->where('id', '=', $collaborator)
+            ->with('identificationTypes')
+            ->with('collaborators.company')
+            ->with('collaborators.area')
+            ->with('collaborators.jobTitle')
+            ->with('collaborators.location')
+            ->get();
+        
+        return view('AccessControl.Collaborators.edit', [
+            'companies' => $companies,
+            'areas' => $areas,
+            'jobTitles' => $jobTitles,
+            'locations' => $locations,
+            'identificationTypes' => $identificationTypes,
+            'user' => $user[0],
+        ]);
     }
 
     /**
@@ -193,8 +221,20 @@ class CollaboratorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Collaborator $collaborator)
+    public function destroy(string $collaborator)
     {
-        //
+        $collaboratorToDelete = User::find($collaborator);
+
+        if( $collaboratorToDelete ){
+            $collaboratorToDelete->is_active = false;
+            $collaboratorToDelete->update();
+
+            return redirect()->route('colaboradores.index')
+            ->with('success', 'Se eliminó el colaborador correctamente');
+
+        }else{
+            return redirect()->route('colaboradores.index')
+            ->with('error', 'No se encontró el usuario');
+        }
     }
 }

@@ -214,6 +214,12 @@ h6 {
     font-family: "Poppins", sans-serif;
 }
 
+.title-sm {
+    font-size: 14px;
+    font-weight: bold;
+    color: #012970;
+}
+
 .card-title span {
     color: #899bbd;
     font-size: 14px;
@@ -1166,6 +1172,24 @@ table th{
 #capturedImageContainer img{
     width: 340px;
     border-radius: 10px;
+}
+
+#defaultImage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-default{
+    border-radius: 10px;
+    width: 240px !important;
+    height: 200px;
+}
+
+.center-css{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /*

@@ -11,68 +11,109 @@ use App\Models\AccessControl\IncomeExitCollaborators;
 class IncomeExitCollaboratorsController extends Controller
 {
     //
-    function index() {
-        
+    function index()
+    {
+
         //Get all in and collaborator Income Output
         $incomeOutputs = IncomeExitCollaborators::get();
 
         return view('IncomeOutput.index', [
             'incomeOutputs' => $incomeOutputs,
         ]);
-
     }
 
-    function setIncomeCollaborator(string $id, Request $request) {
+    function setIncomeCollaborator(string $id, Request $request)
+    {
 
         $collaborator = Collaborator::find($id);
 
-        if(!$collaborator){
+        if (!$collaborator) {
             return redirect()->route('home')
-            ->with('error', 'El usuario no existe');
+                ->with('error', 'El usuario no existe');
         }
 
-        // Obetener los ingresos y salidas actuales del colaborador
-        
+        $incomeOutPut = IncomeExitCollaborators::where('collaborator_id', '=', $collaborator->id)
+            ->orderBy('created_at', 'desc')
+            ->limit(1)
+            ->get();
 
-        $observation = isset($request->all()['observation']) 
-        ? $request->all()['observation']
-        : '';
+        if (sizeof($incomeOutPut) != 0) {
+
+            $date = date('d-M-Y', strtotime($incomeOutPut[0]->date_time_in));
+            $hour = date('H:i:s', strtotime($incomeOutPut[0]->date_time_in));
+
+            $lastIncome = "No se le ha dado la salida al colaborador del día: \n$date, a las: $hour. \nregistrar salida e intentarlo nuevamente.";
+
+            if ($incomeOutPut[0]->date_time_out == null) {
+                return redirect()->route('home')->with('error', $lastIncome);
+            }
+
+            return $this->createCollaboratorIncome($request, $collaborator);
+        } else {
+            return $this->createCollaboratorIncome($request, $collaborator);
+        }
+    }
+
+    private function createCollaboratorIncome(Request $request, Collaborator $collaborator)
+    {
+        $observation = isset($request->all()['observation'])
+            ? $request->all()['observation']
+            : '';
 
         $setIncome = IncomeExitCollaborators::create([
             'date_time_in' => date_create()->format('Y-m-d H:i:s'),
             'collaborator_id' => $collaborator->id,
             'created_by' => auth()->user()->id,
             'registered_in_by' => auth()->user()->id,
-            'observation' => $observation,
+            'observation' => "Ingreso: \n" . $observation . "\n",
             'out_of_time' => 0,
         ]);
 
-        if($setIncome){
+        if ($setIncome) {
             return redirect()->route('home')
-            ->with('success', 'Se registró el ingreso correctamente');
-        }else{
+                ->with('success', 'Se registró el ingreso correctamente');
+        } else {
             return redirect()->route('home')
-            ->with('error', 'No se pudo registrar el ingreso');
+                ->with('error', 'No se pudo registrar el ingreso');
         }
-        
     }
 
-    function setOutputCollaborator(Collaborator $id) {
+    function setOutputCollaborator(Request $request, string $id)
+    {
 
         $collaborator = Collaborator::find($id);
 
-        if(!$collaborator){
+        if (!$collaborator) {
             return redirect()->route('home')
-            ->with('error', 'El usuario no existe');
+                ->with('error', 'El usuario no existe');
         }
 
-        //TODO: Agregar en la base de datos la observación de salida
-
         // Buscar el ingreso registro de ingreso y salida del colaborador
-        
+        $incomeOutPut = IncomeExitCollaborators::where('collaborator_id', '=', $collaborator->id)
+            ->orderBy('created_at', 'desc')
+            ->limit(1)
+            ->get();
 
-        // Si hay un ingreso y la salida es null registrar salida
-        
+        if (sizeof($incomeOutPut) != 0) {
 
+            $lastIncome = "No se ha registrado el ingreso al colaborador";
+
+            if ($incomeOutPut[0]->date_time_out != null) {
+                return redirect()->route('home')->with('error', $lastIncome);
+            }
+
+            $observation = isset($request->all()['observation'])
+            ? $request->all()['observation']
+            : '';
+
+            $incomeOutPut[0]->date_time_out = date_create()->format('Y-m-d H:i:s');
+            $incomeOutPut[0]->observation = $incomeOutPut[0]->observation . 
+            "\nSalida: \n" . $observation; 
+            $incomeOutPut[0]->updated_by = auth()->user()->id;
+            $incomeOutPut[0]->update();
+
+            return redirect()->route('home')->with('success', 'Se ha registrado la salida');
+
+        }
     }
 }

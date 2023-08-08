@@ -62,7 +62,13 @@ input.addEventListener('input', () => {
 
 
         btnOut.addEventListener('click', ()=>{
-            console.log('out');
+            
+            let modalTitle = modalOutcome.querySelector('.modal-title');
+            let getFormOut = modalOutcome.querySelector('#form-out-collaborator');
+
+            modalTitle.textContent = `Registrar la salida a: ${ collaboratorFullName }`;
+            getFormOut.action = `registrar-salida/${collaboratorId}`;
+            
         });
 
         
