@@ -188,13 +188,10 @@
                                     <!-- End user information -->
                                     <hr>
                                     <div class="d-flex justify-content-center">
-
-                                        <a href="{{ route('visitantes.create') }}"
-                                            class="dashboard-user-action user-action-primary m-1">
+                                        <a class="dashboard-user-action user-action-primary m-1" href="#" id="btnCreateVisitor">
                                             <div class="content-icon"> <i class="bi bi-person-fill-add"></i> </div>
                                             <div class="content-text"> {{ __('Registrar visitante') }} </div>
                                         </a>
-
                                         <a href="" class="dashboard-user-action user-action-warning m-1">
                                             <div class="content-icon"> <i class="bi bi-person-video"></i> </div>
                                             <div class="content-text"> {{ __('Ver colaborador') }} </div>
@@ -216,7 +213,7 @@
                                     <!-- End user information -->
 
                                     <div class="d-flex justify-content-center">
-                                        <a href="{{ route('registrar-visitante') }}"
+                                        <a href="#"
                                             class="dashboard-user-action user-action-primary m-1">
                                             <div class="content-icon"> <i class="bi bi-person-fill-add"></i> </div>
                                             <div class="content-text"> {{ __('Crear Colaborador') }} </div>

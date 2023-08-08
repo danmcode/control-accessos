@@ -16,6 +16,10 @@ const btnOut = document.getElementById('btnOutCollaborator');
 const modalIncome = document.getElementById('modalInCollaborator');
 const modalOutcome = document.getElementById('modalOutCollaborator');
 
+const btnVisitor = document.getElementById('btnCreateVisitor')
+
+
+
 input.addEventListener('input', () => {
     let selectedOption = null;
     let inputValue = input.value.toLowerCase();
@@ -56,9 +60,14 @@ input.addEventListener('input', () => {
 
         });
 
+
         btnOut.addEventListener('click', ()=>{
             console.log('out');
         });
+
+        
+        //Visitors
+        btnVisitor.setAttribute('href',`crear-visitante/${collaboratorId}`);
 
     }else{
 

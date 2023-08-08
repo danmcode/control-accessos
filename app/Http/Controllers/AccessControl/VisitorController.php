@@ -8,6 +8,7 @@ use App\Models\AccessControl\Arl;
 use App\Models\AccessControl\Visitor;
 use App\Models\AccessControl\IdentificationType;
 use App\Models\AccessControl\Company;
+use App\Models\AccessControl\VisitorTypes;
 
 class VisitorController extends Controller
 {
@@ -23,7 +24,7 @@ class VisitorController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
                 //Get all identifications types
                 $identificationTypes = IdentificationType::where('is_active', '=', true)
@@ -35,13 +36,17 @@ class VisitorController extends Controller
 
                 $arls = Arl::where('is_active','=',true)
                 ->get();
-        
-        
+
+                $visitorTypes = VisitorTypes::where('is_active','=',true);
+         
                 return view('AccessControl.Visitors.create',[
+                    
                     'companies' => $companies,
                     'identificationTypes' => $identificationTypes,
-                    'arls'=>$arls
-                ]); 
+                    'arls'=>$arls,
+                    'id'=>$id,
+                    'visitorTypes'=>$visitorTypes,
+                ]);  
 
     }
 

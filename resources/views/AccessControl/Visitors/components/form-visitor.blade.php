@@ -119,6 +119,10 @@
                         </label>
                         <select name="typeVisitor" id="typeVisitor" class="form-select" required>
                             <option value="" selected> {{ __('Seleccione...') }} </option>
+                            @foreach( $visitorTypes as $key => $visitorType )
+                            <option value="{{ $visitorType->id }}"> {{ $visitorType->name }}
+                            </option>
+                            @endforeach
                         </select>
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ __('Los apellidos son requeridos') }}</strong>

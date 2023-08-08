@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccessControl\VisitorController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -57,16 +58,12 @@ Route::post('registrar-salida/{id}',
 /**
  * visitors
  */
-Route::resource('visitantes', 'App\Http\Controllers\AccessControl\VisitorController')
-    ->middleware('auth');
 
-//createVisitorToColabollator
-Route::get('/registrar-visitante', 
-    [
-        App\Http\Controllers\AccessControl\VisitorController::class, 
-        'createVisitorToColabollator'
-    ])->name('registrar-visitante')
-    ->middleware('auth');
+Route::get('/listar-visitantes',[VisitorController::class,'index'])->name('visitantes.index')->middleware('auth');
+
+route::get('/crear-visitante/{id}',[App\Http\Controllers\AccessControl\VisitorController::class,'create'])->name('crear-visitante')->middleware('auth');
+
+
 
 /**
  * Configuration
