@@ -22,15 +22,15 @@
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                         <!-- show when the image is taken -->
                         <div id="capturedImageContainer"></div>
-                        
+
                         <!-- Show default or when is canceled -->
                         <div id="defaultImage">
                             <img class="image-default" src="{{asset('images/default.png')}}">
                         </div>
-                        
+
                         <!-- Show streaming video to take a photo -->
                         <div class="cameraFeed" id="cameraFeed"></div>
-                        
+
                         <h2>
                             <div class="center-css">
                                 <label id="labelName">
@@ -45,7 +45,7 @@
                         </h2>
 
                         <h3 class="center-css">
-                            <label id="job_title_label"> Cargo </label> 
+                            <label id="job_title_label"> Cargo </label>
                         </h3>
 
                         <div class="row">
@@ -167,6 +167,16 @@
 
                             <hr>
                             <div class="form-heading mt-2 mb-2">Información de colaborador</div>
+
+                            <div class="col-12 mb-2">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
+                                        required>
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">
+                                        Director o Jefe de área </label>
+                                </div>
+                            </div>
+
 
                             <!-- Company -->
                             <div class="col-6 mb-3">
