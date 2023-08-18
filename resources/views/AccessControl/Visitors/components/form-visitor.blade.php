@@ -120,7 +120,7 @@
                         <select name="typeVisitor" id="typeVisitor" class="form-select" required>
                             <option value="" selected> {{ __('Seleccione...') }} </option>
                             @foreach( $visitorTypes as $key => $visitorType )
-                            <option value="{{ $visitorType->id }}"> {{ $visitorType->name }}
+                            <option value="{{ $visitorType->id}}"> {{ $visitorType->name }}
                             </option>
                             @endforeach
                         </select>
@@ -143,27 +143,22 @@
                     <div class="form-heading mt-2 mb-2">Información Laboral</div>
 
                     <!-- Company -->
-                    <div class="col-6 mb-3">
+                    <div class="col-12 mb-3">
                         <label for="company_id fw-bold" class="form-label">
                             {{ __('Empresa:') }} <small> * </small>
                         </label>
-                        <select name="company_id" id="company_id" class="form-select" required>
-                            <option value="" selected> {{ __('Seleccione...') }} </option>
-                            @foreach( $companies as $key => $company )
-                            <option value="{{ $company->id }}"> {{ $company->name }} </option>
-                            @endforeach
-                        </select>
+                        <input type="text" name="company" id="company" class="form-control" required>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ __('La empresa es requerida') }}</strong>
+                            <strong>{{ __('Los empresa es requerida') }}</strong>
                         </span>
                     </div>
 
                     <!-- Area -->
-                    <div class="col-6 mb-3">
+                    <div class="col-6 mb-3" id="block_arl">
                         <label for="area_id fw-bold" class="form-label">
                             {{ __('ARL:') }} <small> * </small>
                         </label>
-                        <select name="area_id" id="area_id" class="form-select" required>
+                        <select name="arl" id="arl" class="form-select" required>
                             <option value="" selected> {{ __('Seleccione...') }} </option>
                             @foreach( $arls as $key => $arls )
                             <option value="{{ $arls->id }}"> {{ $arls->name }} </option>
@@ -172,6 +167,23 @@
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ __('El área es requerida') }}</strong>
                         </span>
+                    </div>
+
+                    <div class="col-6 mb-3" id="block_date_arl">
+                        <label for="date_arl fw-bold" class="form-label">
+                            {{ __('Fecha de vencimiento del ARL:') }} <small> * </small>
+                        </label>
+                        <input type="date" name="date_arl" id="date_arl" class="form-control" required>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ __('La fecha es requerida') }}</strong>
+                        </span>
+                    </div>
+
+                    <div class="col-12 mb-3" id="block_remission">
+                        <label for="remission fw-bold" class="form-label">
+                            {{ __('Remision:') }} 
+                        </label>
+                        <textarea name="remission" id="remission" class="form-control" required></textarea>
                     </div>
                 </div>
             </div>
