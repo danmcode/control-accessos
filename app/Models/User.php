@@ -86,4 +86,36 @@ class User extends Authenticatable
     
         return $aleatoryString;
     }
+
+    public static function getAllUsersRelations() : array{
+
+        $users = User::where('is_active', true)
+        ->where('id', '!=', 1)
+        ->with('identificationTypes')
+        ->with('collaborators.company')
+        ->with('collaborators.area')
+        ->with('collaborators.jobTitle')
+        ->with('collaborators.location')
+        ->get();
+
+        $users = [ 'users' => $users ] ;
+
+        return $users;
+    }
+
+    public static function getUserRelationById($collaborator) : array {
+
+        $user = User::where('is_active', '=', true)
+            ->where('id', '=', $collaborator)
+            ->with('identificationTypes')
+            ->with('collaborators.company')
+            ->with('collaborators.area')
+            ->with('collaborators.jobTitle')
+            ->with('collaborators.location')
+            ->get();
+
+        $user = [ 'user' => $user[0] ] ;
+
+        return $user;
+    }
 }

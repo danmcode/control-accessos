@@ -15,28 +15,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use App\Helpers\CustomHelpers;
+
 
 class CollaboratorController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // Get all user collaborator active
-        $users = User::where('is_active', '=', true)
-            ->where('id', '!=', 1)
-            ->with('identificationTypes')
-            ->with('collaborators.company')
-            ->with('collaborators.area')
-            ->with('collaborators.jobTitle')
-            ->with('collaborators.location')
-            ->get();
-    
-
-        return view('AccessControl.Collaborators.index', [
-            'users' => $users,
-        ]);
+        return view('AccessControl.Collaborators.index', User::getAllUsersRelations());
     }
 
     /**
@@ -44,33 +34,7 @@ class CollaboratorController extends Controller
      */
     public function create()
     {
-        //Get all identifications types
-        $identificationTypes = IdentificationType::where('is_active', '=', true)
-        ->get();
-
-        //Get all companies
-        $companies = Company::where('is_active', '=', true)
-        ->get();
-
-        //Get all Áreas
-        $areas = Area::where('is_active', '=', true)
-        ->get();
-
-        //Get all Cargos
-        $jobTitles = JobTitle::where('is_active', '=', true)
-        ->get();
-
-        //Get all Locations
-        $locations = Location::where('is_active', '=', true)
-            ->get();
-
-        return view('AccessControl.Collaborators.create', [
-            'companies' => $companies,
-            'areas' => $areas,
-            'jobTitles' => $jobTitles,
-            'locations' => $locations,
-            'identificationTypes' => $identificationTypes,
-        ]);
+        return view('AccessControl.Collaborators.create', getDropdownsList());
     }
 
     /**
@@ -165,49 +129,15 @@ class CollaboratorController extends Controller
         
     }
 
-
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $collaborator)
     {
-        //Get all identifications types
-        $identificationTypes = IdentificationType::where('is_active', '=', true)
-        ->get();
-
-        //Get all companies
-        $companies = Company::where('is_active', '=', true)
-        ->get();
-
-        //Get all Áreas
-        $areas = Area::where('is_active', '=', true)
-        ->get();
-
-        //Get all Cargos
-        $jobTitles = JobTitle::where('is_active', '=', true)
-        ->get();
-
-        //Get all Locations
-        $locations = Location::where('is_active', '=', true)
-            ->get();
-
-        $user = User::where('is_active', '=', true)
-            ->where('id', '=', $collaborator)
-            ->with('identificationTypes')
-            ->with('collaborators.company')
-            ->with('collaborators.area')
-            ->with('collaborators.jobTitle')
-            ->with('collaborators.location')
-            ->get();
-        
-        return view('AccessControl.Collaborators.edit', [
-            'companies' => $companies,
-            'areas' => $areas,
-            'jobTitles' => $jobTitles,
-            'locations' => $locations,
-            'identificationTypes' => $identificationTypes,
-            'user' => $user[0],
-        ]);
+        $dropDownsLists = getDropdownsList();
+        $dropDownsLists +=  User::getUserRelationById($collaborator);
+            
+        return view('AccessControl.Collaborators.edit', $dropDownsLists);
     }
 
     /**
