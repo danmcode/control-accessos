@@ -100,7 +100,7 @@
                                     {{ __('Tipo de identificación:') }} <small> * </small>
                                 </label>
                                 <select name="identification_type" id="identification_type" class="form-select"
-                                    required>
+                                    required disabled>
                                     <option value="{{ $user->identificationTypes->id }}" selected>
                                         {{ $user->identificationTypes->name }} </option>
                                     @if( isset($identificationTypes) && sizeof($identificationTypes) > 0 )
@@ -121,7 +121,7 @@
                                     {{ __('Identificación:') }} <small> * </small>
                                 </label>
                                 <input type="text" name="identification" id="identification" class="form-control"
-                                    value="{{$user->identification}}" required>
+                                    value="{{$user->identification}}" required readonly>
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ __('La identificación es requerida') }}</strong>
                                 </span>
@@ -158,7 +158,7 @@
                                     {{ __('Correo:') }} <small> * </small>
                                 </label>
                                 <input type="email" name="email" id="email" class="form-control"
-                                    value="{{ $user->email }}" required>
+                                    value="{{ $user->email }}" required readonly>
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ __('El correo es requerido') }}</strong>
                                 </span>
@@ -221,7 +221,7 @@
                                         {{ $user->collaborators->jobTitle->name }} </option>
                                     @if( isset($jobTitles) && sizeof($jobTitles) > 0 )
                                     @foreach( $jobTitles as $key => $jobTitle )
-                                    <option value="{{ $jobTitle->id }}"> {{ $jobTitle->name  }} </option>
+                                    <option value="{{ $jobTitle->id }}"> {{ $jobTitle->name }} </option>
                                     @endforeach
                                     @endif
                                 </select>

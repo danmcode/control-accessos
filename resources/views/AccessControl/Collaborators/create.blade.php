@@ -170,8 +170,7 @@
 
                             <div class="col-12 mb-2">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
-                                        required>
+                                    <input name="area_manager" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
                                     <label class="form-check-label" for="flexSwitchCheckDefault">
                                         Director o Jefe de área </label>
                                 </div>
@@ -269,6 +268,23 @@
 @endsection
 
 @section('scripts')
+@if( $errors->any() )
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error de validación de campos',
+            text: `             
+            @foreach ($errors->all() as $error)
+                - {{ $error}}
+            @endforeach `,
+            showConfirmButton: true,
+            confirmButtonColor: '#0d489a',
+            confirmButtonText: 'Aceptar'     
+        });
+    });
+    </script>
+@endif
 <script src="{{ asset('js/components/camera.js') }}"></script>
 <script src="{{ asset('js/components/inputsControl.js') }}"></script>
 @endsection
