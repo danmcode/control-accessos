@@ -4,6 +4,8 @@ namespace App\Models\AccessControl;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
+
 
 class Collaborator extends Model
 {
@@ -17,6 +19,19 @@ class Collaborator extends Model
         'job_title_id',
         'location_id', 
     ];
+
+    public static function validateCollaborator(array $collaborator)
+    {
+        $isValidCollaborator = Validator::make($collaborator, [
+            "user_id" => 'required',
+            "company_id" => 'required',
+            "area_id" => 'required',
+            "job_title_id" => 'required',
+            "location_id" => 'required',
+        ]);
+
+        return $isValidCollaborator;
+    }
 
     /**
      * Get the user that owns the collaborator.

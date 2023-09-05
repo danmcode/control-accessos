@@ -83,7 +83,7 @@
                         <label for="identification fw-bold" class="form-label">
                             {{ __('Identificación:') }} <small> * </small>
                         </label>
-                        <input type="text" name="identification" id="identification" class="form-control" required>
+                        <input type="number" name="identification" id="identification" class="form-control" minlength="9" required>
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ __('La identificación es requerida') }}</strong>
                         </span>
@@ -131,7 +131,7 @@
 
                     <!-- photo info -->
                     <div class="col-4 mb-3">
-                        <input type="hidden" name="photoDataInput" id="photoDataInput" class="form-control">
+                        <input type="hidden" name="photoDataInput" id="photoDataInput" value="/images/default.png" class="form-control">
                     </div>
 
                     <!-- id-collaborator -->

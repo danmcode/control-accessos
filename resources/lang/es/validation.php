@@ -111,6 +111,7 @@ return [
     'multiple_of' => 'El campo :attribute debe ser un múltiplo de :value.',
     'not_in' => 'El campo :attribute seleccionado es invalido.',
     'not_regex' => 'El formato del campo :attribute no es válido.',
+    'not_select_option' => 'Por favor, seleccione una opción válida en el campo :attribute.',
     'numeric' => 'El campo :attribute debe ser un número.',
     'password' => [
         'letters' => 'El campo :attribute debe contener al menos una letra.',
@@ -143,7 +144,7 @@ return [
     'starts_with' => 'El :attribute debe empezar con uno de los siguientes valores :values',
     'string' => 'El campo :attribute debe ser una cadena.',
     'timezone' => 'El campo :attribute debe ser una zona válida.',
-    'unique' => 'El campo :attribute ya ha sido tomado.',
+    'unique' => 'El campo :attribute ya esta registrado.',
     'uploaded' => 'El campo :attribute no ha podido ser cargado.',
     'uppercase' => 'El :attribute debe estar en mayúsculas', 
     'url' => 'El formato de :attribute no es válido.',

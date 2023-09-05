@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Validator;
 
 class User extends Authenticatable
 {
@@ -54,7 +55,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // Relations
+    public static function validateUser(array $user)
+    {
+        $isValidUser = Validator::make($user, [
+            'username' => 'required|unique:users',
+            'identification' => 'required|unique:users|max:255',
+            'identification_type' => 'required|max:255',
+            'name' => 'required|string',
+            'last_name' => 'required|string',
+            'email' => 'required|email|unique:users',
+        ]);
+
+        return $isValidUser;
+    }
 
     /**
      * Get the collaborator associated with the user
@@ -85,5 +98,37 @@ class User extends Authenticatable
         }
     
         return $aleatoryString;
+    }
+
+    public static function getAllUsersRelations() : array{
+
+        $users = User::where('is_active', true)
+        ->where('id', '!=', 1)
+        ->with('identificationTypes')
+        ->with('collaborators.company')
+        ->with('collaborators.area')
+        ->with('collaborators.jobTitle')
+        ->with('collaborators.location')
+        ->get();
+
+        $users = [ 'users' => $users ] ;
+
+        return $users;
+    }
+
+    public static function getUserRelationById($collaborator) : array {
+
+        $user = User::where('is_active', '=', true)
+            ->where('id', '=', $collaborator)
+            ->with('identificationTypes')
+            ->with('collaborators.company')
+            ->with('collaborators.area')
+            ->with('collaborators.jobTitle')
+            ->with('collaborators.location')
+            ->get();
+
+        $user = [ 'user' => $user[0] ] ;
+
+        return $user;
     }
 }

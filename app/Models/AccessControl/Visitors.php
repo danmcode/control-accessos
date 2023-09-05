@@ -13,6 +13,7 @@ class Visitors extends Model
         'identification_type',
         'identification',
         'name',
+        'photo_path',
         'last_name',
         'visitor_type',
         'company',

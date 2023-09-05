@@ -25,9 +25,9 @@
                         <i class="bi bi-person-add"></i> {{__('Crear colaborador')}}
                     </a>
 
-                    <a href="" class="btn btn-success">
+                    <!-- <a href="" class="btn btn-success">
                         <i class="bi bi-file-earmark-excel"></i> {{__('Exportar a excel')}}
-                    </a>
+                    </a> -->
                 </div>
             </div>
             <hr>
@@ -73,9 +73,9 @@
                                 {{$user->collaborators->location->name}}
                             </td>
                             <td>
-                                <a href="" class="btn btn-primary">
+                                <!-- <a href="" class="btn btn-primary">
                                     <i class="bi bi-eye"></i>
-                                </a>
+                                </a> -->
 
                                 <a href="{{ route('colaboradores.edit', $user->id) }}" class="btn btn-secondary">
                                     <i class="bi bi-pencil"></i>

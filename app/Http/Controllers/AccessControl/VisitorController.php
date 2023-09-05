@@ -68,15 +68,17 @@ class VisitorController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->validate($request,[
+            'identification'=> 'required'
+        ]);
+
+        
         DB::transaction(function () use ($request) {
-            $data = $request->all();
-            try{
-            
 
-            
+            /* try{
+              
                $imagePath = "/images/default.png";
-
-               
 
               //Insert into table Vehicle and equipment
                $vehicle = new Vehicle();
@@ -115,8 +117,6 @@ class VisitorController extends Controller
                $visitor->id_user = auth()->user()->id;  
 
                //Save in DB
-                
-                
                $visitor->save(); 
 
               // Si todo va bien, confirmar la transacción
@@ -126,7 +126,7 @@ class VisitorController extends Controller
            }catch(\Exception $error){
                DB::rollBack();
                dd('Error en la transacción: ' . $error->getMessage());
-           } 
+           }  */
 
         });
 
