@@ -224,6 +224,25 @@
 
 @section('scripts')
 
+@if( $errors->any() )
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error de validación de campos',
+            text:`             
+            @foreach ($errors->all() as $error)
+                - {{ $error}}
+            @endforeach`,
+            showConfirmButton: true,
+            confirmButtonColor: '#0d489a',
+            confirmButtonText: 'Aceptar'     
+        });
+    });
+    </script>
+@endif
+
+
 <script>
 /**
  * Manage the tabs

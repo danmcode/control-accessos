@@ -150,6 +150,32 @@
 
 @endsection
 
-@section('scripts')
 
+@section('scripts')
+@if (session('success'))
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    Swal.fire({
+        icon: 'success',
+        title: '¡Éxito!',
+        text: ` {{ session('success') }} `,
+        showConfirmButton: false,
+        timer: 1500
+    });
+});
+</script>
+@elseif(session('error'))
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: ` {{ session('error') }} `,
+            showConfirmButton: false,
+            timer: 1500
+        });
+    });
+    </script>
+@endif
+<script src="js/collaborators/deleteCollaborator.js"></script>
 @endsection

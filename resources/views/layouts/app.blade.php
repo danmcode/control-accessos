@@ -290,7 +290,7 @@
                 </a>
                 <ul id="visitors-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="{{ route('visitantes.index') }}">
+                        <a href="{{ route('visitantes-index') }}">
                             <span>Ver visitantes</span>
                         </a>
                     </li>

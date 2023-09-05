@@ -59,7 +59,7 @@ Route::post('registrar-salida/{id}',
  * visitors
  */
 
-Route::get('/listar-visitantes',[VisitorController::class,'index'])->name('visitantes.index')->middleware('auth');
+Route::get('/listar-visitantes',[VisitorController::class,'index'])->name('visitantes-index')->middleware('auth');
 
 Route::get('/crear-visitante/{id}',[VisitorController::class,'create'])->name('crear-visitante')->middleware('auth');
 

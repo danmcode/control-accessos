@@ -1,11 +1,14 @@
 <?php
 
 use App\Models\AccessControl\Area;
-use App\Models\AccessControl\Collaborator;
 use App\Models\AccessControl\Company;
-use App\Models\AccessControl\IdentificationType;
 use App\Models\AccessControl\JobTitle;
 use App\Models\AccessControl\Location;
+use App\Models\AccessControl\Collaborator;
+use App\Models\AccessControl\vehicleTypes;
+use App\Models\AccessControl\VisitorTypes;
+use App\Models\AccessControl\EquipmentTypes;
+use App\Models\AccessControl\IdentificationType;
 
 function testHelper(): string {
     return "Helper Test";

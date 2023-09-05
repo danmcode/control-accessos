@@ -120,19 +120,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-@elseif( session('error') )
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    Swal.fire({
-        icon: 'error',
-        title: '¡Error!',
-        text: ` {{ session('error') }} `,
-        showConfirmButton: true,
-        confirmButtonColor: '#0d489a',
-        confirmButtonText: 'Aceptar'
-    });
-});
-</script>
 @endif
 <script src="js/collaborators/deleteCollaborator.js"></script>
 @endsection
