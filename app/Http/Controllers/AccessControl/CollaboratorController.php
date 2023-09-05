@@ -136,7 +136,7 @@ class CollaboratorController extends Controller
                     $fileName = uniqid() . '.png';
 
                     // Save the user collaborator image
-                    $filePath = 'storage/collaborators/images/' . $fileName;
+                    $filePath = 'storage/storage/collaborators/images/' . $fileName;
                     Storage::disk('public')->put($filePath, $image);
     
                     $userCreated->photo_path = $filePath;

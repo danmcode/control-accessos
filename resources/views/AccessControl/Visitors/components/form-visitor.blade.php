@@ -125,7 +125,7 @@
                             @endforeach
                         </select>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ __('Los apellidos son requeridos') }}</strong>
+                            <strong>{{ __('El tipo de visitante es requerido') }}</strong>
                         </span>
                     </div>
 
@@ -134,9 +134,9 @@
                         <input type="hidden" name="photoDataInput" id="photoDataInput" class="form-control">
                     </div>
 
-                    <!-- photo info -->
+                    <!-- id-collaborator -->
                     <div class="col-4 mb-3">
-                        <input type="hidden" value={{$id}} name="id-creator" id="id-creator" class="form-control">
+                        <input type="hidden" value={{$id}} name="id_collaborator" id="id_collaborator" class="form-control">
                     </div>
 
                     <hr>

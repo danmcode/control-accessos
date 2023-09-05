@@ -17,7 +17,7 @@ class VehicleTypeController extends Controller
             'created_by'=> auth()->user()->id,
         ]);
 
-        if($$vehicleTypeCreated){
+        if($vehicleTypeCreated){
             return redirect()->route('configuration.index')
                 ->with('success', 'Se ha creado el tipo de vehiculo con éxito');
         }else{

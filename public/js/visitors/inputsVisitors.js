@@ -7,6 +7,9 @@ const input_date_arl = document.getElementById('date_arl');
 const mark_car = document.getElementById('mark_car');
 const Placa = document.getElementById('Placa');
 const color = document.getElementById('color');
+const mark = document.getElementById('mark');
+const description = document.getElementById('description');
+const serial = document.getElementById('serial');
 
 //labels of visitors
 const labelName_Visitor = document.getElementById('labelName_Visitor');
@@ -22,6 +25,7 @@ const block_vehicle = document.getElementById('vehicle');
 const typeVisitor = document.getElementById('typeVisitor');
 const select_arl = document.getElementById('arl');
 const vehicle_type = document.getElementById('vehicle_type');
+const equipment_type = document.getElementById('equipment_type');
 
 //TextArea of visitors
 const remission = document.getElementById('remission');
@@ -159,6 +163,20 @@ typeVisitor.addEventListener('change',(e)=>{
     }
 
 });
+
+equipment_type.addEventListener('change',(event)=>{
+    const name = equipment_type.options[equipment_type.selectedIndex].text;
+
+    if(name==="Seleccione"){
+        mark.required = false;
+        description.required = false;
+        serial.required = false;
+    }else{
+        mark.required = true;
+        description.required = true;
+        serial.required = true;
+    }
+})
 
 
 

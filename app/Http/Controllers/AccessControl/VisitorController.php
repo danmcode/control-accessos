@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers\AccessControl;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\AccessControl\Arl;
-use App\Models\AccessControl\Visitor;
-use App\Models\AccessControl\IdentificationType;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 use App\Models\AccessControl\Company;
-use App\Models\AccessControl\EquipmentTypes;
+use App\Models\AccessControl\Vehicle;
+use App\Models\AccessControl\Visitors;
+use App\Models\AccessControl\Equipments;
 use App\Models\AccessControl\vehicleTypes;
 use App\Models\AccessControl\VisitorTypes;
+use App\Models\AccessControl\EquipmentTypes;
+use App\Models\AccessControl\IdentificationType;
 
 class VisitorController extends Controller
 {
@@ -63,13 +68,78 @@ class VisitorController extends Controller
      */
     public function store(Request $request)
     {
-        return dd($request->all());
+        DB::transaction(function () use ($request) {
+            $data = $request->all();
+            try{
+            
+
+            
+               $imagePath = "/images/default.png";
+
+               
+
+              //Insert into table Vehicle and equipment
+               $vehicle = new Vehicle();
+               $vehicle->mark = $data['mark_car'];
+               $vehicle->placa = $data['Placa'];
+               $vehicle->color = $data['color'];
+               $vehicle->id_vehicle_type = $data['vehicle_type'];
+
+               $vehicle->save();  
+ 
+               $equipment = new Equipments();
+               $equipment->mark = $data['mark'];
+               $equipment->serial = $data['serial'];
+               $equipment->description = $data['description'];
+               $equipment->id_equipment_type = $data['equipment_type'];  
+
+               $equipment->save();     
+
+               
+ 
+              //Insert into table Visitor
+               $visitor = new Visitors();
+               $visitor->photo_path = "/images/default.png";
+               $visitor->identification_type = $data['identification_type'];
+               $visitor->identification = $data['identification'];
+               $visitor->name = $data['name_Visitor'];
+               $visitor->last_name = $data['lastname_Visitor'];
+               $visitor->visitor_type = $data['typeVisitor'];
+               $visitor->company = $data['company'];
+               $visitor->arl_id = $data['arl'];
+               $visitor->date_arl = $data['date_arl'];
+               $visitor->remission = $data['remission'];
+               $visitor->equipment_type =  null;
+               $visitor->vehicle_type = $vehicle->id;
+               $visitor->id_collaborator = $data['id_collaborator'];
+               $visitor->id_user = auth()->user()->id;  
+
+               //Save in DB
+                
+                
+               $visitor->save(); 
+
+              // Si todo va bien, confirmar la transacción
+               DB::commit(); 
+
+
+           }catch(\Exception $error){
+               DB::rollBack();
+               dd('Error en la transacción: ' . $error->getMessage());
+           } 
+
+        });
+
+        
+
+
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Visitor $visitor)
+    public function show(Visitors $visitor)
     {
         //
     }
@@ -77,7 +147,7 @@ class VisitorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Visitor $visitor)
+    public function edit(Visitors $visitor)
     {
         //
     }
@@ -85,7 +155,7 @@ class VisitorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Visitor $visitor)
+    public function update(Request $request, Visitors $visitor)
     {
         //
     }
@@ -93,7 +163,7 @@ class VisitorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Visitor $visitor)
+    public function destroy(Visitors $visitor)
     {
         //
     }
@@ -104,7 +174,6 @@ class VisitorController extends Controller
      */
     public function createVisitorToColabollator()
     {
-
 
         return view('AccessControl.Visitors.create');
     }

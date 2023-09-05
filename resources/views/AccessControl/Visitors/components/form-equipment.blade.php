@@ -20,7 +20,7 @@
 
                     <!-- marca -->
                     <div class="col-4 mb-3">
-                        <label for="mark fw-bold" class="form-label">
+                        <label for="mark fw-bold"  class="form-label">
                             {{ __('Marca:') }} 
                         </label>
                         <input type="text" name="mark" id="mark" class="form-control" required>
