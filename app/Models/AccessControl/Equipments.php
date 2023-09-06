@@ -13,6 +13,11 @@ class Equipments extends Model
         'mark',
         'serial',
         'description',
-        'id_equipment_type',
+        'equipment_type_id',
     ];
+
+    public function EquipmentType()
+    {
+        return $this->belongsTo(EquipmentTypes::class);
+    }
 }

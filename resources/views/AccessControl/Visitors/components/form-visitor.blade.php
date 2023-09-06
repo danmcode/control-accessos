@@ -131,7 +131,7 @@
 
                     <!-- photo info -->
                     <div class="col-4 mb-3">
-                        <input type="hidden" name="photoDataInput" id="photoDataInput" value="/images/default.png" class="form-control">
+                        <input type="hidden" name="photoDataInput" id="photoDataInput" value="images/default.png" class="form-control">
                     </div>
 
                     <!-- id-collaborator -->
@@ -175,15 +175,18 @@
                         </label>
                         <input type="date" name="date_arl" id="date_arl" class="form-control" required>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ __('La fecha es requerida') }}</strong>
+                            <strong>{{ __('La fecha de arl es requerida') }}</strong>
                         </span>
                     </div>
 
                     <div class="col-12 mb-3" id="block_remission">
                         <label for="remission fw-bold" class="form-label">
-                            {{ __('Remision:') }} 
+                            {{ __('Remisión:') }} 
                         </label>
                         <textarea name="remission" id="remission" class="form-control" required></textarea>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ __('La remision es requerida') }}</strong>
+                        </span>
                     </div>
                 </div>
             </div>

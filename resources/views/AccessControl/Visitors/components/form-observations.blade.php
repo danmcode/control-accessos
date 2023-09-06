@@ -9,7 +9,7 @@
                         <label for="observation fw-bold" class="form-label">
                             {{ __('Observación:') }} 
                         </label>
-                        <textarea name="observation" id="observation" class="form-control" required></textarea>
+                        <textarea name="observation" id="observation" class="form-control" ></textarea>
                     </div>
                 </div>
             </div>

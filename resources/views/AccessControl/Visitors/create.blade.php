@@ -131,7 +131,10 @@
                         @csrf
                         <h5>
                             <i class="bi bi-person card-title"></i>
-                            <span class="card-title">{{ __('DANIEL ALEXANDER MUELAS RIVERA,') }}</span>
+{{--                             @foreach ($collaborator as $collaborato)
+                                <span class="card-title">{{$collaborato->user->name}}</span>
+                            @endforeach --}}
+                            JJR
                             <i class="bi bi-geo-alt"></i>
                             {{ __('Edificio viejo - Oficina de Técnologia') }}
                         </h5>

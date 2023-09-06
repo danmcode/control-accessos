@@ -18,22 +18,25 @@ return new class extends Migration
             $table->string('name');
             $table->string('photo_path')->nullable();
             $table->string('last_name');
-            $table->unsignedBigInteger('visitor_type')->unsigned();
+            $table->unsignedBigInteger('visitor_type_id')->unsigned();
             $table->string('company');
 
             $table->unsignedBigInteger('arl_id')->unsigned()->nullable();
             $table->date('date_arl')->nullable();
-            $table->string('remission')->nullable();
+            $table->text('remission')->nullable();
             
-            $table->unsignedBigInteger('equipment_type')->unsigned()->nullable();
-            $table->unsignedBigInteger('vehicle_type')->unsigned()->nullable();
+            $table->unsignedBigInteger('equipment_id')->unsigned()->nullable();
+            $table->unsignedBigInteger('vehicle_id')->unsigned()->nullable();
             $table->unsignedBigInteger('id_collaborator')->unsigned();
             $table->unsignedBigInteger('id_user')->unsigned();
 
 
             //add constrained in the table
             $table->foreign('identification_type')->references('id')->on('identification_types');
-            $table->foreign('visitor_type')->references('id')->on('visitor_types');
+            $table->foreign('vehicle_id')->references('id')->on('vehicles');
+            $table->foreign('equipment_id')->references('id')->on('equipments');
+            $table->foreign('id_collaborator')->references('id')->on('collaborators');
+            $table->foreign('visitor_type_id')->references('id')->on('visitor_types');
             $table->foreign('arl_id')->references('id')->on('arls');
             $table->foreign('id_user')->references('id')->on('users');
         });
@@ -56,8 +59,8 @@ return new class extends Migration
             $table->dropColumn('arl_id');
             $table->dropColumn('date_arl');
             $table->dropColumn('remission');
-            $table->dropColumn('equipment_type');
-            $table->dropColumn('vehicle_type');
+            $table->dropColumn('equipment_id');
+            $table->dropColumn('vehicle_id');
             $table->dropColumn('id_creator');
             $table->dropColumn('id_collaborator');
         });

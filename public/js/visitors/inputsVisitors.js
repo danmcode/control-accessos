@@ -105,6 +105,11 @@ typeVisitor.addEventListener('change',(e)=>{
         block_remission.style.display = 'none';
         remission.required = false;
 
+        mark_car.required = false;
+        Placa.required = false;
+        color.required = false;
+        vehicle_type.required = false;
+
 
     }else if(name === "Conductor"){
         let enable = confirm("¿Desea agregar una remisión para el Conductor?");

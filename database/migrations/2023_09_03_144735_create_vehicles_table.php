@@ -16,11 +16,11 @@ return new class extends Migration
             $table->string('mark')->nullable();
             $table->string('placa')->nullable();
             $table->string('color')->nullable();
-            $table->unsignedBigInteger('id_vehicle_type')->unsigned()->nullable();
+            $table->unsignedBigInteger('vehicle_type_id')->unsigned()->nullable();
             $table->timestamps();
 
             //add constrained in the table
-            $table->foreign('id_vehicle_type')->references('id')->on('vehicle_types');
+            $table->foreign('vehicle_type_id')->references('id')->on('vehicle_types');
         });
     }
 

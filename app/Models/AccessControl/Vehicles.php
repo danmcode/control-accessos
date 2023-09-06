@@ -5,7 +5,7 @@ namespace App\Models\AccessControl;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Vehicle extends Model
+class Vehicles extends Model
 {
     use HasFactory;
 
@@ -13,7 +13,12 @@ class Vehicle extends Model
         'mark',
         'placa',
         'color',
-        'id_vehicle_type',
+        'vehicle_type_id',
     ];
+
+    public function VehicleType()
+    {
+        return $this->belongsTo(vehicleTypes::class);
+    }
 
 }

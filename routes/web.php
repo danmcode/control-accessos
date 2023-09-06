@@ -58,11 +58,11 @@ Route::post('registrar-salida/{id}',
 /**
  * visitors
  */
-
+//List a history of all visitors
 Route::get('/listar-visitantes',[VisitorController::class,'index'])->name('visitantes-index')->middleware('auth');
-
+//Get the create visitor view
 Route::get('/crear-visitante/{id}',[VisitorController::class,'create'])->name('crear-visitante')->middleware('auth');
-
+//Create and Login a First Time Visitor
 Route::post('/crear-visitante',[VisitorController::class,'store'])->name('crear-visitante.store')->middleware('auth');
 
 

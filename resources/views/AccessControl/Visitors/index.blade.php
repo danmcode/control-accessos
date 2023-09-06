@@ -78,54 +78,109 @@
                                     <th scope="col">
                                         {{ __('Visitante') }}
                                     </th>
-                                    <th scope="col">Elemtos de ingreso</th>
+                                    <th scope="col">Elemetos de ingreso</th>
                                     <th scope="col">Vehiculo</th>
                                     <th scope="col">Acciones</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @if( isset($visitors) && sizeof($visitors) > 0 )
+                                @foreach( $visitors as $key => $visitor )
                                 <tr>
-                                    <th scope="row"> 1 </th>
+                                    <th scope="row">{{ $key + 1 }}</th>
                                     <td>
-                                        <img src="{{ asset('images/messages-3.jpg') }}">
+                                        <img src="{{ asset($visitor->photo_path) }}">
                                     </td>
                                     <td>
                                         <div>
                                             <span class="card-title">
-                                                {{__('DAVID EDUARDO NELSON MULDON ')}}
+                                                {{$visitor->name.' '.$visitor->last_name}}
                                             </span>
                                             <div class="row">
-                                                <div class="col-6">
+                                                <div class="col-5">
                                                     <div>
                                                         <i class="bi bi-person-vcard-fill"></i>
-                                                        <span> {{__('1141237956')}} </span>
+                                                        <span> {{$visitor->identification}} </span>
                                                     </div>
                                                     <div>
-                                                        <i class="bi bi-building"></i>
-                                                        <span> {{__('Abka Colombia SAS')}} </span>
+                                                        <i class="bi bi-person-workspace"></i>
+                                                        <span> {{$visitor->VisitorType->name}} </span>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-6">
+                                                <div class="col-7">
                                                     <div>
-                                                        <i class="bi bi-person-workspace"></i>
-                                                        <span> {{__('Contratista')}} </span>
-                                                    </div>
-                                                    <div>
-                                                        <i class="bi bi-geo-alt"></i>
-                                                        <span> {{__('Edificio viejo')}} </span>
+                                                        <i class="bi bi-building"></i>
+                                                        <span> {{$visitor->company}} </span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div>
-                                                <i class="bi bi-person-fill-lock"></i>
-                                                <span class="fw-bold"> Responsable: </span> {{__('Jaider Vasquez')}}
+                                            <div class="row">
+                                                <div>
+                                                    <i class="bi bi-person-fill-lock"></i>
+                                                    <span class="fw-bold"> Responsable: </span> {{__('Jaider
+                                                    Vasquez')}}
+                                                </div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div>
+                                                    <i class="bi bi-box-seam"></i>
+                                                    <span class="fw-bold"> Tipo de equipo:</span>
+                                                    {{isset($visitor->Equipment->EquipmentType->name)?
+                                                        $visitor->Equipment->EquipmentType->name :'NA'
+                                                    }}
+                                                </div>
+                                                <div>
+                                                    <i class="bi bi-badge-tm"></i>
+                                                    <span class="fw-bold"> Marca:</span>
+                                                    {{isset($visitor->Equipment->mark)?
+                                                    $visitor->Equipment->mark :'NA'}}
+                                                </div>
+                                                <div>
+                                                    <i class="bi bi-qr-code"></i>
+                                                    <span class="fw-bold"> Serial:</span>
+                                                    {{isset($visitor->Equipment->serial)?
+                                                    $visitor->Equipment->serial : 'NA'}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div>
+                                                    <i class="bi bi-c-circle-fill"></i>
+                                                    <span class="fw-bold"> Marca:</span>
+                                                    {{isset($visitor->Vehicle->mark)?
+                                                    $visitor->Vehicle->mark:'NA'}}
+                                                </div>
+                                                <div>
+                                                    <i class="bi bi-badge-3d"></i>
+                                                    <span class="fw-bold"> Placa:</span>
+                                                    {{isset($visitor->Vehicle->placa)?
+                                                    $visitor->Vehicle->placa:'NA'}}
+                                                </div>
+                                                <div>
+                                                    <i class="bi bi-paint-bucket"></i>
+                                                    <span class="fw-bold"> Color:</span>
+                                                    {{isset($visitor->Vehicle->color)?
+                                                    $visitor->Vehicle->color:'NA'}}
+                                                </div>
+                                                <div>
+                                                    <i class="bi bi-car-front-fill"></i>
+                                                    <span class="fw-bold"> Tipo Vehiculo:</span>
+                                                    {{isset($visitor->Vehicle->VehicleType->name)?
+                                                    $visitor->Vehicle->VehicleType->name:'NA'}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td>
                                         <div>
                                             <i class="bi bi-box-arrow-right visitor-in"></i> <span> 17/05/23 10:45 a.m.
@@ -138,6 +193,8 @@
                                     </td>
                                     <td> <a href=""><i class="bi bi-exclamation-circle"></i></a> </td>
                                 </tr>
+                                @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -154,7 +211,7 @@
 @section('scripts')
 @if (session('success'))
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
     Swal.fire({
         icon: 'success',
         title: '¡Éxito!',
@@ -175,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function() {
             timer: 1500
         });
     });
-    </script>
+</script>
 @endif
 <script src="js/collaborators/deleteCollaborator.js"></script>
 @endsection
