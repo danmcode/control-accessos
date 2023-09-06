@@ -11,13 +11,12 @@ use App\Models\AccessControl\IncomeExitCollaborators;
 class IncomeExitCollaboratorsController extends Controller
 {
     //
-    function index()
+    public function index()
     {
-
         //Get all in and collaborator Income Output
         $incomeOutputs = IncomeExitCollaborators::get();
 
-        return view('IncomeOutput.index', [
+        return view('AccessControl.IncomeOutput.index', [
             'incomeOutputs' => $incomeOutputs,
         ]);
     }

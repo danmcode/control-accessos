@@ -35,6 +35,10 @@ Route::resource('configuration', 'App\Http\Controllers\AccessControl\Configurati
 Route::resource('colaboradores', 'App\Http\Controllers\AccessControl\CollaboratorController')
     ->middleware('auth');
 
+
+Route::resource('ingresos-salidas', 'App\Http\Controllers\AccessControl\IncomeExitCollaboratorsController')
+    ->middleware('auth');
+
 //in
 Route::post('registrar-ingreso/{id}',
     [
