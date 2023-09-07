@@ -42,7 +42,7 @@ class Collaborator extends Model
             ->with('collaborator.jobTitle')
             ->with('collaborator.location')
             ->with('collaborator.user')
-            ->orderBy('date_time_out', 'asc')
+            ->orderByRaw('ISNULL(date_time_out) DESC, date_time_out DESC')
             ->limit(30)
             ->get();
         
