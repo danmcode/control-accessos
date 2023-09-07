@@ -121,8 +121,8 @@
                                                     <i class="bi bi-person-fill-lock"></i>
                                                     <span class="fw-bold"> Responsable: </span>
                                                     @foreach ($incomeExitVisitors[1] as $incomeExitVisitor)
-                                                    {{$incomeExitVisitor->users->name.'
-                                                    '.$incomeExitVisitor->users->last_name}}
+                                                    {{$incomeExitVisitor->user->name.'
+                                                    '.$incomeExitVisitor->user->last_name}}
                                                     @endforeach
                                                 </div>
                                             </div>
@@ -199,7 +199,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <a href="#" class="btn btn-danger" data-bs-toggle="modal"
-                                                    data-bs-target="#modalOutVisitor" id="btnOutVisitor">
+                                                    data-bs-target="#modalOutVisitor" data-id={{$visitor->id}} data-full-name={{$visitor->name.' '.$visitor->last_name}} id="btnOutVisitor">
                                                         <i class="bi bi-box-arrow-left visitor-out"></i>
                                                         {{ __('Registrar salida') }}
                                                     </a>
@@ -207,6 +207,11 @@
                                             </div>
                                         </div>
                                     </td>
+                                    data-bs-target="#modalUpdateArea" 
+                                data-bs-area-id="{{ $area->id }}"
+                                data-bs-area-name="{{ $area->name }}" 
+                                data-bs-company-id="{{ $area->company_id }}"
+                                data-bs-company-name="{{ $area->company->name}}"
                                     <td> <a href=""><i class="bi bi-exclamation-circle"></i></a> </td>
                                 </tr>
                                 @endforeach
