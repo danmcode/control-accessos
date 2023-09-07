@@ -133,8 +133,8 @@
                         <h5>
                             <i class="bi bi-person card-title"></i>
                             @foreach ($collaborator as $collaborato)
-                            <span class="card-title">{{$collaborato->users->name.'
-                                '.$collaborato->users->last_name}}</span>
+                            <span class="card-title">{{$collaborato->user->name.'
+                                '.$collaborato->user->last_name}}</span>
                             
                             <i class="bi bi-geo-alt"></i>
                             {{$collaborato->location->name }}

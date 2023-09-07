@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Models\AccessControl\Company;
+use App\Models\AccessControl\Collaborator;
 use App\Models\AccessControl\Vehicles;
 use App\Models\AccessControl\Visitors;
 use Illuminate\Support\Facades\Storage;
