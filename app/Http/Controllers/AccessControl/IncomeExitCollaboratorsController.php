@@ -5,19 +5,14 @@ namespace App\Http\Controllers\AccessControl;
 use App\Http\Controllers\Controller;
 use App\Models\AccessControl\Collaborator;
 use Illuminate\Http\Request;
-
 use App\Models\AccessControl\IncomeExitCollaborators;
 
 class IncomeExitCollaboratorsController extends Controller
 {
-    //
     public function index()
     {
-        //Get all in and collaborator Income Output
-        $incomeOutputs = IncomeExitCollaborators::get();
-
         return view('AccessControl.IncomeOutput.index', [
-            'incomeOutputs' => $incomeOutputs,
+            'incomeOutputs' => Collaborator::getIncomeExitCollaborators(),
         ]);
     }
 
@@ -77,7 +72,7 @@ class IncomeExitCollaboratorsController extends Controller
         }
     }
 
-    function setOutputCollaborator(Request $request, string $id)
+    function setOutputCollaborator(Request $request, string $id, string $view = null)
     {
 
         $collaborator = Collaborator::find($id);
@@ -110,6 +105,8 @@ class IncomeExitCollaboratorsController extends Controller
             "\nSalida: \n" . $observation; 
             $incomeOutPut[0]->updated_by = auth()->user()->id;
             $incomeOutPut[0]->update();
+            
+            if($view) return redirect()->route('ingresos-salidas.index')->with('success', 'Se ha registrado la salida');
 
             return redirect()->route('home')->with('success', 'Se ha registrado la salida');
 

@@ -50,7 +50,7 @@ Route::post('registrar-ingreso/{id}',
 
 //Out
 //in
-Route::post('registrar-salida/{id}',
+Route::post('registrar-salida/{id}/{view?}',
     [
         App\Http\Controllers\AccessControl\IncomeExitCollaboratorsController::class,
         'setOutputCollaborator'
