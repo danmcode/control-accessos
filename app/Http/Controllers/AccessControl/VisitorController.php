@@ -62,6 +62,7 @@ class VisitorController extends Controller
                 $incomeExitVisitors[] = $lastIncomeExitVisitor;
             }
         }
+        
         return [$incomeExitVisitors,$collaborator];
     }
 

@@ -207,11 +207,6 @@
                                             </div>
                                         </div>
                                     </td>
-                                    data-bs-target="#modalUpdateArea" 
-                                data-bs-area-id="{{ $area->id }}"
-                                data-bs-area-name="{{ $area->name }}" 
-                                data-bs-company-id="{{ $area->company_id }}"
-                                data-bs-company-name="{{ $area->company->name}}"
                                     <td> <a href=""><i class="bi bi-exclamation-circle"></i></a> </td>
                                 </tr>
                                 @endforeach
