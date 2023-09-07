@@ -36,10 +36,23 @@ class Collaborator extends Model
         return $isValidCollaborator;
     }
 
-    /**
-     * Get the user that owns the collaborator.
-     */
-    public function users()
+    public static function getIncomeExitCollaborators(){
+        
+        $incomeOutputs = IncomeExitCollaborators::with('collaborator')
+            ->with('collaborator.company')
+            ->with('collaborator.area')
+            ->with('collaborator.jobTitle')
+            ->with('collaborator.location')
+            ->with('collaborator.user')
+            ->orderByRaw('ISNULL(date_time_out) DESC, date_time_out DESC')
+            ->limit(30)
+            ->get();
+        
+        return $incomeOutputs;
+    }
+
+
+    public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
@@ -78,7 +91,7 @@ class Collaborator extends Model
     {
 
         $collaborator = Collaborator::where('id', '=', $collaborator)
-        ->with('users')
+        ->with('user')
         ->with('location')
         ->get();
 

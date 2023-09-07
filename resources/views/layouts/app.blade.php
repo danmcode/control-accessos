@@ -278,6 +278,11 @@
                             <span>Crear colaboradores</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('ingresos-salidas.index') }}">
+                            <span>Ingresos y salidas</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <!-- End Colaborators Colaboradores -->
