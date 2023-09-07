@@ -48,6 +48,7 @@ class VisitorController extends Controller
     private function Date_Hour_in($visitors){
         // Inicializa un arreglo para almacenar los registros de IncomeExitVisitors
         $incomeExitVisitors = [];
+        $data_collaborator = [];
 
         // Recorre cada visitante y obtén su último registro de IncomeExitVisitors
         foreach ($visitors as $visitor) {
@@ -55,15 +56,18 @@ class VisitorController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->first();
 
-            $collaborator = Collaborator::getCollaboratorRelationById($visitor->id);
+            $collaborator = Collaborator::where('user_id', '=', $visitor->id)
+            ->orderBy('created_at', 'desc')
+            ->first();
 
             // Agrega el registro al arreglo si se encontró
-            if ($lastIncomeExitVisitor) {
+            if ($lastIncomeExitVisitor && $collaborator) {
                 $incomeExitVisitors[] = $lastIncomeExitVisitor;
+                $data_collaborator[] = $collaborator;
             }
         }
         
-        return [$incomeExitVisitors,$collaborator];
+        return [$incomeExitVisitors,$data_collaborator];
     }
 
     /**

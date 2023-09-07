@@ -16,7 +16,7 @@
 
 <section class="section profile">
 
-    <div class="row">
+{{--     <div class="row">
         <div class="col-xl-3">
             <div class="card">
 
@@ -121,9 +121,9 @@
                     <!-- end visitors-card -->
                 </div>
             </div>
-        </div>
+        </div> --}}
 
-        <div class="col-xl-9">
+        <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
 
@@ -133,8 +133,8 @@
                         <h5>
                             <i class="bi bi-person card-title"></i>
                             @foreach ($collaborator as $collaborato)
-                            <span class="card-title">{{$collaborato->users->name.'
-                                '.$collaborato->users->last_name}}</span>
+                            <span class="card-title">{{$collaborato->user->name.'
+                                '.$collaborato->user->last_name}}</span>
                             
                             <i class="bi bi-geo-alt"></i>
                             {{$collaborato->location->name }}

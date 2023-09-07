@@ -14,7 +14,7 @@
 
 <section class="section profile">
 
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-xl-3">
             <div class="card">
                 <div class="card-body profile-card pt-4">
@@ -61,9 +61,9 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
-        <div class="col-xl-9">
+        <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title"> {{ __('Visitantes') }} </h5>
@@ -121,8 +121,8 @@
                                                     <i class="bi bi-person-fill-lock"></i>
                                                     <span class="fw-bold"> Responsable: </span>
                                                     @foreach ($incomeExitVisitors[1] as $incomeExitVisitor)
-                                                    {{$incomeExitVisitor->user->name.'
-                                                    '.$incomeExitVisitor->user->last_name}}
+                                                    {{$incomeExitVisitor->name.'
+                                                    '.$incomeExitVisitor->last_name}}
                                                     @endforeach
                                                 </div>
                                             </div>
@@ -199,7 +199,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <a href="#" class="btn btn-danger" data-bs-toggle="modal"
-                                                    data-bs-target="#modalOutVisitor" data-id={{$visitor->id}} data-full-name={{$visitor->name.' '.$visitor->last_name}} id="btnOutVisitor">
+                                                    data-bs-target="#modalOutVisitor" data-bs-id="{{$visitor->id}}" data-bs-full-name="{{$visitor->name.' '.$visitor->last_name}}" id="btnOutVisitor">
                                                         <i class="bi bi-box-arrow-left visitor-out"></i>
                                                         {{ __('Registrar salida') }}
                                                     </a>
@@ -256,6 +256,7 @@
 
 @section('scripts')
 @if (session('success'))
+<script src="js/modals/outputVisitorModal.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
     Swal.fire({
@@ -280,5 +281,5 @@
     });
 </script>
 @endif
-<script src="js/collaborators/deleteCollaborator.js"></script>
+
 @endsection

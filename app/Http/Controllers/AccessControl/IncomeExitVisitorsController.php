@@ -24,7 +24,7 @@ class IncomeExitVisitorsController extends Controller
                 $lastIncome = "No se ha registrado el ingreso al visitante";
     
                 if ($incomeOutPut[0]->date_time_out != null) {
-                    return redirect()->route('home')->with('error', $lastIncome);
+                    return redirect()->route('visitantes-index')->with('error', $lastIncome);
                 }
     
                 $observation = isset($request->all()['observation'])
@@ -35,6 +35,7 @@ class IncomeExitVisitorsController extends Controller
                 $incomeOutPut[0]->observation = $incomeOutPut[0]->observation . 
                 "\nSalida: \n" . $observation; 
                 $incomeOutPut[0]->updated_by = auth()->user()->id;
+                $incomeOutPut[0]->registered_out_by = auth()->user()->id;
                 $incomeOutPut[0]->update();
     
                 //return redirect()->route('home')->with('success', 'Se ha registrado la salida'); 
