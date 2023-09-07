@@ -4,7 +4,7 @@ namespace App\Http\Controllers\AccessControl;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\AccessControl\vehicleTypes;
+use App\Models\AccessControl\VehicleTypes;
 
 class VehicleTypeController extends Controller
 {
@@ -12,7 +12,7 @@ class VehicleTypeController extends Controller
     {
         $data = $request->all();
 
-        $vehicleTypeCreated = vehicleTypes::create([
+        $vehicleTypeCreated = VehicleTypes::create([
             'name'=>$data['name'],
             'created_by'=> auth()->user()->id,
         ]);
@@ -26,13 +26,13 @@ class VehicleTypeController extends Controller
         }
     }
 
-        /**
+    /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $vehicleTypes)
+    public function update(Request $request, string $VehicleTypes)
     {
         //update a identification type
-        $vehicleTypeToUpdate = vehicleTypes::find($vehicleTypes);
+        $vehicleTypeToUpdate = VehicleTypes::find($VehicleTypes);
         $data = $request->all();
 
         $vehicleTypeToUpdate->name = $data['name'];
@@ -48,10 +48,10 @@ class VehicleTypeController extends Controller
                 /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $vehicleTypes)
+    public function destroy(string $VehicleTypes)
     {
         // Soft delete
-        $vehicleTypeToDelete = vehicleTypes::find($vehicleTypes);
+        $vehicleTypeToDelete = VehicleTypes::find($VehicleTypes);
         $vehicleTypeToDelete->is_active = false;
         $vehicleTypeToDelete->update();
 
