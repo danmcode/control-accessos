@@ -5,7 +5,7 @@ namespace App\Models\AccessControl;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class vehicleTypes extends Model
+class VehicleTypes extends Model
 {
     use HasFactory;
 

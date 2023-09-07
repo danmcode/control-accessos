@@ -15,8 +15,7 @@ use App\Models\AccessControl\Visitors;
 use Illuminate\Support\Facades\Storage;
 use App\Models\AccessControl\Equipments;
 use Illuminate\Support\Facades\Validator;
-use App\Models\AccessControl\Collaborator;
-use App\Models\AccessControl\vehicleTypes;
+use App\Models\AccessControl\VehicleTypes;
 use App\Models\AccessControl\VisitorTypes;
 use App\Models\AccessControl\EquipmentTypes;
 use App\Models\AccessControl\IdentificationType;
@@ -89,7 +88,7 @@ class VisitorController extends Controller
 
                 $equipmentsTypes = EquipmentTypes::where('is_active','=',true)->get();
 
-                $vehiclestypes = vehicleTypes::where('is_active','=',true)->get();
+                $vehiclestypes = VehicleTypes::where('is_active','=',true)->get();
          
                 
                  return view('AccessControl.Visitors.create',[
