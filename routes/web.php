@@ -65,6 +65,14 @@ Route::get('/crear-visitante/{id}',[VisitorController::class,'create'])->name('c
 //Create and Login a First Time Visitor
 Route::post('/crear-visitante',[VisitorController::class,'store'])->name('crear-visitante.store')->middleware('auth');
 
+Route::post('registrar-salida-visitante/{id}',
+    [
+        App\Http\Controllers\AccessControl\IncomeExitVisitorsController::class,
+        'setOutputVisitor'
+    ])
+    ->name('registrar-salida-visitante')
+    ->middleware('auth');
+
 
 
 

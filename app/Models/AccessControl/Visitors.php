@@ -42,9 +42,9 @@ class Visitors extends Model
         return $this->belongsTo(Equipments::class);
     }
 
-
-
-
-
+    public function incomeExitVisitor()
+    {
+        return $this->hasMany(IncomeExitVisitors::class,'visitor_id');
+    }
 
 }

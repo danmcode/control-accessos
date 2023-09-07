@@ -9,18 +9,18 @@ use App\Models\AccessControl\Arl;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Models\AccessControl\Collaborator;
 use App\Models\AccessControl\Company;
 use App\Models\AccessControl\Vehicles;
 use App\Models\AccessControl\Visitors;
 use Illuminate\Support\Facades\Storage;
 use App\Models\AccessControl\Equipments;
 use Illuminate\Support\Facades\Validator;
+use App\Models\AccessControl\Collaborator;
 use App\Models\AccessControl\vehicleTypes;
 use App\Models\AccessControl\VisitorTypes;
 use App\Models\AccessControl\EquipmentTypes;
 use App\Models\AccessControl\IdentificationType;
-use App\Models\IncomeExitVisitors;
+use App\Models\AccessControl\IncomeExitVisitors;
 
 class VisitorController extends Controller
 {
@@ -37,9 +37,32 @@ class VisitorController extends Controller
         $vehicles = Vehicles::with('VehicleType')->get();
 
         $equipments = Equipments::with('EquipmentType')->get();
+        
+        $incomeExitVisitors = $this->Date_Hour_in($visitors);
+
 
         //dd($visitors,$vehicles,$equipments);
-        return view('AccessControl.Visitors.index',compact('visitors','vehicles'));
+        return view('AccessControl.Visitors.index',compact('visitors','vehicles','equipments','incomeExitVisitors'));
+    }
+
+    private function Date_Hour_in($visitors){
+        // Inicializa un arreglo para almacenar los registros de IncomeExitVisitors
+        $incomeExitVisitors = [];
+
+        // Recorre cada visitante y obtén su último registro de IncomeExitVisitors
+        foreach ($visitors as $visitor) {
+            $lastIncomeExitVisitor = IncomeExitVisitors::where('visitor_id', $visitor->id)
+                ->orderBy('created_at', 'desc')
+                ->first();
+
+            $collaborator = Collaborator::getCollaboratorRelationById($visitor->id);
+
+            // Agrega el registro al arreglo si se encontró
+            if ($lastIncomeExitVisitor) {
+                $incomeExitVisitors[] = $lastIncomeExitVisitor;
+            }
+        }
+        return [$incomeExitVisitors,$collaborator];
     }
 
     /**
@@ -51,8 +74,9 @@ class VisitorController extends Controller
                 $identificationTypes = IdentificationType::where('is_active', '=', true)
                 ->get();
 
-                //$collaborator = Collaborator::find($id);
+                $collaborator = Collaborator::getCollaboratorRelationById($id);
         
+                //dd($collaborator);
                 //Get all companies
                 $companies = Company::where('is_active', '=', true)
                 ->get();
@@ -67,7 +91,7 @@ class VisitorController extends Controller
                 $vehiclestypes = vehicleTypes::where('is_active','=',true)->get();
          
                 
-                return view('AccessControl.Visitors.create',[
+                 return view('AccessControl.Visitors.create',[
                     
                     'companies' => $companies,
                     'identificationTypes' => $identificationTypes,
@@ -75,8 +99,8 @@ class VisitorController extends Controller
                     'visitorTypes'=>$visitorTypes,
                     'equipmentsTypes'=>$equipmentsTypes,
                     'vehiclestypes'=>$vehiclestypes,
-                    'id'=>$id,
-                ]);   
+                    'collaborator'=>$collaborator,
+                ]);    
 
     }
 

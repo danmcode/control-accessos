@@ -6,6 +6,8 @@ namespace App\Models\AccessControl;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
+use App\Models\User;
+
 
 
 class Collaborator extends Model
@@ -18,7 +20,7 @@ class Collaborator extends Model
         'company_id',
         'area_id',
         'job_title_id',
-        'location_id', 
+        'location_id',
     ];
 
     public static function validateCollaborator(array $collaborator)
@@ -39,7 +41,7 @@ class Collaborator extends Model
      */
     public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function company()
@@ -70,5 +72,18 @@ class Collaborator extends Model
     public function incomeExitCollaborator()
     {
         return $this->hasMany(IncomeExitCollaborators::class);
+    }
+
+    public static function getCollaboratorRelationById($collaborator): array
+    {
+
+        $collaborator = Collaborator::where('id', '=', $collaborator)
+        ->with('users')
+        ->with('location')
+        ->get();
+
+        $collaborator = ['collaborator' => $collaborator[0]];
+
+        return $collaborator;
     }
 }

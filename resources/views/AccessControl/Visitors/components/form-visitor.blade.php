@@ -136,7 +136,9 @@
 
                     <!-- id-collaborator -->
                     <div class="col-4 mb-3">
-                        <input type="hidden" value={{$id}} name="id_collaborator" id="id_collaborator" class="form-control">
+                        @foreach ($collaborator as $collaborato)
+                        <input type="hidden" value={{$collaborato->id}} name="id_collaborator" id="id_collaborator" class="form-control">
+                        @endforeach
                     </div>
 
                     <hr>

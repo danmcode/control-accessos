@@ -119,11 +119,13 @@
                                             <div class="row">
                                                 <div>
                                                     <i class="bi bi-person-fill-lock"></i>
-                                                    <span class="fw-bold"> Responsable: </span> {{__('Jaider
-                                                    Vasquez')}}
+                                                    <span class="fw-bold"> Responsable: </span>
+                                                    @foreach ($incomeExitVisitors[1] as $incomeExitVisitor)
+                                                    {{$incomeExitVisitor->users->name.'
+                                                    '.$incomeExitVisitor->users->last_name}}
+                                                    @endforeach
                                                 </div>
                                             </div>
-                                        </div>
                                     </td>
                                     <td>
                                         <div class="row">
@@ -132,7 +134,7 @@
                                                     <i class="bi bi-box-seam"></i>
                                                     <span class="fw-bold"> Tipo de equipo:</span>
                                                     {{isset($visitor->Equipment->EquipmentType->name)?
-                                                        $visitor->Equipment->EquipmentType->name :'NA'
+                                                    $visitor->Equipment->EquipmentType->name :'NA'
                                                     }}
                                                 </div>
                                                 <div>
@@ -182,14 +184,28 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div>
-                                            <i class="bi bi-box-arrow-right visitor-in"></i> <span> 17/05/23 10:45 a.m.
-                                            </span>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div>
+                                                    <i class="bi bi-box-arrow-right visitor-in"></i>
+                                                    <span class="fw-bold">
+                                                        Entrada:
+                                                    </span>
+                                                </div>
+                                                @foreach ($incomeExitVisitors[0] as $incomeExitVisitor)
+                                                {{$incomeExitVisitor->date_time_in}}
+                                                @endforeach
+                                                <div>
+                                                </div>
+                                                <div class="row">
+                                                    <a href="#" class="btn btn-danger" data-bs-toggle="modal"
+                                                    data-bs-target="#modalOutVisitor" id="btnOutVisitor">
+                                                        <i class="bi bi-box-arrow-left visitor-out"></i>
+                                                        {{ __('Registrar salida') }}
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <a href="" class="btn btn-danger">
-                                            <i class="bi bi-box-arrow-left visitor-out"></i>
-                                            {{ __('Registrar salida') }}
-                                        </a>
                                     </td>
                                     <td> <a href=""><i class="bi bi-exclamation-circle"></i></a> </td>
                                 </tr>
@@ -203,6 +219,36 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalOutVisitor" tabindex="-1" aria-labelledby="modalTitle" data-type="outcome"
+        aria-hidden="true">
+
+        <form id="form-out-visitor" method="POST" action="#">
+            @csrf
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalTitle">Registrar salida</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="observation" class="form-label">Observaciones de salida: </label>
+                            <textarea class="form-control" id="observation" name="observation" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">{{ __('Cerrar') }}</button>
+                        <button type="submit" class="btn btn-primary"> {{ __('Registrar Salida') }} </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
 </section>
 
 @endsection

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\AccessControl;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,4 +20,9 @@ class IncomeExitVisitors extends Model
         'registered_out_by',
 
     ];
+
+    public function Visitor()
+    {
+        return $this->belongsTo(Visitors::class);
+    }
 }
