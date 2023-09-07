@@ -114,16 +114,14 @@
                                                         <i class="bi bi-building"></i>
                                                         <span> {{$visitor->company}} </span>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div>
-                                                    <i class="bi bi-person-fill-lock"></i>
-                                                    <span class="fw-bold"> Responsable: </span>
-                                                    @foreach ($incomeExitVisitors[1] as $incomeExitVisitor)
-                                                    {{$incomeExitVisitor->name.'
-                                                    '.$incomeExitVisitor->last_name}}
-                                                    @endforeach
+                                                    <div>
+                                                        <i class="bi bi-person-fill-lock"></i>
+                                                        <span class="fw-bold"> Responsable: </span>
+                                                        @foreach ($collaborator as $collaborato)
+                                                        {{$collaborato->user->name.'
+                                                        '.$collaborato->user->last_name}}
+                                                        @endforeach
+                                                    </div>
                                                 </div>
                                             </div>
                                     </td>
@@ -184,26 +182,38 @@
                                         </div>
                                     </td>
                                     <td>
+                                        @foreach ($incomeExitVisitors as $incomeExitVisitor)
                                         <div class="row">
                                             <div class="col-12">
+
                                                 <div>
                                                     <i class="bi bi-box-arrow-right visitor-in"></i>
                                                     <span class="fw-bold">
                                                         Entrada:
                                                     </span>
                                                 </div>
-                                                @foreach ($incomeExitVisitors[0] as $incomeExitVisitor)
                                                 {{$incomeExitVisitor->date_time_in}}
-                                                @endforeach
+
+                                                @if($incomeExitVisitor->date_time_out)
                                                 <div>
+                                                    <i class="bi bi-box-arrow-left"></i>
+                                                    <span class="fw-bold">
+                                                        Salida:
+                                                    </span>
                                                 </div>
+                                                {{$incomeExitVisitor->date_time_out}}
+                                                @else
                                                 <div class="row">
                                                     <a href="#" class="btn btn-danger" data-bs-toggle="modal"
-                                                    data-bs-target="#modalOutVisitor" data-bs-id="{{$visitor->id}}" data-bs-full-name="{{$visitor->name.' '.$visitor->last_name}}" id="btnOutVisitor">
+                                                        data-bs-target="#modalOutVisitor" id="btnOutVisitor"
+                                                        data-id="{{$incomeExitVisitor->visitor_id}}"
+                                                        data-bs-full-name="{{$incomeExitVisitor->visitor->name.' '.$incomeExitVisitor->visitor->last_name}}">
                                                         <i class="bi bi-box-arrow-left visitor-out"></i>
                                                         {{ __('Registrar salida') }}
                                                     </a>
+                                                    @endif
                                                 </div>
+                                                @endforeach
                                             </div>
                                         </div>
                                     </td>
@@ -225,7 +235,8 @@
     <div class="modal fade" id="modalOutVisitor" tabindex="-1" aria-labelledby="modalTitle" data-type="outcome"
         aria-hidden="true">
 
-        <form id="form-out-visitor" method="POST" action="#">
+        <!-- Modal -->
+        <form id="form-out-visitor" class="form-out-visitor" method="POST" action="#">
             @csrf
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -240,8 +251,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary"
-                            data-bs-dismiss="modal">{{ __('Cerrar') }}</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Cerrar')
+                            }}</button>
                         <button type="submit" class="btn btn-primary"> {{ __('Registrar Salida') }} </button>
                     </div>
                 </div>
@@ -255,8 +266,8 @@
 
 
 @section('scripts')
-@if (session('success'))
 <script src="js/modals/outputVisitorModal.js"></script>
+@if (session('success'))
 <script>
     document.addEventListener('DOMContentLoaded', function() {
     Swal.fire({
@@ -264,7 +275,7 @@
         title: '¡Éxito!',
         text: ` {{ session('success') }} `,
         showConfirmButton: false,
-        timer: 1500
+        timer: 2000
     });
 });
 </script>
@@ -276,7 +287,7 @@
             title: 'Error',
             text: ` {{ session('error') }} `,
             showConfirmButton: false,
-            timer: 1500
+            timer: 2000
         });
     });
 </script>

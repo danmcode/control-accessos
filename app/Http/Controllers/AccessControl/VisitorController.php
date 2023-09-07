@@ -30,83 +30,77 @@ class VisitorController extends Controller
     public function index()
     {
         $visitors = Visitors::with('VisitorType')
-        ->with('Vehicle')
-        ->with('Equipment')
-        ->get();
+            ->with('Vehicle')
+            ->with('Equipment')
+            ->get();
 
         $vehicles = Vehicles::with('VehicleType')->get();
 
         $equipments = Equipments::with('EquipmentType')->get();
-        
-        $incomeExitVisitors = $this->Date_Hour_in($visitors);
+
+        $incomeExitVisitors =IncomeExitVisitors::
+        with('Visitor')
+        ->get();
+
+        $collaborator = $this->Itera_collaborator($visitors);
 
 
-        //dd($visitors,$vehicles,$equipments);
-        return view('AccessControl.Visitors.index',compact('visitors','vehicles','equipments','incomeExitVisitors'));
+        return view('AccessControl.Visitors.index', compact('visitors', 'vehicles', 'equipments', 'incomeExitVisitors','collaborator'));
     }
 
-    private function Date_Hour_in($visitors){
-        // Inicializa un arreglo para almacenar los registros de IncomeExitVisitors
-        $incomeExitVisitors = [];
-        $data_collaborator = [];
+    private function Itera_collaborator($visitors)
+    {
+
+        // Inicializa $collaborator
+        $collaborator = null;
 
         // Recorre cada visitante y obtén su último registro de IncomeExitVisitors
         foreach ($visitors as $visitor) {
-            $lastIncomeExitVisitor = IncomeExitVisitors::where('visitor_id', $visitor->id)
-                ->orderBy('created_at', 'desc')
-                ->first();
 
-            $collaborator = Collaborator::where('user_id', '=', $visitor->id)
-            ->orderBy('created_at', 'desc')
-            ->first();
+            $collaborator = Collaborator::getCollaboratorRelationById($visitor->id_collaborator);
 
-            // Agrega el registro al arreglo si se encontró
-            if ($lastIncomeExitVisitor && $collaborator) {
-                $incomeExitVisitors[] = $lastIncomeExitVisitor;
-                $data_collaborator[] = $collaborator;
-            }
         }
-        
-        return [$incomeExitVisitors,$data_collaborator];
+
+        return $collaborator;
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create($id)
     {
-                //Get all identifications types
-                $identificationTypes = IdentificationType::where('is_active', '=', true)
-                ->get();
+        //Get all identifications types
+        $identificationTypes = IdentificationType::where('is_active', '=', true)
+            ->get();
 
-                $collaborator = Collaborator::getCollaboratorRelationById($id);
-        
-                //dd($collaborator);
-                //Get all companies
-                $companies = Company::where('is_active', '=', true)
-                ->get();
+        $collaborator = Collaborator::getCollaboratorRelationById($id);
 
-                $arls = Arl::where('is_active','=',true)
-                ->get();
+        //dd($collaborator);
+        //Get all companies
+        $companies = Company::where('is_active', '=', true)
+            ->get();
 
-                $visitorTypes = VisitorTypes::where('is_active','=',true)->get();
+        $arls = Arl::where('is_active', '=', true)
+            ->get();
 
-                $equipmentsTypes = EquipmentTypes::where('is_active','=',true)->get();
+        $visitorTypes = VisitorTypes::where('is_active', '=', true)->get();
 
-                $vehiclestypes = VehicleTypes::where('is_active','=',true)->get();
-         
-                
-                 return view('AccessControl.Visitors.create',[
-                    
-                    'companies' => $companies,
-                    'identificationTypes' => $identificationTypes,
-                    'arls'=>$arls,
-                    'visitorTypes'=>$visitorTypes,
-                    'equipmentsTypes'=>$equipmentsTypes,
-                    'vehiclestypes'=>$vehiclestypes,
-                    'collaborator'=>$collaborator,
-                ]);    
+        $equipmentsTypes = EquipmentTypes::where('is_active', '=', true)->get();
 
+        $vehiclestypes = VehicleTypes::where('is_active', '=', true)->get();
+
+
+        return view('AccessControl.Visitors.create', [
+
+            'companies' => $companies,
+            'identificationTypes' => $identificationTypes,
+            'arls' => $arls,
+            'visitorTypes' => $visitorTypes,
+            'equipmentsTypes' => $equipmentsTypes,
+            'vehiclestypes' => $vehiclestypes,
+            'collaborator' => $collaborator,
+        ]);
     }
 
     /**
@@ -134,8 +128,8 @@ class VisitorController extends Controller
 
 
 
-         DB::transaction(function () use ($request) {
-             try{
+        DB::transaction(function () use ($request) {
+            try {
                 $data = $request->all();
 
                 $mark = $data['mark_car'];
@@ -149,8 +143,8 @@ class VisitorController extends Controller
 
                 $photo = $this->saveImage($data['photoDataInput']);
 
-                if(!is_null($mark)&&!is_null($placa)&&!is_null($color)){
-               //Insert into table Vehicle and equipment
+                if (!is_null($mark) && !is_null($placa) && !is_null($color)) {
+                    //Insert into table Vehicle and equipment
                     $vehicle = new Vehicles();
                     $vehicle->mark = $mark;
                     $vehicle->placa = $placa;
@@ -160,76 +154,76 @@ class VisitorController extends Controller
                     $vehicle->save();
                 }
 
-                if(!is_null($mark_eq)&&!is_null($serial)&&!is_null($description)){
+                if (!is_null($mark_eq) && !is_null($serial) && !is_null($description)) {
                     $equipment = new Equipments();
                     $equipment->mark = $mark_eq;
                     $equipment->serial = $serial;
                     $equipment->description = $description;
-                    $equipment->equipment_type_id = $data['equipment_type'];  
+                    $equipment->equipment_type_id = $data['equipment_type'];
 
-                    $equipment->save();  
+                    $equipment->save();
                 }
 
-                   
 
-               
- 
-                    //Insert into table Visitor
-                    $visitor = new Visitors();
-                    $visitor->photo_path = $photo;
-                    $visitor->identification_type = $data['identification_type'];
-                    $visitor->identification = $data['identification'];
-                    $visitor->name = $data['name_Visitor'];
-                    $visitor->last_name = $data['lastname_Visitor'];
-                    $visitor->visitor_type_id = $data['typeVisitor'];
-                    $visitor->company = $data['company'];
-                    $visitor->arl_id = $data['arl'];
-                    $visitor->date_arl = $data['date_arl'];
-                    $visitor->remission = $data['remission'];
-                    $visitor->equipment_id = isset($equipment->id)?$equipment->id:null;
-                    $visitor->vehicle_id = isset($vehicle->id)?$vehicle->id:null;
-                    $visitor->id_collaborator = $data['id_collaborator'];
-                    $visitor->id_user = auth()->user()->id;  
 
-                    //Save in DB
-                    $visitor->save();
 
-                    // Insert into table IncomeExitVisitor
-                    $Visitor_in = new IncomeExitVisitors();
-                    $Visitor_in->date_time_in = Carbon::now();
-                    $Visitor_in->date_time_out = null;
-                    $Visitor_in->observation = $data['observation'];
-                    $Visitor_in->visitor_id = $visitor->id;
-                    $Visitor_in->created_by = auth()->user()->id;
-                    $Visitor_in->updated_by = null;
-                    $Visitor_in->registered_in_by = auth()->user()->id;
-                    $Visitor_in->registered_out_by = null;
 
-                    //Save in DB
-                    $Visitor_in->save();
+                //Insert into table Visitor
+                $visitor = new Visitors();
+                $visitor->photo_path = $photo;
+                $visitor->identification_type = $data['identification_type'];
+                $visitor->identification = $data['identification'];
+                $visitor->name = $data['name_Visitor'];
+                $visitor->last_name = $data['lastname_Visitor'];
+                $visitor->visitor_type_id = $data['typeVisitor'];
+                $visitor->company = $data['company'];
+                $visitor->arl_id = $data['arl'];
+                $visitor->date_arl = $data['date_arl'];
+                $visitor->remission = $data['remission'];
+                $visitor->equipment_id = isset($equipment->id) ? $equipment->id : null;
+                $visitor->vehicle_id = isset($vehicle->id) ? $vehicle->id : null;
+                $visitor->id_collaborator = $data['id_collaborator'];
+                $visitor->id_user = auth()->user()->id;
 
-               // Después de que la transacción sea exitosa
+                //Save in DB
+                $visitor->save();
+
+                // Insert into table IncomeExitVisitor
+                $Visitor_in = new IncomeExitVisitors();
+                $Visitor_in->date_time_in = Carbon::now();
+                $Visitor_in->date_time_out = null;
+                $Visitor_in->observation = $data['observation'];
+                $Visitor_in->visitor_id = $visitor->id;
+                $Visitor_in->created_by = auth()->user()->id;
+                $Visitor_in->updated_by = null;
+                $Visitor_in->registered_in_by = auth()->user()->id;
+                $Visitor_in->registered_out_by = null;
+
+                //Save in DB
+                $Visitor_in->save();
+
+                // Después de que la transacción sea exitosa
                 DB::commit();
 
                 // Establece un mensaje de éxito en la sesión
                 session()->flash('success', 'Registrado y puede Ingresar el Visitante');
 
-               // Para definir una variable de sesión 'success' con un mensaje:
-           }catch(\Exception $error){
-               DB::rollBack();
+                // Para definir una variable de sesión 'success' con un mensaje:
+            } catch (\Exception $error) {
+                DB::rollBack();
                 // Establece un mensaje de error en la sesión
                 dd($error);
                 session()->flash('error', 'No se ha registrado el visitante con éxito.');
-           }  
+            }
         });
-        
+
         return redirect()->route('visitantes-index');
-
     }
-    
-    private function saveImage($image){
 
-        if($image !='images/default.png'){
+    private function saveImage($image)
+    {
+
+        if ($image != 'images/default.png') {
             $photoData = preg_replace('/^data:image\/(jpeg|png|gif);base64,/', '', $image);
             $image = base64_decode($photoData);
             $fileName = uniqid() . '.png';
@@ -238,7 +232,7 @@ class VisitorController extends Controller
             Storage::disk('public')->put($filePath, $image);
 
             $Photo = "storage/" . $filePath;
-        }else{
+        } else {
             $Photo = $image;
         }
         return $Photo;

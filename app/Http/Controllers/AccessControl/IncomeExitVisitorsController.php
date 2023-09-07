@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\AccessControl\IncomeExitVisitors;
 use App\Models\AccessControl\Visitors;
+use Carbon\Carbon;
 
 class IncomeExitVisitorsController extends Controller
 {
@@ -31,14 +32,14 @@ class IncomeExitVisitorsController extends Controller
                 ? $request->all()['observation']
                 : '';
     
-                $incomeOutPut[0]->date_time_out = date_create()->format('Y-m-d H:i:s');
+                $incomeOutPut[0]->date_time_out = now();
                 $incomeOutPut[0]->observation = $incomeOutPut[0]->observation . 
                 "\nSalida: \n" . $observation; 
                 $incomeOutPut[0]->updated_by = auth()->user()->id;
                 $incomeOutPut[0]->registered_out_by = auth()->user()->id;
                 $incomeOutPut[0]->update();
     
-                //return redirect()->route('home')->with('success', 'Se ha registrado la salida'); 
+                return redirect()->route('visitantes-index')->with('success', 'Se ha registrado la salida'); 
     
             }
 

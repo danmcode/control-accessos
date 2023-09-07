@@ -47,4 +47,6 @@ class Visitors extends Model
         return $this->hasMany(IncomeExitVisitors::class,'visitor_id');
     }
 
+
+
 }
