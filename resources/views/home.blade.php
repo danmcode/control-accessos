@@ -16,20 +16,35 @@
     <div class="row">
 
         <!--  -->
+
         <div class="row">
             <!-- Visitors Card -->
             <div class="col-xxl-3 col-md-6">
                 <div class="card info-card sales-card">
 
                     <div class="card-body">
-                        <h5 class="card-title">Visitantes <span>| Hoy</span></h5>
-
+                        <h5 class="card-title">Visitantes<span>|
+                                Hoy</span></h5>
                         <div class="d-flex align-items-center">
                             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                 <i class="bi bi-people"></i>
                             </div>
                             <div class="ps-3">
-                                <h6> 30 <span class="text-muted small pt-2 ps-1"> Visitantes </span></h6>
+                                @if(isset($incomeExitVisitors) && sizeof($incomeExitVisitors) > 0)
+                                @foreach( $incomeExitVisitors as $incomeExitVisitor )
+                                <h6>{{$incomeExitVisitor->visitor->count()}}
+                                    <span class="text-muted small pt-2 ps-1">
+                                        @choice('Visitante|Visitantes',$incomeExitVisitor->visitor->count())
+                                    </span>
+                                </h6>
+                                @endforeach
+                                @else
+                                <h6>0
+                                    <span class="text-muted small pt-2 ps-1">
+                                        Visitantes
+                                    </span>
+                                </h6>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -188,7 +203,8 @@
                                     <!-- End user information -->
                                     <hr>
                                     <div class="d-flex justify-content-center">
-                                        <a class="dashboard-user-action user-action-primary m-1" href="#" id="btnCreateVisitor">
+                                        <a class="dashboard-user-action user-action-primary m-1" href="#"
+                                            id="btnCreateVisitor">
                                             <div class="content-icon"> <i class="bi bi-person-fill-add"></i> </div>
                                             <div class="content-text"> {{ __('Registrar visitante') }} </div>
                                         </a>
@@ -213,8 +229,7 @@
                                     <!-- End user information -->
 
                                     <div class="d-flex justify-content-center">
-                                        <a href="#"
-                                            class="dashboard-user-action user-action-primary m-1">
+                                        <a href="#" class="dashboard-user-action user-action-primary m-1">
                                             <div class="content-icon"> <i class="bi bi-person-fill-add"></i> </div>
                                             <div class="content-text"> {{ __('Crear Colaborador') }} </div>
                                         </a>
@@ -250,183 +265,87 @@
                     <h5 class="card-title"> {{ __('Visitantes') }} <span>| {{ __('Hoy') }}</span></h5>
                     <hr>
                     <div class="activity">
+                        @if (isset($incomeExitVisitor))
+                        @foreach ($incomeExitVisitors as $iincomeExitVisitor)
                         <!-- visitors-card -->
                         <div class="visitor-card">
                             <div class="row">
                                 <div class="col-2 visitor-card-img">
-                                    <img src="{{ asset('/images/messages-3.jpg') }}">
+                                    <img src="{{ asset($incomeExitVisitor->visitor->photo_path) }}">
                                 </div>
 
                                 <div class="col-8">
                                     <div class="card-visitor-title">
-                                        DAVID EDUARDO NELSON MULDON
+                                        {{$incomeExitVisitor->visitor->name}} {{$incomeExitVisitor->visitor->last_name}}
                                     </div>
 
                                     <div class="row card-visitor-body">
                                         <div class="col-6">
                                             <div>
-                                                <i class="bi bi-person-vcard-fill"></i> <span> 1141237956 </span>
+                                                <i class="bi bi-person-vcard-fill"></i> <span>
+                                                    {{$incomeExitVisitor->visitor->identification}} </span>
                                             </div>
                                             <div>
-                                                <i class="bi bi-calendar-event"></i> <span> 17/05/23 10:45 a.m.
+                                                <i class="bi bi-box-arrow-right visitor-in"></i> <span>
+                                                    {{$incomeExitVisitor->date_time_in}}
                                                 </span>
                                             </div>
+                                            @if($incomeExitVisitor->date_time_out)
+                                            <div>
+                                                <i class="bi bi-box-arrow-left"></i> <span>
+                                                    {{$incomeExitVisitor->date_time_out}}
+                                                </span>
+                                            </div>
+                                            @endif
                                         </div>
 
                                         <div class="col-6">
                                             <div>
-                                                <i class="bi bi-building"></i>Abka Colombia SAS </span>
+                                                <i
+                                                    class="bi bi-building"></i>{{$incomeExitVisitor->visitor->company}}</span>
                                             </div>
+                                            @foreach ($collaborator as $collaborato)
                                             <div>
-                                                <i class="bi bi-person-fill-lock"></i> <span> Jaider Vasquez
+                                                <i class="bi bi-person-fill-lock"></i>
+                                                <span>
+                                                    {{$collaborato->user->name.' '.$collaborato->user->last_name}}
+
+                                                </span>
+                                            </div>
+                                            @endforeach
+                                            <div>
+                                                <i class="bi bi-car-front-fill"></i>
+                                                <span>
+                                                    {{isset($incomeExitVisitor->visitor->Vehicle->VehicleType->name)?
+                                                    $incomeExitVisitor->visitor->Vehicle->VehicleType->name:'NA'}}
                                                 </span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                @if(!isset($incomeExitVisitor->date_time_out))
                                 <div class="col-2 btn-visitor-out">
-                                    <a href="#" class="btn btn-danger">
+                                    <a href="#" class="btn btn-danger" data-bs-toggle="modal"
+                                        data-bs-target="#modalOutVisitor" id="btnOutVisitor"
+                                        data-id="{{$incomeExitVisitor->visitor_id}}"
+                                        data-bs-full-name="{{$incomeExitVisitor->visitor->name.' '.$incomeExitVisitor->visitor->last_name}}">
                                         <i class="bi bi-box-arrow-left"></i>
                                         {{ __('Salida') }}
                                     </a>
                                 </div>
+                                @endif
                             </div>
                             <hr>
                         </div>
-                        <!-- end visitors-card -->
-
-                        <!-- visitors-card -->
-                        <div class="visitor-card">
-                            <div class="row">
-                                <div class="col-2 visitor-card-img">
-                                    <img src="{{ asset('/images/pisa.png') }}">
-                                </div>
-
-                                <div class="col-8">
-                                    <div class="card-visitor-title">
-                                        ROBERTO CARLOS HUDSON NELSON
-                                    </div>
-
-
-                                    <div class="row card-visitor-body">
-                                        <div class="col-6">
-                                            <div>
-                                                <i class="bi bi-person-vcard-fill"></i> <span> 1144097956 </span>
-                                            </div>
-                                            <div>
-                                                <i class="bi bi-calendar-event"></i> <span> 17/05/23 08:45 a.m.
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <div>
-                                                <i class="bi bi-building"></i>Abka Colombia SAS </span>
-                                            </div>
-                                            <div>
-                                                <i class="bi bi-person-fill-lock"></i> <span> Raquel Perez
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-2 btn-visitor-out">
-                                    <a href="#" class="btn btn-danger">
-                                        <i class="bi bi-box-arrow-left"></i>
-                                        {{ __('Salida') }}
-                                    </a>
-                                </div>
-                            </div>
-                            <hr>
+                        @endforeach
+                        @else
+                        <div class="text-center">
+                            <span class="fw-bold">
+                                No hay visitantes para el día de hoy
+                            </span>
                         </div>
-                        <!-- end visitors-card -->
-                        <!-- visitors-card -->
-                        <div class="visitor-card">
-                            <div class="row">
-                                <div class="col-2 visitor-card-img">
-                                    <img src="{{ asset('/images/messages-1.jpg') }}">
-                                </div>
+                        @endif
 
-                                <div class="col-8">
-                                    <div class="card-visitor-title">
-                                        LOREM MARIA HUDSON NELSON
-                                    </div>
-
-                                    <div class="row card-visitor-body">
-                                        <div class="col-6">
-                                            <div>
-                                                <i class="bi bi-person-vcard-fill"></i> <span> 1144097956 </span>
-                                            </div>
-                                            <div>
-                                                <i class="bi bi-calendar-event"></i> <span> 17/05/23 08:45 a.m.
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <div>
-                                                <i class="bi bi-building"></i>Abka Colombia SAS </span>
-                                            </div>
-                                            <div>
-                                                <i class="bi bi-person-fill-lock"></i> <span> Raquel Perez
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-2 btn-visitor-out">
-                                    <a href="#" class="btn btn-danger">
-                                        <i class="bi bi-box-arrow-left"></i>
-                                        {{ __('Salida') }}
-                                    </a>
-                                </div>
-                            </div>
-                            <hr>
-                        </div>
-                        <!-- end visitors-card -->
-                        <!-- visitors-card -->
-                        <div class="visitor-card">
-                            <div class="row">
-                                <div class="col-2 visitor-card-img">
-                                    <img src="{{ asset('/images/messages-2.jpg') }}">
-                                </div>
-
-                                <div class="col-8">
-                                    <div class="card-visitor-title">
-                                        MARIA HUDSON MULDON
-                                    </div>
-
-                                    <div class="row card-visitor-body">
-                                        <div class="col-6">
-                                            <div>
-                                                <i class="bi bi-person-vcard-fill"></i> <span> 1144787956 </span>
-                                            </div>
-                                            <div>
-                                                <i class="bi bi-calendar-event"></i> <span> 17/05/23 02:45 p.m.
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <div>
-                                                <i class="bi bi-building"></i> Media Commerce </span>
-                                            </div>
-                                            <div>
-                                                <i class="bi bi-person-fill-lock"></i> <span> Fabian Riquet
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-2 btn-visitor-out">
-                                    <a href="#" class="btn btn-danger">
-                                        <i class="bi bi-box-arrow-left"></i>
-                                        {{ __('Salida') }}
-                                    </a>
-                                </div>
-                            </div>
-                            <hr>
-                        </div>
                         <!-- end visitors-card -->
                     </div>
                 </div>
@@ -455,8 +374,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary"
-                            data-bs-dismiss="modal">{{ __('Cerrar') }}</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Cerrar')
+                            }}</button>
                         <button type="submit" class="btn btn-primary"> {{ __('Registrar Ingreso') }} </button>
                     </div>
                 </div>
@@ -483,8 +402,37 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary"
-                            data-bs-dismiss="modal">{{ __('Cerrar') }}</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Cerrar')
+                            }}</button>
+                        <button type="submit" class="btn btn-primary"> {{ __('Registrar Salida') }} </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalOutVisitor" tabindex="-1" aria-labelledby="modalTitle" data-type="outcome"
+        aria-hidden="true">
+
+        <!-- Modal -->
+        <form id="form-out-visitor" class="form-out-visitor" method="POST" action="#">
+            @csrf
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalTitle">Registrar salida</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="observation" class="form-label">Observaciones de salida: </label>
+                            <textarea class="form-control" id="observation" name="observation" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Cerrar')
+                            }}</button>
                         <button type="submit" class="btn btn-primary"> {{ __('Registrar Salida') }} </button>
                     </div>
                 </div>
@@ -495,9 +443,10 @@
     @endsection
 
     @section('scripts')
+    <script src="js/modals/outputVisitorModal.js"></script>
     @if (session('success'))
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function() {
         Swal.fire({
             icon: 'success',
             title: '¡Éxito!',
@@ -509,7 +458,7 @@
     </script>
     @elseif( session('error') )
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function() {
         Swal.fire({
             icon: 'error',
             title: '¡Error!',
