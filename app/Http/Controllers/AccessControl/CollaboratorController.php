@@ -99,6 +99,11 @@ class CollaboratorController extends Controller
             $user->photo_path = '/images/default.png';
         }
 
+        if( $image == null ){
+            $user->photo_path = '/images/default.png';
+            return $user->update();
+        }
+
         $photoData = preg_replace('/^data:image\/(jpeg|png|gif);base64,/', '', $image);
         $image = base64_decode($photoData);
         $fileName = uniqid() . '.png';
