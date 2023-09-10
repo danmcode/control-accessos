@@ -38,12 +38,12 @@ class VisitorController extends Controller
 
         $equipments = Equipments::with('EquipmentType')->get();
 
-        $incomeExitVisitors = IncomeExitVisitors::with('Visitor')->get();
+        $incomeExitVisitors = Visitors::getIncomeExitVisitor();
 
         $collaborator = $this->Itera_collaborator($visitors);
 
 
-        return view('AccessControl.Visitors.index', compact('visitors', 'vehicles', 'equipments', 'incomeExitVisitors', 'collaborator'));
+        return view('AccessControl.Visitors.index', compact('incomeExitVisitors', 'collaborator'));
     }
 
     private function Itera_collaborator($visitors)

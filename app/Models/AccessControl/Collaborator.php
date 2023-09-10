@@ -36,8 +36,9 @@ class Collaborator extends Model
         return $isValidCollaborator;
     }
 
-    public static function getIncomeExitCollaborators(){
-        
+    public static function getIncomeExitCollaborators()
+    {
+
         $incomeOutputs = IncomeExitCollaborators::with('collaborator')
             ->with('collaborator.company')
             ->with('collaborator.area')
@@ -47,7 +48,7 @@ class Collaborator extends Model
             ->orderByRaw('ISNULL(date_time_out) DESC, date_time_out DESC')
             ->limit(30)
             ->get();
-        
+
         return $incomeOutputs;
     }
 
@@ -91,9 +92,9 @@ class Collaborator extends Model
     {
 
         $collaborator = Collaborator::where('id', '=', $collaborator)
-        ->with('user')
-        ->with('location')
-        ->get();
+            ->with('user')
+            ->with('location')
+            ->get();
 
         $collaborator = ['collaborator' => $collaborator[0]];
 

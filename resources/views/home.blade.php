@@ -30,14 +30,12 @@
                                 <i class="bi bi-people"></i>
                             </div>
                             <div class="ps-3">
-                                @if(isset($incomeExitVisitors) && sizeof($incomeExitVisitors) > 0)
-                                @foreach( $incomeExitVisitors as $incomeExitVisitor )
-                                <h6>{{$incomeExitVisitor->visitor->count()}}
+                                @if(isset($count))
+                                <h6>{{$count}}
                                     <span class="text-muted small pt-2 ps-1">
-                                        @choice('Visitante|Visitantes',$incomeExitVisitor->visitor->count())
+                                        @choice('Visitante|Visitantes',$count)
                                     </span>
                                 </h6>
-                                @endforeach
                                 @else
                                 <h6>0
                                     <span class="text-muted small pt-2 ps-1">
@@ -265,8 +263,8 @@
                     <h5 class="card-title"> {{ __('Visitantes') }} <span>| {{ __('Hoy') }}</span></h5>
                     <hr>
                     <div class="activity">
-                        @if (isset($incomeExitVisitor))
-                        @foreach ($incomeExitVisitors as $iincomeExitVisitor)
+                        @if (isset($incomeExitVisitors) && sizeof($incomeExitVisitors) > 0)
+                        @foreach($incomeExitVisitors as $incomeExitVisitor)
                         <!-- visitors-card -->
                         <div class="visitor-card">
                             <div class="row">
@@ -304,15 +302,15 @@
                                                 <i
                                                     class="bi bi-building"></i>{{$incomeExitVisitor->visitor->company}}</span>
                                             </div>
-                                            @foreach ($collaborator as $collaborato)
+
                                             <div>
                                                 <i class="bi bi-person-fill-lock"></i>
                                                 <span>
-                                                    {{$collaborato->user->name.' '.$collaborato->user->last_name}}
-
+                                                    {{ $incomeExitVisitor->visitor->collaborator->user->name }}
+                                                    {{ $incomeExitVisitor->visitor->collaborator->user->last_name }}
                                                 </span>
                                             </div>
-                                            @endforeach
+
                                             <div>
                                                 <i class="bi bi-car-front-fill"></i>
                                                 <span>
@@ -434,6 +432,37 @@
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Cerrar')
                             }}</button>
                         <button type="submit" class="btn btn-primary"> {{ __('Registrar Salida') }} </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalValidate" tabindex="-1" aria-labelledby="modalTitle" data-type="validate"
+        aria-hidden="true">
+
+        <!-- Modal -->
+        <form id="form-validate-visitor" class="form-validate-visitor" method="POST" action="#">
+            @csrf
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalTitle">Consulta de registro del visitante</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="validate_identification" class="form-label">Numero del documento de identidad:
+                            </label>
+                            <input class="form-control" type="number" id="validate_identification"
+                                name="validate_identification" required />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{
+                            __('Cerrar')}}</button>
+                        <button type="submit" class="btn btn-primary"> {{ __('Consultar') }} </button>
                     </div>
                 </div>
             </div>

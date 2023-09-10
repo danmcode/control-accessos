@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccessControl\validateVisitorController;
 use App\Http\Controllers\AccessControl\VisitorController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    if( Auth::guest() != 1 ){
+    if (Auth::guest() != 1) {
         return view('home');
     }
     return view('auth.login');
@@ -40,21 +41,25 @@ Route::resource('ingresos-salidas', 'App\Http\Controllers\AccessControl\IncomeEx
     ->middleware('auth');
 
 //in
-Route::post('registrar-ingreso/{id}',
+Route::post(
+    'registrar-ingreso/{id}',
     [
         App\Http\Controllers\AccessControl\IncomeExitCollaboratorsController::class,
         'setIncomeCollaborator'
-    ])
+    ]
+)
     ->name('registrar-ingreso')
     ->middleware('auth');
 
 //Out
 //in
-Route::post('registrar-salida/{id}/{view?}',
+Route::post(
+    'registrar-salida/{id}/{view?}',
     [
         App\Http\Controllers\AccessControl\IncomeExitCollaboratorsController::class,
         'setOutputCollaborator'
-    ])
+    ]
+)
     ->name('registrar-salida')
     ->middleware('auth');
 
@@ -63,19 +68,23 @@ Route::post('registrar-salida/{id}/{view?}',
  * visitors
  */
 //List a history of all visitors
-Route::get('/listar-visitantes',[VisitorController::class,'index'])->name('visitantes-index')->middleware('auth');
+Route::get('/listar-visitantes', [VisitorController::class, 'index'])->name('visitantes-index')->middleware('auth');
 //Get the create visitor view
-Route::get('/crear-visitante/{id}',[VisitorController::class,'create'])->name('crear-visitante')->middleware('auth');
+Route::get('/crear-visitante/{id}', [VisitorController::class, 'create'])->name('crear-visitante')->middleware('auth');
 //Create and Login a First Time Visitor
-Route::post('/crear-visitante',[VisitorController::class,'store'])->name('crear-visitante.store')->middleware('auth');
+Route::post('/crear-visitante', [VisitorController::class, 'store'])->name('crear-visitante.store')->middleware('auth');
 
-Route::post('registrar-salida-visitante/{id}',
+Route::post(
+    'registrar-salida-visitante/{id}',
     [
         App\Http\Controllers\AccessControl\IncomeExitVisitorsController::class,
         'setOutputVisitor'
-    ])
+    ]
+)
     ->name('registrar-salida-visitante')
     ->middleware('auth');
+
+Route::post('validar-visitante/{id}', [App\Http\Controllers\AccessControl\ValidateVisitorController::class, 'validatevisitor'])->name('validar-visitante')->middleware('auth');
 
 
 
@@ -109,10 +118,10 @@ Route::resource('tipo-indentificaciones', 'App\Http\Controllers\AccessControl\Id
 Route::resource('tipo-visitantes', 'App\Http\Controllers\AccessControl\VisitorTypesController');
 
 //Equipaments Types
-Route::resource('tipo-equipos','App\Http\Controllers\AccessControl\EquipmentTypeController');
+Route::resource('tipo-equipos', 'App\Http\Controllers\AccessControl\EquipmentTypeController');
 
 //vehicles Types
-Route::resource('tipo-vehiculos','App\Http\Controllers\AccessControl\VehicleTypeController');
+Route::resource('tipo-vehiculos', 'App\Http\Controllers\AccessControl\VehicleTypeController');
 
 //arls
 Route::resource('arls', 'App\Http\Controllers\AccessControl\ArlController')

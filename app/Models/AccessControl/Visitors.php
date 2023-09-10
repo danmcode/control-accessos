@@ -32,6 +32,11 @@ class Visitors extends Model
         return $this->belongsTo(VisitorTypes::class);
     }
 
+    public function IdentificationType()
+    {
+        return $this->belongsTo(IdentificationType::class, 'identification_type');
+    }
+
     public function Vehicle()
     {
         return $this->belongsTo(Vehicles::class);
@@ -42,11 +47,34 @@ class Visitors extends Model
         return $this->belongsTo(Equipments::class);
     }
 
-    public function incomeExitVisitor()
+    public function Collaborator()
     {
-        return $this->hasMany(IncomeExitVisitors::class,'visitor_id');
+        return $this->belongsTo(Collaborator::class, 'id_collaborator');
     }
 
+    public function User()
+    {
+        return $this->belongsTo(User::class);
+    }
 
+    /*     public function incomeExitVisitor()
+    {
+        return $this->hasMany(IncomeExitVisitors::class, 'visitor_id');
+    } */
 
+    public static function getIncomeExitVisitor()
+    {
+
+        $incomeOutputs = IncomeExitVisitors::with('Visitor')
+            ->with('Visitor.VisitorType')
+            ->with('Visitor.IdentificationType')
+            ->with('Visitor.Vehicle')
+            ->with('Visitor.Equipment')
+            ->with('Visitor.Collaborator')
+            ->orderByRaw('ISNULL(date_time_out) DESC, date_time_out DESC')
+            ->limit(30)
+            ->get();
+
+        return $incomeOutputs;
+    }
 }

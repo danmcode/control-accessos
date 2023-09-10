@@ -85,42 +85,45 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if( isset($visitors) && sizeof($visitors) > 0 )
-                                @foreach( $visitors as $key => $visitor )
+                                @if( isset($incomeExitVisitors) && sizeof($incomeExitVisitors) > 0 )
+                                @foreach( $incomeExitVisitors as $key => $incomeExitVisitor )
                                 <tr>
                                     <th scope="row">{{ $key + 1 }}</th>
                                     <td>
-                                        <img src="{{ asset($visitor->photo_path) }}">
+                                        <img src="{{ asset($incomeExitVisitor->visitor->photo_path) }}">
                                     </td>
                                     <td>
                                         <div>
                                             <span class="card-title">
-                                                {{$visitor->name.' '.$visitor->last_name}}
+                                                {{$incomeExitVisitor->visitor->name.'
+                                                '.$incomeExitVisitor->visitor->last_name}}
                                             </span>
                                             <div class="row">
                                                 <div class="col-5">
                                                     <div>
                                                         <i class="bi bi-person-vcard-fill"></i>
-                                                        <span> {{$visitor->identification}} </span>
+                                                        <span>
+                                                            {{$incomeExitVisitor->visitor->IdentificationType->initials}}
+                                                        </span>
+                                                        <span> {{$incomeExitVisitor->visitor->identification}} </span>
                                                     </div>
                                                     <div>
                                                         <i class="bi bi-person-workspace"></i>
-                                                        <span> {{$visitor->VisitorType->name}} </span>
+                                                        <span> {{$incomeExitVisitor->visitor->VisitorType->name}}
+                                                        </span>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-7">
                                                     <div>
                                                         <i class="bi bi-building"></i>
-                                                        <span> {{$visitor->company}} </span>
+                                                        <span> {{$incomeExitVisitor->visitor->company}} </span>
                                                     </div>
                                                     <div>
                                                         <i class="bi bi-person-fill-lock"></i>
                                                         <span class="fw-bold"> Responsable: </span>
-                                                        @foreach ($collaborator as $collaborato)
-                                                        {{$collaborato->user->name.'
-                                                        '.$collaborato->user->last_name}}
-                                                        @endforeach
+                                                        {{ $incomeExitVisitor->visitor->collaborator->user->name }}
+                                                        {{ $incomeExitVisitor->visitor->collaborator->user->last_name }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -131,21 +134,21 @@
                                                 <div>
                                                     <i class="bi bi-box-seam"></i>
                                                     <span class="fw-bold"> Tipo de equipo:</span>
-                                                    {{isset($visitor->Equipment->EquipmentType->name)?
-                                                    $visitor->Equipment->EquipmentType->name :'NA'
+                                                    {{isset($incomeExitVisitor->visitor->Equipment->EquipmentType->name)?
+                                                    $incomeExitVisitor->visitor->Equipment->EquipmentType->name :'NA'
                                                     }}
                                                 </div>
                                                 <div>
                                                     <i class="bi bi-badge-tm"></i>
                                                     <span class="fw-bold"> Marca:</span>
-                                                    {{isset($visitor->Equipment->mark)?
-                                                    $visitor->Equipment->mark :'NA'}}
+                                                    {{isset($incomeExitVisitor->visitor->Equipment->mark)?
+                                                    $incomeExitVisitor->visitor->Equipment->mark :'NA'}}
                                                 </div>
                                                 <div>
                                                     <i class="bi bi-qr-code"></i>
                                                     <span class="fw-bold"> Serial:</span>
-                                                    {{isset($visitor->Equipment->serial)?
-                                                    $visitor->Equipment->serial : 'NA'}}
+                                                    {{isset($incomeExitVisitor->visitor->Equipment->serial)?
+                                                    $incomeExitVisitor->visitor->Equipment->serial :'NA'}}
                                                 </div>
                                             </div>
                                         </div>
@@ -157,35 +160,34 @@
                                                 <div>
                                                     <i class="bi bi-c-circle-fill"></i>
                                                     <span class="fw-bold"> Marca:</span>
-                                                    {{isset($visitor->Vehicle->mark)?
-                                                    $visitor->Vehicle->mark:'NA'}}
+                                                    {{isset($incomeExitVisitor->visitor->Vehicle->mark)?
+                                                    $incomeExitVisitor->visitor->Vehicle->mark:'NA'}}
                                                 </div>
                                                 <div>
                                                     <i class="bi bi-badge-3d"></i>
                                                     <span class="fw-bold"> Placa:</span>
-                                                    {{isset($visitor->Vehicle->placa)?
-                                                    $visitor->Vehicle->placa:'NA'}}
+                                                    {{isset($incomeExitVisitor->visitor->Vehicle->placa)?
+                                                    $incomeExitVisitor->visitor->Vehicle->placa:'NA'}}
                                                 </div>
                                                 <div>
                                                     <i class="bi bi-paint-bucket"></i>
                                                     <span class="fw-bold"> Color:</span>
-                                                    {{isset($visitor->Vehicle->color)?
-                                                    $visitor->Vehicle->color:'NA'}}
+                                                    {{isset($incomeExitVisitor->visitor->Vehicle->color)?
+                                                    $incomeExitVisitor->visitor->Vehicle->color:'NA'}}
                                                 </div>
                                                 <div>
                                                     <i class="bi bi-car-front-fill"></i>
                                                     <span class="fw-bold"> Tipo Vehiculo:</span>
-                                                    {{isset($visitor->Vehicle->VehicleType->name)?
-                                                    $visitor->Vehicle->VehicleType->name:'NA'}}
+                                                    {{isset($incomeExitVisitor->visitor->Vehicle->VehicleType->name)?
+                                                    $incomeExitVisitor->visitor->Vehicle->VehicleType->name:'NA'}}
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        @foreach ($incomeExitVisitors as $incomeExitVisitor)
+
                                         <div class="row">
                                             <div class="col-12">
-
                                                 <div>
                                                     <i class="bi bi-box-arrow-right visitor-in"></i>
                                                     <span class="fw-bold">
@@ -205,15 +207,14 @@
                                                 @else
                                                 <div class="row">
                                                     <a href="#" class="btn btn-danger" data-bs-toggle="modal"
-                                                        data-bs-target="#modalOutVisitor" id="btnOutVisitor"
+                                                        data-bs-target="#modalOutvisitor" id="btnOutvisitor"
                                                         data-id="{{$incomeExitVisitor->visitor_id}}"
                                                         data-bs-full-name="{{$incomeExitVisitor->visitor->name.' '.$incomeExitVisitor->visitor->last_name}}">
                                                         <i class="bi bi-box-arrow-left visitor-out"></i>
                                                         {{ __('Registrar salida') }}
                                                     </a>
-                                                    @endif
                                                 </div>
-                                                @endforeach
+                                                @endif
                                             </div>
                                         </div>
                                     </td>
@@ -232,7 +233,7 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="modalOutVisitor" tabindex="-1" aria-labelledby="modalTitle" data-type="outcome"
+    <div class="modal fade" id="modalOutvisitor" tabindex="-1" aria-labelledby="modalTitle" data-type="outcome"
         aria-hidden="true">
 
         <!-- Modal -->
