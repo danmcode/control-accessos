@@ -94,9 +94,14 @@ class CollaboratorController extends Controller
 
     private function saveImage($user, $image, $update = false){
 
-        if( $update ){
+        if( $update && $image == "/images/default.png"){
             unlink($user->photo_path);
             $user->photo_path = '/images/default.png';
+        }
+
+        if( $image == null ){
+            $user->photo_path = '/images/default.png';
+            return $user->update();
         }
 
         $photoData = preg_replace('/^data:image\/(jpeg|png|gif);base64,/', '', $image);
