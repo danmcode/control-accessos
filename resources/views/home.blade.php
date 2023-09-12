@@ -139,7 +139,7 @@
                                     <datalist id="collaborators">
                                         @if( isset($users) && sizeof($users) > 0 )
                                         @foreach( $users as $user )
-                                        <option id="collaboratorList" value="{{ $user->name }}  {{ $user->last_name }}"
+                                        <option id="collaboratorList" value="{{ $user->name }} {{ $user->last_name }}"
                                             data-id="{{ $user->collaborators->id }}"
                                             data-full-name="{{ $user->name }} {{ $user->last_name }}"
                                             data-identification="{{ $user->identification }}"

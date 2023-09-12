@@ -1230,3 +1230,19 @@ table th{
     border-radius: 10px;
     padding: 2px;
 }
+
+/*
+ # Configuration
+*/
+.configuration-title {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #899bbd;
+    font-weight: 600;
+    margin: 10px 0 5px 15px;
+}
+
+.configuration-title hr{
+    margin-top: 1px;
+    margin-bottom: 4px;
+}
