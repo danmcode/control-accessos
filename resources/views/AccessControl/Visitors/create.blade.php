@@ -16,7 +16,7 @@
 
 <section class="section profile">
 
-{{--     <div class="row">
+    {{-- <div class="row">
         <div class="col-xl-3">
             <div class="card">
 
@@ -135,7 +135,7 @@
                             @foreach ($collaborator as $collaborato)
                             <span class="card-title">{{$collaborato->user->name.'
                                 '.$collaborato->user->last_name}}</span>
-                            
+
                             <i class="bi bi-geo-alt"></i>
                             {{$collaborato->location->name }}
                             @endforeach
@@ -243,6 +243,21 @@
             showConfirmButton: true,
             confirmButtonColor: '#0d489a',
             confirmButtonText: 'Aceptar'     
+        });
+    });
+</script>
+@endif
+
+@if(session('information'))
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+            icon: 'info',
+            title: 'Información',
+            text: ` {{ session('information') }} `,
+            showConfirmButton: true,
+            confirmButtonColor: '#0d489a',
+            confirmButtonText: 'Aceptar'    
         });
     });
 </script>

@@ -38,7 +38,8 @@ class HomeController extends Controller
             ->with('collaborators.location')
             ->get();
 
-        $incomeExitVisitors = IncomeExitVisitors::whereDate('date_time_in', Carbon::today())
+        $incomeExitVisitors = IncomeExitVisitors::where('date_time_out', '=', null)
+            ->whereDate('date_time_in', Carbon::today())
             ->with('Visitor')
             ->with('Visitor.VisitorType')
             ->with('Visitor.IdentificationType')
@@ -55,6 +56,7 @@ class HomeController extends Controller
         }
 
         $count = $incomeExitVisitors->count();
+
 
         return view('home', [
             'users' => $users,

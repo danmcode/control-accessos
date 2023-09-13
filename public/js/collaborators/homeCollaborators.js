@@ -16,6 +16,8 @@ const btnOut = document.getElementById("btnOutCollaborator");
 const modalIncome = document.getElementById("modalInCollaborator");
 const modalOutcome = document.getElementById("modalOutCollaborator");
 
+let formModalVisitorIn = document.getElementById("FormVisitorIn");
+
 let modalValidate = document.getElementById("modalValidate");
 
 const btnVisitor = document.getElementById("btnCreateVisitor");
@@ -75,12 +77,11 @@ input.addEventListener("input", () => {
         });
 
         //Visitors
-        btnVisitor.setAttribute("href", `crear-visitante/${collaboratorId}`);
-        /*         modalValidate.addEventListener("show.bs.modal", function (evet) {
-            let button = evet.relatedTarget;
+        //btnVisitor.setAttribute("href", `crear-visitante/${collaboratorId}`);
+        modalValidate.addEventListener("show.bs.modal", function (evet) {
             let getForm = modalValidate.querySelector(".form-validate-visitor");
             getForm.action = `validar-visitante/${collaboratorId}`;
-        }); */
+        });
     } else {
     }
 });

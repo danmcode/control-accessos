@@ -201,8 +201,8 @@
                                     <!-- End user information -->
                                     <hr>
                                     <div class="d-flex justify-content-center">
-                                        <a class="dashboard-user-action user-action-primary m-1" href="#"
-                                            id="btnCreateVisitor">
+                                        <a class="dashboard-user-action user-action-primary m-1" data-bs-toggle="modal"
+                                            data-bs-target="#modalValidate" href="#" id="btnCreateVisitor">
                                             <div class="content-icon"> <i class="bi bi-person-fill-add"></i> </div>
                                             <div class="content-text"> {{ __('Registrar visitante') }} </div>
                                         </a>
@@ -324,10 +324,10 @@
                                 @if(!isset($incomeExitVisitor->date_time_out))
                                 <div class="col-2 btn-visitor-out">
                                     <a href="#" class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#modalOutVisitor" id="btnOutVisitor"
+                                        data-bs-target="#modalOutvisitor" id="btnOutvisitor"
                                         data-id="{{$incomeExitVisitor->visitor_id}}"
                                         data-bs-full-name="{{$incomeExitVisitor->visitor->name.' '.$incomeExitVisitor->visitor->last_name}}">
-                                        <i class="bi bi-box-arrow-left"></i>
+                                        <i class="bi bi-box-arrow-left visitor-out"></i>
                                         {{ __('Salida') }}
                                     </a>
                                 </div>
@@ -410,7 +410,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="modalOutVisitor" tabindex="-1" aria-labelledby="modalTitle" data-type="outcome"
+    <div class="modal fade" id="modalOutvisitor" tabindex="-1" aria-labelledby="modalTitle" data-type="outcome"
         aria-hidden="true">
 
         <!-- Modal -->
@@ -472,7 +472,7 @@
     @endsection
 
     @section('scripts')
-    <script src="js/modals/outputVisitorModal.js"></script>
+    <script src="{{asset('js/modals/outputVisitorModal.js')}}"></script>
     @if (session('success'))
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -499,5 +499,7 @@
     });
     </script>
     @endif
+
+
     <script src="{{ asset('js/collaborators/homeCollaborators.js') }}"></script>
     @endsection

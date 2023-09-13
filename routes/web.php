@@ -86,6 +86,7 @@ Route::post(
 
 Route::post('validar-visitante/{id}', [App\Http\Controllers\AccessControl\ValidateVisitorController::class, 'validatevisitor'])->name('validar-visitante')->middleware('auth');
 
+Route::post('registra-entrada-visitante/{id}', [App\Http\Controllers\AccessControl\ValidateVisitorController::class, 'registerinvisitor'])->name('registrar-entrada-visitante')->middleware('auth');
 
 
 
