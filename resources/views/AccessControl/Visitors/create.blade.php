@@ -2,16 +2,29 @@
 @section('title', 'Visitantes')
 @section('content')
 
+@if(session('validar'))
 <div class="pagetitle">
-    <h1> Registro de visitantes </h1>
+    <h1> Ingresar Visitantes </h1>
     </h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a></li>
-            <li class="breadcrumb-item active">Registro de Visitantes</li>
+            <li class="breadcrumb-item active">Ingresar Visitantes</li>
         </ol>
     </nav>
 </div>
+@else
+<div class="pagetitle">
+    <h1> Registrar Visitantes </h1>
+    </h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a></li>
+            <li class="breadcrumb-item active">Registrar Visitantes</li>
+        </ol>
+    </nav>
+</div>
+@endif
 <!-- End Page Title -->
 
 <section class="section profile">
@@ -127,8 +140,9 @@
             <div class="card">
                 <div class="card-body">
 
-                    <form action="{{ route('crear-visitante.store') }}" method="POST" class="needs-validation"
-                        novalidate>
+                    <form
+                        action="{{session('Ingreso')?route('registrar-entrada-visitante'):route('crear-visitante.store') }}"
+                        method="POST" class="needs-validation" novalidate>
                         @csrf
                         <h5>
                             <i class="bi bi-person card-title"></i>
@@ -214,11 +228,19 @@
 
                         </div>
                         <!-- End Bordered Tabs -->
+                        @if(session('Ingreso'))
+                        <div class="d-flex align-items-center justify-content-end">
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Registrar Ingreso') }}
+                            </button>
+                        </div>
+                        @else
                         <div class="d-flex align-items-center justify-content-end">
                             <button type="submit" class="btn btn-primary">
                                 {{ __('Registrar visitante') }}
                             </button>
                         </div>
+                        @endif
                     </form>
                 </div>
             </div>

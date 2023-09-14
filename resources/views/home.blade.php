@@ -299,23 +299,22 @@
 
                                         <div class="col-6">
                                             <div>
-                                                <i
-                                                    class="bi bi-building"></i>{{$incomeExitVisitor->visitor->company}}</span>
+                                                <i class="bi bi-building"></i>{{$incomeExitVisitor->company}}</span>
                                             </div>
 
                                             <div>
                                                 <i class="bi bi-person-fill-lock"></i>
                                                 <span>
-                                                    {{ $incomeExitVisitor->visitor->collaborator->user->name }}
-                                                    {{ $incomeExitVisitor->visitor->collaborator->user->last_name }}
+                                                    {{ $incomeExitVisitor->collaborator->user->name }}
+                                                    {{ $incomeExitVisitor->collaborator->user->last_name }}
                                                 </span>
                                             </div>
 
                                             <div>
                                                 <i class="bi bi-car-front-fill"></i>
                                                 <span>
-                                                    {{isset($incomeExitVisitor->visitor->Vehicle->VehicleType->name)?
-                                                    $incomeExitVisitor->visitor->Vehicle->VehicleType->name:'NA'}}
+                                                    {{isset($incomeExitVisitor->Vehicle->VehicleType->name)?
+                                                    $incomeExitVisitor->Vehicle->VehicleType->name:'NA'}}
                                                 </span>
                                             </div>
                                         </div>

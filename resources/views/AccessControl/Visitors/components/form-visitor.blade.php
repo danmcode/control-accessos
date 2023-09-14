@@ -1,4 +1,42 @@
 <div class="row">
+    @if(session('validar'))
+    @foreach (session('validar') as $visitor)
+
+    <div class="col-xl-5">
+        <div class="card">
+            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                <!-- show when the image is taken -->
+                <div id="capturedImageContainer"></div>
+
+                <!-- Show default or when is canceled -->
+                <div id="defaultImage">
+                    <img style="width: 250px;" src="{{asset($visitor->photo_path)}}" alt="Imagen del visitante">
+                </div>
+
+                <!-- Show streaming video to take a photo -->
+                <div class="cameraFeed" id="cameraFeed"></div>
+
+                <div class="mt-2">
+                    <h2>
+                        <label id="label" style="color:#012970">
+                            Registrando Ingreso del Visitante:
+                        </label>
+                    </h2>
+                </div>
+
+                <h2>
+                    <label id="labelName_Visitor">
+                        Nombre
+                    </label>
+                    <label id="labelLastName_Visitor">
+                        Visitante
+                    </label>
+                </h2>
+            </div>
+        </div>
+    </div>
+    @endforeach
+    @else
     <div class="col-xl-5">
         <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
@@ -53,6 +91,7 @@
             </div>
         </div>
     </div>
+    @endif
 
     <div class="col-xl-7">
         <div class="card">
@@ -61,6 +100,65 @@
                 <div class="form-heading mt-2 mb-2">Información básica</div>
 
                 <div class="row">
+                    @if(session('validar'))
+                    @foreach (session('validar') as $visitor)
+                    <!-- Identification type -->
+                    <div class="col-6 mb-3">
+                        <label for="identification_type fw-bold" class="form-label">
+                            {{ __('Tipo de identificación:') }} <small> * </small>
+                        </label>
+                        <select name="identification_type" id="identification_type" class="form-select" required
+                            disabled>
+                            <option value="{{$visitor->IdentificationType->id}}">{{$visitor->IdentificationType->name}}
+                            </option>
+                        </select>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ __('El tipo de identificación es requerido') }}</strong>
+                        </span>
+                    </div>
+
+                    <!-- identification -->
+                    <div class="col-6 mb-3">
+                        <label for="identification fw-bold" class="form-label">
+                            {{ __('Identificación:') }} <small> * </small>
+                        </label>
+                        <input type="number" name="identification" id="identification"
+                            value="{{$visitor->identification}}" class="form-control" minlength="9" required disabled>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ __('La identificación es requerida') }}</strong>
+                        </span>
+                    </div>
+
+
+                    <!-- name -->
+                    <div class="col-4 mb-3">
+                        <label for="name_Visitor fw-bold" class="form-label">
+                            {{ __('Nombres:') }} <small> * </small>
+                        </label>
+                        <input type="text" name="name_Visitor" id="name_Visitor" value="{{$visitor->name}}"
+                            class="form-control" required disabled>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ __('Los nombres son requeridos') }}</strong>
+                        </span>
+                    </div>
+
+                    <!-- last name -->
+                    <div class="col-4 mb-3">
+                        <label for="lastname_Visitor fw-bold" class="form-label">
+                            {{ __('Apellidos:') }} <small> * </small>
+                        </label>
+                        <input type="text" name="lastname_Visitor" id="lastname_Visitor" value="{{$visitor->last_name}}"
+                            class="form-control" required disabled>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ __('Los apellidos son requeridos') }}</strong>
+                        </span>
+                    </div>
+
+                    <input type="hidden" name="id_visitor" value="{{$visitor->id}}" class="form-control">
+
+                    @endforeach
+                    @else
+
                     <!-- Identification type -->
                     <div class="col-6 mb-3">
                         <label for="identification_type fw-bold" class="form-label">
@@ -83,7 +181,8 @@
                         <label for="identification fw-bold" class="form-label">
                             {{ __('Identificación:') }} <small> * </small>
                         </label>
-                        <input type="number" name="identification" id="identification" class="form-control" minlength="9" required>
+                        <input type="number" name="identification" id="identification" class="form-control"
+                            minlength="9" required>
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ __('La identificación es requerida') }}</strong>
                         </span>
@@ -111,6 +210,7 @@
                             <strong>{{ __('Los apellidos son requeridos') }}</strong>
                         </span>
                     </div>
+                    @endif
 
                     <!-- type visitors -->
                     <div class="col-4 mb-3">
@@ -131,13 +231,15 @@
 
                     <!-- photo info -->
                     <div class="col-4 mb-3">
-                        <input type="hidden" name="photoDataInput" id="photoDataInput" value="images/default.png" class="form-control">
+                        <input type="hidden" name="photoDataInput" id="photoDataInput" value="/images/default.png"
+                            class="form-control">
                     </div>
 
                     <!-- id-collaborator -->
                     <div class="col-4 mb-3">
                         @foreach ($collaborator as $collaborato)
-                        <input type="hidden" value={{$collaborato->id}} name="id_collaborator" id="id_collaborator" class="form-control">
+                        <input type="hidden" value={{$collaborato->id}} name="id_collaborator" id="id_collaborator"
+                        class="form-control">
                         @endforeach
                     </div>
 
@@ -183,7 +285,7 @@
 
                     <div class="col-12 mb-3" id="block_remission">
                         <label for="remission fw-bold" class="form-label">
-                            {{ __('Remisión:') }} 
+                            {{ __('Remisión:') }}
                         </label>
                         <textarea name="remission" id="remission" class="form-control" required></textarea>
                         <span class="invalid-feedback" role="alert">

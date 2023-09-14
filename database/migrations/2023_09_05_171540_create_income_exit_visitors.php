@@ -17,8 +17,17 @@ return new class extends Migration
             $table->dateTime('date_time_in');
             $table->dateTime('date_time_out')->nullable();
             $table->text('observation')->nullable();
+            $table->date('date_arl')->nullable();
+            $table->text('remission')->nullable();
+            $table->string('company');
 
             $table->unsignedBigInteger('visitor_id')->unsigned();
+            $table->unsignedBigInteger('visitor_type_id')->unsigned();
+            $table->unsignedBigInteger('arl_id')->unsigned()->nullable();
+            $table->unsignedBigInteger('equipment_id')->unsigned()->nullable();
+            $table->unsignedBigInteger('vehicle_id')->unsigned()->nullable();
+            $table->unsignedBigInteger('id_collaborator')->unsigned();
+
 
             $table->unsignedBigInteger('created_by')->unsigned();
             $table->unsignedBigInteger('updated_by')->unsigned()->nullable();
@@ -30,6 +39,11 @@ return new class extends Migration
             $table->foreign('updated_by')->references('id')->on('users');
             $table->foreign('registered_in_by')->references('id')->on('users');
             $table->foreign('registered_out_by')->references('id')->on('users');
+            $table->foreign('vehicle_id')->references('id')->on('vehicles');
+            $table->foreign('equipment_id')->references('id')->on('equipments');
+            $table->foreign('id_collaborator')->references('id')->on('collaborators');
+            $table->foreign('visitor_type_id')->references('id')->on('visitor_types');
+            $table->foreign('arl_id')->references('id')->on('arls');
 
             $table->timestamps();
         });

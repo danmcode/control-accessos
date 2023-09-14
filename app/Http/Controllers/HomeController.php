@@ -41,18 +41,18 @@ class HomeController extends Controller
         $incomeExitVisitors = IncomeExitVisitors::where('date_time_out', '=', null)
             ->whereDate('date_time_in', Carbon::today())
             ->with('Visitor')
-            ->with('Visitor.VisitorType')
+            ->with('VisitorType')
+            ->with('Vehicle')
+            ->with('Equipment')
+            ->with('Collaborator')
             ->with('Visitor.IdentificationType')
-            ->with('Visitor.Vehicle')
-            ->with('Visitor.Equipment')
-            ->with('Visitor.Collaborator')
             ->orderByRaw('ISNULL(date_time_out) DESC, date_time_out DESC')
             ->limit(30)
             ->get();
 
 
         foreach ($incomeExitVisitors as $incomeExitVisitor) {
-            $collaborator = Collaborator::getCollaboratorRelationById($incomeExitVisitor->visitor->id_collaborator);
+            $collaborator = Collaborator::getCollaboratorRelationById($incomeExitVisitor->id_collaborator);
         }
 
         $count = $incomeExitVisitors->count();

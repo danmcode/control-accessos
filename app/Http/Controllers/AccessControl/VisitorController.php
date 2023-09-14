@@ -29,31 +29,31 @@ class VisitorController extends Controller
      */
     public function index()
     {
-        $visitors = Visitors::with('VisitorType')
+        $incomeExitVisitors = IncomeExitVisitors::with('Visitor')
+            ->with('VisitorType')
             ->with('Vehicle')
             ->with('Equipment')
+            ->with('Collaborator')
+            ->with('Visitor.IdentificationType')
+            ->orderByRaw('ISNULL(date_time_out) DESC, date_time_out DESC')
+            ->limit(30)
             ->get();
 
-        $vehicles = Vehicles::with('VehicleType')->get();
 
-        $equipments = Equipments::with('EquipmentType')->get();
-
-        $incomeExitVisitors = Visitors::getIncomeExitVisitor();
-
-        $collaborator = $this->Itera_collaborator($visitors);
+        $collaborator = $this->Itera_collaborator($incomeExitVisitors);
 
 
         return view('AccessControl.Visitors.index', compact('incomeExitVisitors', 'collaborator'));
     }
 
-    private function Itera_collaborator($visitors)
+    private function Itera_collaborator($incomeExitVisitors)
     {
 
         // Inicializa $collaborator
         $collaborator = null;
 
         // Recorre cada visitante y obtén su último registro de IncomeExitVisitors
-        foreach ($visitors as $visitor) {
+        foreach ($incomeExitVisitors as $visitor) {
 
             $collaborator = Collaborator::getCollaboratorRelationById($visitor->id_collaborator);
         }
@@ -172,15 +172,8 @@ class VisitorController extends Controller
                 $visitor->identification = $data['identification'];
                 $visitor->name = $data['name_Visitor'];
                 $visitor->last_name = $data['lastname_Visitor'];
-                $visitor->visitor_type_id = $data['typeVisitor'];
-                $visitor->company = $data['company'];
-                $visitor->arl_id = $data['arl'];
-                $visitor->date_arl = $data['date_arl'];
-                $visitor->remission = $data['remission'];
-                $visitor->equipment_id = isset($equipment->id) ? $equipment->id : null;
-                $visitor->vehicle_id = isset($vehicle->id) ? $vehicle->id : null;
-                $visitor->id_collaborator = $data['id_collaborator'];
-                $visitor->id_user = auth()->user()->id;
+
+
 
                 //Save in DB
                 $visitor->save();
@@ -195,6 +188,14 @@ class VisitorController extends Controller
                 $Visitor_in->updated_by = null;
                 $Visitor_in->registered_in_by = auth()->user()->id;
                 $Visitor_in->registered_out_by = null;
+                $Visitor_in->visitor_type_id = $data['typeVisitor'];
+                $Visitor_in->company = $data['company'];
+                $Visitor_in->arl_id = $data['arl'];
+                $Visitor_in->date_arl = $data['date_arl'];
+                $Visitor_in->remission = $data['remission'];
+                $Visitor_in->equipment_id = isset($equipment->id) ? $equipment->id : null;
+                $Visitor_in->vehicle_id = isset($vehicle->id) ? $vehicle->id : null;
+                $Visitor_in->id_collaborator = $data['id_collaborator'];
 
                 //Save in DB
                 $Visitor_in->save();
@@ -220,7 +221,9 @@ class VisitorController extends Controller
     private function saveImage($image)
     {
 
-        if ($image != 'images/default.png') {
+        if ($image == "/images/default.png" || $image == null) {
+            $Photo = "/images/default.png";
+        } else {
             $photoData = preg_replace('/^data:image\/(jpeg|png|gif);base64,/', '', $image);
             $image = base64_decode($photoData);
             $fileName = uniqid() . '.png';
@@ -229,8 +232,6 @@ class VisitorController extends Controller
             Storage::disk('public')->put($filePath, $image);
 
             $Photo = "storage/" . $filePath;
-        } else {
-            $Photo = $image;
         }
         return $Photo;
     }

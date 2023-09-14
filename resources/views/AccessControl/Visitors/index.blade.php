@@ -109,7 +109,7 @@
                                                     </div>
                                                     <div>
                                                         <i class="bi bi-person-workspace"></i>
-                                                        <span> {{$incomeExitVisitor->visitor->VisitorType->name}}
+                                                        <span> {{$incomeExitVisitor->VisitorType->name}}
                                                         </span>
                                                     </div>
                                                 </div>
@@ -117,13 +117,13 @@
                                                 <div class="col-7">
                                                     <div>
                                                         <i class="bi bi-building"></i>
-                                                        <span> {{$incomeExitVisitor->visitor->company}} </span>
+                                                        <span> {{$incomeExitVisitor->company}} </span>
                                                     </div>
                                                     <div>
                                                         <i class="bi bi-person-fill-lock"></i>
                                                         <span class="fw-bold"> Responsable: </span>
-                                                        {{ $incomeExitVisitor->visitor->collaborator->user->name }}
-                                                        {{ $incomeExitVisitor->visitor->collaborator->user->last_name }}
+                                                        {{ $incomeExitVisitor->collaborator->user->name }}
+                                                        {{ $incomeExitVisitor->collaborator->user->last_name }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -134,21 +134,21 @@
                                                 <div>
                                                     <i class="bi bi-box-seam"></i>
                                                     <span class="fw-bold"> Tipo de equipo:</span>
-                                                    {{isset($incomeExitVisitor->visitor->Equipment->EquipmentType->name)?
-                                                    $incomeExitVisitor->visitor->Equipment->EquipmentType->name :'NA'
+                                                    {{isset($incomeExitVisitor->Equipment->EquipmentType->name)?
+                                                    $incomeExitVisitor->Equipment->EquipmentType->name :'NA'
                                                     }}
                                                 </div>
                                                 <div>
                                                     <i class="bi bi-badge-tm"></i>
                                                     <span class="fw-bold"> Marca:</span>
-                                                    {{isset($incomeExitVisitor->visitor->Equipment->mark)?
-                                                    $incomeExitVisitor->visitor->Equipment->mark :'NA'}}
+                                                    {{isset($incomeExitVisitor->Equipment->mark)?
+                                                    $incomeExitVisitor->Equipment->mark :'NA'}}
                                                 </div>
                                                 <div>
                                                     <i class="bi bi-qr-code"></i>
                                                     <span class="fw-bold"> Serial:</span>
-                                                    {{isset($incomeExitVisitor->visitor->Equipment->serial)?
-                                                    $incomeExitVisitor->visitor->Equipment->serial :'NA'}}
+                                                    {{isset($incomeExitVisitor->Equipment->serial)?
+                                                    $incomeExitVisitor->Equipment->serial :'NA'}}
                                                 </div>
                                             </div>
                                         </div>
@@ -160,26 +160,26 @@
                                                 <div>
                                                     <i class="bi bi-c-circle-fill"></i>
                                                     <span class="fw-bold"> Marca:</span>
-                                                    {{isset($incomeExitVisitor->visitor->Vehicle->mark)?
-                                                    $incomeExitVisitor->visitor->Vehicle->mark:'NA'}}
+                                                    {{isset($incomeExitVisitor->Vehicle->mark)?
+                                                    $incomeExitVisitor->Vehicle->mark:'NA'}}
                                                 </div>
                                                 <div>
                                                     <i class="bi bi-badge-3d"></i>
                                                     <span class="fw-bold"> Placa:</span>
-                                                    {{isset($incomeExitVisitor->visitor->Vehicle->placa)?
-                                                    $incomeExitVisitor->visitor->Vehicle->placa:'NA'}}
+                                                    {{isset($incomeExitVisitor->Vehicle->placa)?
+                                                    $incomeExitVisitor->Vehicle->placa:'NA'}}
                                                 </div>
                                                 <div>
                                                     <i class="bi bi-paint-bucket"></i>
                                                     <span class="fw-bold"> Color:</span>
-                                                    {{isset($incomeExitVisitor->visitor->Vehicle->color)?
-                                                    $incomeExitVisitor->visitor->Vehicle->color:'NA'}}
+                                                    {{isset($incomeExitVisitor->Vehicle->color)?
+                                                    $incomeExitVisitor->Vehicle->color:'NA'}}
                                                 </div>
                                                 <div>
                                                     <i class="bi bi-car-front-fill"></i>
                                                     <span class="fw-bold"> Tipo Vehiculo:</span>
-                                                    {{isset($incomeExitVisitor->visitor->Vehicle->VehicleType->name)?
-                                                    $incomeExitVisitor->visitor->Vehicle->VehicleType->name:'NA'}}
+                                                    {{isset($incomeExitVisitor->Vehicle->VehicleType->name)?
+                                                    $incomeExitVisitor->Vehicle->VehicleType->name:'NA'}}
                                                 </div>
                                             </div>
                                         </div>
@@ -218,7 +218,9 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td> <a href=""><i class="bi bi-exclamation-circle"></i></a> </td>
+                                    <td> <a href="#" id="MostrarObservaciones"
+                                            data-mensaje="{{$incomeExitVisitor->observation}}"><i
+                                                class="bi bi-exclamation-circle"></i></a> </td>
                                 </tr>
                                 @endforeach
                                 @endif
@@ -276,7 +278,7 @@
         title: '¡Éxito!',
         text: ` {{ session('success') }} `,
         showConfirmButton: false,
-        timer: 2000
+        timer: 2500
     });
 });
 </script>
@@ -288,10 +290,25 @@
             title: 'Error',
             text: ` {{ session('error') }} `,
             showConfirmButton: false,
-            timer: 2000
+            timer: 2500
         });
     });
 </script>
 @endif
+{{-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('MostrarObservaciones').addEventListener('click', function(e) {
+            e.preventDefault();
+            var  mensaje = this.getAttribute('data-mensaje');
+        Swal.fire({
+            icon: 'info',
+            title: 'Observaciones',
+            text: mensaje,
+            showConfirmButton: false,
+            timer: 2000
+        });
+    })
+    });
+</script> --}}
 
 @endsection
