@@ -94,7 +94,7 @@
                                     </td>
                                     <td>
                                         <div>
-                                            <span class="card-title">
+                                            <span class="title-sm">
                                                 {{$incomeExitVisitor->visitor->name.'
                                                 '.$incomeExitVisitor->visitor->last_name}}
                                             </span>
@@ -119,13 +119,22 @@
                                                         <i class="bi bi-building"></i>
                                                         <span> {{$incomeExitVisitor->company}} </span>
                                                     </div>
+<<<<<<< HEAD
                                                     <div>
                                                         <i class="bi bi-person-fill-lock"></i>
                                                         <span class="fw-bold"> Responsable: </span>
                                                         {{ $incomeExitVisitor->collaborator->user->name }}
                                                         {{ $incomeExitVisitor->collaborator->user->last_name }}
                                                     </div>
+=======
+>>>>>>> fd41278 (fix: Organizando estilos del front)
                                                 </div>
+                                            </div>
+                                            <div>
+                                                <i class="bi bi-person-fill-lock"></i>
+                                                <span class="fw-bold"> Responsable: </span>
+                                                {{ $incomeExitVisitor->visitor->collaborator->user->name }}
+                                                {{ $incomeExitVisitor->visitor->collaborator->user->last_name }}
                                             </div>
                                     </td>
                                     <td>

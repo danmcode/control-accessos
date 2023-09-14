@@ -273,12 +273,12 @@
                                 </div>
 
                                 <div class="col-8">
-                                    <div class="card-visitor-title">
+                                    <div class="title-sm">
                                         {{$incomeExitVisitor->visitor->name}} {{$incomeExitVisitor->visitor->last_name}}
                                     </div>
 
                                     <div class="row card-visitor-body">
-                                        <div class="col-6">
+                                        <div class="col-7">
                                             <div>
                                                 <i class="bi bi-person-vcard-fill"></i> <span>
                                                     {{$incomeExitVisitor->visitor->identification}} </span>
@@ -297,17 +297,9 @@
                                             @endif
                                         </div>
 
-                                        <div class="col-6">
+                                        <div class="col-5">
                                             <div>
                                                 <i class="bi bi-building"></i>{{$incomeExitVisitor->company}}</span>
-                                            </div>
-
-                                            <div>
-                                                <i class="bi bi-person-fill-lock"></i>
-                                                <span>
-                                                    {{ $incomeExitVisitor->collaborator->user->name }}
-                                                    {{ $incomeExitVisitor->collaborator->user->last_name }}
-                                                </span>
                                             </div>
 
                                             <div>
@@ -318,15 +310,22 @@
                                                 </span>
                                             </div>
                                         </div>
+                                        <div>
+                                            <i class="bi bi-person-fill-lock"></i>
+                                            <span>
+                                                {{ $incomeExitVisitor->visitor->collaborator->user->name }}
+                                                {{ $incomeExitVisitor->visitor->collaborator->user->last_name }}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                                 @if(!isset($incomeExitVisitor->date_time_out))
                                 <div class="col-2 btn-visitor-out">
-                                    <a href="#" class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#modalOutvisitor" id="btnOutvisitor"
+                                    <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#modalOutVisitor" id="btnOutVisitor"
                                         data-id="{{$incomeExitVisitor->visitor_id}}"
                                         data-bs-full-name="{{$incomeExitVisitor->visitor->name.' '.$incomeExitVisitor->visitor->last_name}}">
-                                        <i class="bi bi-box-arrow-left visitor-out"></i>
+                                        <i class="bi bi-box-arrow-right"></i>
                                         {{ __('Salida') }}
                                     </a>
                                 </div>
@@ -474,7 +473,7 @@
     <script src="{{asset('js/modals/outputVisitorModal.js')}}"></script>
     @if (session('success'))
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
         Swal.fire({
             icon: 'success',
             title: '¡Éxito!',
@@ -486,14 +485,14 @@
     </script>
     @elseif( session('error') )
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
         Swal.fire({
             icon: 'error',
             title: '¡Error!',
             text: ` {{ session('error') }} `,
             showConfirmButton: true,
             confirmButtonColor: '#0d489a',
-            confirmButtonText: 'Aceptar'     
+            confirmButtonText: 'Aceptar'
         });
     });
     </script>
