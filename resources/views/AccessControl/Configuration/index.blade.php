@@ -22,37 +22,25 @@
     <div class="card">
 
         <div class="card-body pt-3">
-            <form class="row gy-2 gx-3 align-items-center">
+            <form method="POST" action="{{ route('horario.store') }}" class="row needs-validation" novalidate>
+                @csrf
                 <div class="col-auto">
-                    <label class="visually-hidden" for="autoSizingInput">Name</label>
-                    <input type="text" class="form-control" id="autoSizingInput" placeholder="Jane Doe">
-                </div>
-                <div class="col-auto">
-                    <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
+                    <label class="form-label fw-bold" for="autoSizingInputGroup">Hora de ingreso: </label>
                     <div class="input-group">
-                        <div class="input-group-text">@</div>
-                        <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="Username">
+                        <div class="input-group-text"><i class="bi bi-clock"></i></div>
+                        <input type="time" name="time_in" class="form-control" id="autoSizingInputGroup" required>
                     </div>
                 </div>
                 <div class="col-auto">
-                    <label class="visually-hidden" for="autoSizingSelect">Preference</label>
-                    <select class="form-select" id="autoSizingSelect">
-                        <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-                <div class="col-auto">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="autoSizingCheck">
-                        <label class="form-check-label" for="autoSizingCheck">
-                            Remember me
-                        </label>
+                    <label class="form-label fw-bold" for="autoSizingInputGroup">Hora de salida: </label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="bi bi-clock"></i></div>
+                        <input type="time" name="time_out" class="form-control" id="autoSizingInputGroup" required>
                     </div>
                 </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                <div class="col-auto d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
                 </div>
             </form>
         </div>
@@ -65,49 +53,72 @@
 
     <div class="card">
         <div class="card-body pt-3">
-            <form class="row g-3">
+            <form method="POST" action="{{ route('configuracion-correo.store') }}" class="row g-3 needs-validation" novalidate>
+                @csrf
                 <div class="col-md-6">
-                    <label for="inputEmail4" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="inputEmail4">
-                </div>
-                <div class="col-md-6">
-                    <label for="inputPassword4" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="inputPassword4">
-                </div>
-                <div class="col-12">
-                    <label for="inputAddress" class="form-label">Address</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                </div>
-                <div class="col-12">
-                    <label for="inputAddress2" class="form-label">Address 2</label>
-                    <input type="text" class="form-control" id="inputAddress2"
-                        placeholder="Apartment, studio, or floor">
+                    <label for="inputEmail4" class="form-label fw-bold">Correo electrónico: </label>
+                    <input type="email" name="email" class="form-control" id="inputEmail4" required>
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ __('El correo es requerido') }}</strong>
+                    </span>
                 </div>
                 <div class="col-md-6">
-                    <label for="inputCity" class="form-label">City</label>
-                    <input type="text" class="form-control" id="inputCity">
+                    <label for="inputPassword4" class="form-label fw-bold">Contraseña: </label>
+                    <input type="password" name="password" class="form-control" id="inputPassword4" required>
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ __('La contraseña es requerida') }}</strong>
+                    </span>
                 </div>
+
                 <div class="col-md-4">
-                    <label for="inputState" class="form-label">State</label>
-                    <select id="inputState" class="form-select">
-                        <option selected>Choose...</option>
-                        <option>...</option>
+                    <label for="inputState" class="form-label fw-bold">Protocolo: </label>
+                    <select id="inputState" name="protocol" class="form-select" required>
+                        <option value="">Seleccione...</option>
+                        <option>SMTP</option>
+                        <option>IMAP</option>
+                        <option>POP3</option>
                     </select>
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ __('El protocolo es requerido') }}</strong>
+                    </span>
                 </div>
-                <div class="col-md-2">
-                    <label for="inputZip" class="form-label">Zip</label>
-                    <input type="text" class="form-control" id="inputZip">
+
+                <div class="col-md-4">
+                    <label for="inputState" class="form-label fw-bold">Cifrado: </label>
+                    <select id="inputState" name="encryption" class="form-select" required>
+                        <option value="" selected>Seleccione...</option>
+                        <option>TLS</option>
+                    </select>
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ __('El cifrado es requerido') }}</strong>
+                    </span>
                 </div>
+
+                <div class="col-md-4">
+                    <label for="inputEmail4" class="form-label fw-bold">Puerto: </label>
+                    <input type="number" name="port" class="form-control" id="inputEmail4" required>
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ __('El puerto es requerido') }}</strong>
+                    </span>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="inputEmail4" class="form-label fw-bold">Host: </label>
+                    <input type="text" name="host" class="form-control" id="inputEmail4" required>
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ __('El host es requerido') }}</strong>
+                    </span>
+                </div>
+                <div class="col-md-6">
+                    <label for="inputPassword4" class="form-label fw-bold">Nombre de usuario: </label>
+                    <input type="text" name="username" class="form-control" id="inputPassword4" required>
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ __('El usuario es requerido') }}</strong>
+                    </span>
+                </div>
+
                 <div class="col-12">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck">
-                        <label class="form-check-label" for="gridCheck">
-                            Check me out
-                        </label>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary">Sign in</button>
+                    <button type="submit" class="btn btn-primary"> Guardar </button>
                 </div>
             </form>
         </div>
