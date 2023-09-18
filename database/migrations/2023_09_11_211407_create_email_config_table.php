@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('port');
             $table->string('host');
             $table->string('username');
-            $table->string('created_by');
-            $table->string('updated_by');
+            $table->unsignedBigInteger('created_by')->unsigned()->nullable();
+            $table->unsignedBigInteger('updated_by')->unsigned()->nullable();
 
             $table->timestamps();
 
