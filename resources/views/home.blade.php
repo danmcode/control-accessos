@@ -322,7 +322,7 @@
                                 @if(!isset($incomeExitVisitor->date_time_out))
                                 <div class="col-2 btn-visitor-out">
                                     <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#modalOutVisitor" id="btnOutVisitor"
+                                        data-bs-target="#modalOutvisitor" id="btnOutVisitor"
                                         data-id="{{$incomeExitVisitor->visitor_id}}"
                                         data-bs-full-name="{{$incomeExitVisitor->visitor->name.' '.$incomeExitVisitor->visitor->last_name}}">
                                         <i class="bi bi-box-arrow-right"></i>
