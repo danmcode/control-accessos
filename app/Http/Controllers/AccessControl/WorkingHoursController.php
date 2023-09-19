@@ -13,24 +13,17 @@ class WorkingHoursController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $data = $request->all();
+        $data['created_by'] = auth()->user()->id;
+
+        $workingHoursCreated = WorkingHours::create($data);
+
+        if ($workingHoursCreated) {
+            return redirect()->route('configuration.index')
+            ->with('success', 'Se han configurado las horas de ingreso y salida');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(WorkingHours $workingHours)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(WorkingHours $workingHours)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -40,11 +33,4 @@ class WorkingHoursController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(WorkingHours $workingHours)
-    {
-        //
-    }
 }

@@ -53,7 +53,8 @@
 
     <div class="card">
         <div class="card-body pt-3">
-            <form method="POST" action="{{ route('configuracion-correo.store') }}" class="row g-3 needs-validation" novalidate>
+            <form method="POST" action="{{ route('configuracion-correo.store') }}" class="row g-3 needs-validation"
+                novalidate>
                 @csrf
                 <div class="col-md-6">
                     <label for="inputEmail4" class="form-label fw-bold">Correo electrónico: </label>
@@ -188,19 +189,7 @@
 
 
             </ul>
-
-            @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @elseif(session('error'))
-            <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                {{ session('error') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
-
+            
             <div class="tab-content" id="myTabContent">
                 <!-- Companies -->
                 <div class="tab-pane fade p-3" id="configuration-company" role="tabpanel"
@@ -311,6 +300,33 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+@if (session('success'))
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    Swal.fire({
+        icon: 'success',
+        title: '¡Éxito!',
+        text: ` {{ session('success') }} `,
+        showConfirmButton: false,
+        timer: 1500
+    });
+});
+</script>
+@elseif( session('error') )
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    Swal.fire({
+        icon: 'error',
+        title: '¡Error!',
+        text: ` {{ session('error') }} `,
+        showConfirmButton: true,
+        confirmButtonColor: '#0d489a',
+        confirmButtonText: 'Aceptar'
+    });
+});
+</script>
+@endif
 
 <script src="js/modals/updateCompanyModal.js"></script>
 <script src="js/modals/updateAreaModal.js"></script>
