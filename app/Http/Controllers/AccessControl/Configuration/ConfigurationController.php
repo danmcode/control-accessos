@@ -11,6 +11,7 @@ use App\Models\AccessControl\IdentificationType;
 use App\Models\AccessControl\JobTitle;
 use App\Models\AccessControl\Location;
 use App\Models\AccessControl\VehicleTypes;
+use App\Models\AccessControl\WorkingHours;
 use App\Models\AccessControl\VisitorTypes;
 use Illuminate\Http\Request;
 
@@ -60,9 +61,10 @@ class ConfigurationController extends Controller
         //get all vehicles types
         $vehiclesTypes = VehicleTypes::where('is_active','=',true)
         ->get();
-        
-    
-        //return to view
+
+        //get Workig Hours
+        $workingHours = WorkingHours::getWorkingHours();
+ 
         return view('AccessControl.Configuration.index', [
             'companies' => $companies,
             'areas' => $areas,
@@ -72,7 +74,8 @@ class ConfigurationController extends Controller
             'visitorTypes' => $visitorTypes,
             'arls' => $arls,
             'vehiclestypes'=> $vehiclesTypes,
-            'equipmentstypes'=>$equipmentsTypes
+            'equipmentstypes'=> $equipmentsTypes,
+            'workingHours' => $workingHours,
         ]);
     }
 

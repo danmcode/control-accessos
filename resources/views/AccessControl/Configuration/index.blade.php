@@ -22,25 +22,31 @@
     <div class="card">
 
         <div class="card-body pt-3">
-            <form method="POST" action="{{ route('horario.store') }}" class="row needs-validation" novalidate>
+            <form method="POST" 
+            action="{{ (isset($workingHours->id)) ? route('horario.update', $workingHours->id) : route('horario.store') }}" class="row needs-validation" novalidate>
                 @csrf
+                @if(isset($workingHours->id))
+                @method('PATCH')
+                @endif
                 <div class="col-auto">
                     <label class="form-label fw-bold" for="autoSizingInputGroup">Hora de ingreso: </label>
                     <div class="input-group">
                         <div class="input-group-text"><i class="bi bi-clock"></i></div>
-                        <input type="time" name="time_in" class="form-control" id="autoSizingInputGroup" required>
+                        <input type="time" name="time_in" value="{{ $workingHours->time_in }}" class="form-control"
+                            id="autoSizingInputGroup" required>
                     </div>
                 </div>
                 <div class="col-auto">
                     <label class="form-label fw-bold" for="autoSizingInputGroup">Hora de salida: </label>
                     <div class="input-group">
                         <div class="input-group-text"><i class="bi bi-clock"></i></div>
-                        <input type="time" name="time_out" class="form-control" id="autoSizingInputGroup" required>
+                        <input type="time" name="time_out" value="{{ $workingHours->time_out }}" class="form-control"
+                            id="autoSizingInputGroup" required>
                     </div>
                 </div>
 
                 <div class="col-auto d-flex align-items-end">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="submit" class="btn btn-primary">{{ (isset($workingHours->id)) ? __('Actualizar') : __('Guardar') }}</button>
                 </div>
             </form>
         </div>
@@ -189,7 +195,7 @@
 
 
             </ul>
-            
+
             <div class="tab-content" id="myTabContent">
                 <!-- Companies -->
                 <div class="tab-pane fade p-3" id="configuration-company" role="tabpanel"
@@ -326,6 +332,24 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+@endif
+
+@if( $errors->any() )
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error de validación de campos',
+            text: `             
+            @foreach ($errors->all() as $error)
+                - {{ $error}}
+            @endforeach `,
+            showConfirmButton: true,
+            confirmButtonColor: '#0d489a',
+            confirmButtonText: 'Aceptar'     
+        });
+    });
+    </script>
 @endif
 
 <script src="js/modals/updateCompanyModal.js"></script>
