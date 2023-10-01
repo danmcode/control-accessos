@@ -59,19 +59,19 @@
 
     <div class="card">
         <div class="card-body pt-3">
-            <form method="POST" action="{{ route('configuracion-correo.store') }}" class="row g-3 needs-validation"
-                novalidate>
+            <form method="POST" 
+                action="{{ (isset($emailConfig->id)) ? route('configuracion-correo.update', $emailConfig->id) : route('configuracion-correo.store') }}" class="row needs-validation" novalidate>
                 @csrf
                 <div class="col-md-6">
                     <label for="inputEmail4" class="form-label fw-bold">Correo electrónico: </label>
-                    <input type="email" name="email" class="form-control" id="inputEmail4" required>
+                    <input type="email" name="email" value="{{ $emailConfig->email }}" class="form-control" id="inputEmail4" required>
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ __('El correo es requerido') }}</strong>
                     </span>
                 </div>
                 <div class="col-md-6">
                     <label for="inputPassword4" class="form-label fw-bold">Contraseña: </label>
-                    <input type="password" name="password" class="form-control" id="inputPassword4" required>
+                    <input type="password" name="password" value="{{ $emailConfig->password }}" class="form-control" id="inputPassword4" required>
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ __('La contraseña es requerida') }}</strong>
                     </span>
@@ -103,7 +103,7 @@
 
                 <div class="col-md-4">
                     <label for="inputEmail4" class="form-label fw-bold">Puerto: </label>
-                    <input type="number" name="port" class="form-control" id="inputEmail4" required>
+                    <input type="number" name="port" value="{{ $emailConfig->port }}" class="form-control" id="inputEmail4" required>
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ __('El puerto es requerido') }}</strong>
                     </span>
@@ -111,21 +111,21 @@
 
                 <div class="col-md-6">
                     <label for="inputEmail4" class="form-label fw-bold">Host: </label>
-                    <input type="text" name="host" class="form-control" id="inputEmail4" required>
+                    <input type="text" name="host" value="{{ $emailConfig->host }}" class="form-control" id="inputEmail4" required>
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ __('El host es requerido') }}</strong>
                     </span>
                 </div>
                 <div class="col-md-6">
                     <label for="inputPassword4" class="form-label fw-bold">Nombre de usuario: </label>
-                    <input type="text" name="username" class="form-control" id="inputPassword4" required>
+                    <input type="text" name="username" value="{{ $emailConfig->username }}" class="form-control" id="inputPassword4" required>
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ __('El usuario es requerido') }}</strong>
                     </span>
                 </div>
 
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary"> Guardar </button>
+                <div class="col-12 mt-2">
+                    <button type="submit" class="btn btn-primary">{{ (isset($emailConfig->id)) ? __('Actualizar') : __('Guardar') }}</button>
                 </div>
             </form>
         </div>

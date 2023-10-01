@@ -31,7 +31,6 @@ class WorkingHoursController extends Controller
         }
     }
 
-
     /**
      * Update the specified resource in storage.
      */
@@ -48,11 +47,13 @@ class WorkingHoursController extends Controller
             ->withErrors($isValidWorkingHours);
         }
 
-        if($workingHours::update($data)){
-            return redirect()->route('configuration.index')
-            ->with('success', 'Se han configurado las horas de ingreso y salida');
-        }
-        
-    }
+        $workingHours->time_in  = $data['time_in'];
+        $workingHours->time_out = $data['time_out'];
+        $workingHours->updated_by = $data['updated_by'];
 
+        if($workingHours->update()){
+            return redirect()->route('configuration.index')
+            ->with('success', 'Se han actualizado las horas de ingreso y salida');
+        }
+    }
 }
