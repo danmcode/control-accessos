@@ -184,4 +184,19 @@ class CollaboratorController extends Controller
             ->with('error', 'No se encontró el usuario');
         }
     }
+
+    public function getColaboratorByIdentification(Request $request){
+        $data = $request->all();
+        $identification = $data['collaborator']['identification'];
+        $collaborator = User::where('identification', $identification)->get();
+        $collaboratorSize = sizeof($collaborator);
+        $response = [];
+        $response['status'] = ($collaboratorSize > 0) ? 200 : 204;
+        $response['data'] = ($collaboratorSize > 0) ? $collaborator : [];
+        $response['msg'] = ($collaboratorSize > 0) ? 'Colaborador encontrado' : 'Colaborador no encontrado';
+
+        return response()->json($response);
+    }
+
+    
 }
