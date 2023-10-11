@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Validator;
 
 class CollaboratorController extends Controller
 {
-    
+
     /**
      * Display a listing of the resource.
      */
@@ -46,7 +46,7 @@ class CollaboratorController extends Controller
             'identification' => $data['identification'],
             'identification_type' => $data['identification_type'],
             'photo_path' => $imagePath,
-            'name' => $data['name'], 
+            'name' => $data['name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'role_id' => 2,
@@ -55,7 +55,7 @@ class CollaboratorController extends Controller
         ];
 
         $isValidUser = User::validateUser($user);
-        
+
         if($isValidUser->fails()){
             return redirect()->route('colaboradores.create')
             ->withErrors($isValidUser);
@@ -70,7 +70,7 @@ class CollaboratorController extends Controller
             "job_title_id" => $data["job_title_id"],
             "location_id" => $data["location_id"],
         ];
-        
+
         $isValidCollaborator = Collaborator::validateCollaborator($collaborator);
 
         if($isValidCollaborator->fails()){
@@ -122,7 +122,7 @@ class CollaboratorController extends Controller
     {
         $dropDownsLists = getDropdownsList();
         $dropDownsLists +=  User::getUserRelationById($collaborator);
-            
+
         return view('AccessControl.Collaborators.edit', $dropDownsLists);
     }
 
@@ -185,7 +185,7 @@ class CollaboratorController extends Controller
         }
     }
 
-    public function getColaboratorByIdentification(Request $request){
+    public function getCollaboratorByIdentification(Request $request){
         $data = $request->all();
         $identification = $data['collaborator']['identification'];
         $collaborator = User::where('identification', $identification)->get();
@@ -198,5 +198,5 @@ class CollaboratorController extends Controller
         return response()->json($response);
     }
 
-    
+
 }

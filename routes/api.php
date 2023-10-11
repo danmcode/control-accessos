@@ -18,9 +18,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('/v1/auth',[
+    App\Http\Controllers\Auth\LoginApiController::class,
+    'apiAuth'
+]);
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/v1/collaborators', [
-        App\Http\Controllers\AccessControl\CollaboratorController::class, 
-        'getColaboratorByIdentification'
+        App\Http\Controllers\AccessControl\CollaboratorController::class,
+        'getCollaboratorByIdentification'
     ]);
-}); 
+});
