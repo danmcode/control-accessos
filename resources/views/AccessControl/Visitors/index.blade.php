@@ -13,56 +13,6 @@
 <!-- End Page Title -->
 
 <section class="section profile">
-
-    {{-- <div class="row">
-        <div class="col-xl-3">
-            <div class="card">
-                <div class="card-body profile-card pt-4">
-                    <h5 class="card-title">
-                        <i class="bi bi-people"></i>
-                        {{ __('Buscar visitantes') }}
-                    </h5>
-
-                    <form action="#">
-                        <div class="row">
-                            <div class="form-heading mt-2 mb-2">Por fecha de ingreso</div>
-
-                            <div class="col-6 mb-3">
-                                <label for="start_date"> {{ __('Desde:') }} </label>
-                                <input type="date" name="start_date" id="start_date" class="form-control">
-                            </div>
-                            <div class="col-6 mb-3">
-                                <label for="end_date"> {{ __('Hasta:') }} </label>
-                                <input type="date" name="end_date" id="end_date" class="form-control">
-                            </div>
-
-                            <div class="col-6 mb-3">
-                                <label for="start_hour"> {{ __('Hora inicio:') }} </label>
-                                <input type="time" name="start_hour" id="start_hour" class="form-control">
-                            </div>
-                            <div class="col-6 mb-3">
-                                <label for="end_hour"> {{ __('Hora fin:') }} </label>
-                                <input type="time" name="end_hour" id="end_hour" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="form-heading mt-2 mb-2">¿A quien visitó?</div>
-                        <div class="col-12 mb-3">
-                            <label for="collaborator_visited"> {{ __('Nombre:') }} </label>
-                            <input type="text" name="collaborator_visited" id="collaborator_visited"
-                                class="form-control">
-                        </div>
-
-                        <hr>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="bi bi-search"></i>
-                            {{ __('Buscar') }}
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div> --}}
-
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
@@ -119,22 +69,13 @@
                                                         <i class="bi bi-building"></i>
                                                         <span> {{$incomeExitVisitor->company}} </span>
                                                     </div>
-<<<<<<< HEAD
                                                     <div>
                                                         <i class="bi bi-person-fill-lock"></i>
                                                         <span class="fw-bold"> Responsable: </span>
                                                         {{ $incomeExitVisitor->collaborator->user->name }}
                                                         {{ $incomeExitVisitor->collaborator->user->last_name }}
                                                     </div>
-=======
->>>>>>> fd41278 (fix: Organizando estilos del front)
                                                 </div>
-                                            </div>
-                                            <div>
-                                                <i class="bi bi-person-fill-lock"></i>
-                                                <span class="fw-bold"> Responsable: </span>
-                                                {{ $incomeExitVisitor->visitor->collaborator->user->name }}
-                                                {{ $incomeExitVisitor->visitor->collaborator->user->last_name }}
                                             </div>
                                     </td>
                                     <td>
@@ -304,20 +245,4 @@
     });
 </script>
 @endif
-{{-- <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('MostrarObservaciones').addEventListener('click', function(e) {
-            e.preventDefault();
-            var  mensaje = this.getAttribute('data-mensaje');
-        Swal.fire({
-            icon: 'info',
-            title: 'Observaciones',
-            text: mensaje,
-            showConfirmButton: false,
-            timer: 2000
-        });
-    })
-    });
-</script> --}}
-
 @endsection

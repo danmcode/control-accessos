@@ -313,8 +313,8 @@
                                         <div>
                                             <i class="bi bi-person-fill-lock"></i>
                                             <span>
-                                                {{ $incomeExitVisitor->visitor->collaborator->user->name }}
-                                                {{ $incomeExitVisitor->visitor->collaborator->user->last_name }}
+                                                {{ $incomeExitVisitor->collaborator->user->name }}
+                                                {{ $incomeExitVisitor->collaborator->user->last_name }}
                                             </span>
                                         </div>
                                     </div>
