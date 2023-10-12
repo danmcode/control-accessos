@@ -70,6 +70,11 @@ class User extends Authenticatable
         return $isValidUser;
     }
 
+    public static function validateIdentification(array $user)
+    {
+        return  Validator::make($user, ['identification' => 'required']);
+    }
+
     /**
      * Get the collaborator associated with the user
      */

@@ -36,7 +36,7 @@ class Collaborator extends Model
         return $isValidCollaborator;
     }
 
-    public static function getIncomeExitCollaborators() : array
+    public static function getIncomeExitCollaborators()
     {
         return IncomeExitCollaborators::with('collaborator')
             ->with('collaborator.company')

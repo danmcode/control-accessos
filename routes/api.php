@@ -33,6 +33,6 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/v1/collaborator/attendance', [
         App\Http\Controllers\Api\AccessControl\CollaboratorAttendanceController::class,
-        'determineIncomeOrExit'
+        'setCollaboratorAttendance'
     ]);
 });
