@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Responses\HttpStatusCode;
+use App\Http\Responses\PJsonResponse;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -21,25 +23,31 @@ class LoginApiController extends Controller
         ]);
 
         if($isValidUser->fails()){
-            return response()->json([
-                'message' => 'Campos requeridos faltantes',
-                'errors' => $isValidUser->errors(),
-                'details' => []
-            ], 400);
+            PJsonResponse::error(
+                'Campos Requeridos Faltantes',
+                HttpStatusCode::HTTP_BAD_REQUEST,
+                $isValidUser->errors()
+            );
         }
 
         if (Auth::attempt($credentials)) {
             $user = User::where('username', $request->username)->first();
             $token = $user->createToken(getenv('APP_TOKEN'))->plainTextToken;
-            return response()->json([
-                'message' => 'Usuario autenticado correctamente',
-                'details' => $user,
-                'token' => $token,
-            ], 200);
+
+            $data = ['user' => $user, 'token' => $token];
+
+            return PJsonResponse::success(
+                $data,
+                'Usuario autenticado correctamente',
+                HttpStatusCode::HTTP_OK
+            );
+
         } else {
-            return response()->json([
-                'message' => 'Invalid credentials',
-            ], 401);
+            return PJsonResponse::error(
+                'Autenticación fallida',
+                HttpStatusCode::HTTP_BAD_REQUEST,
+                $isValidUser->errors()
+            );
         }
     }
 }

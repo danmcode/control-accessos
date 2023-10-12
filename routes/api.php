@@ -29,3 +29,10 @@ Route::middleware('auth:sanctum')->group(function () {
         'getCollaboratorByIdentification'
     ]);
 });
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/v1/collaborator/attendance', [
+        App\Http\Controllers\Api\AccessControl\CollaboratorAttendanceController::class,
+        'determineIncomeOrExit'
+    ]);
+});
