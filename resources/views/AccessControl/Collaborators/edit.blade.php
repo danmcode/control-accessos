@@ -44,7 +44,11 @@
                                 </label>
                             </div>
                         </h2>
-
+                        @if($user->collaborators->area_manager)
+                            <span class="center-css text-bg-light">
+                                        {{ __('Jefe o director de área') }}
+                                    </span>
+                        @endif
                         <h3 class="center-css">
                             <label id="job_title_label"> Cargo </label>
                         </h3>
@@ -88,9 +92,8 @@
             <div class="col-xl-8">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"> {{ __('Crear colaboradores') }} </h5>
+                        <h5 class="card-title col-6"> {{ __('Crear colaboradores') }}</h5>
                         <hr>
-
                         <div class="form-heading mt-2 mb-2">Información básica</div>
 
                         <div class="row">
@@ -172,6 +175,15 @@
 
                             <hr>
                             <div class="form-heading mt-2 mb-2">Información de colaborador</div>
+
+                            <div class="col-12 mb-2">
+                                <div class="form-check form-switch">
+                                    <input name="area_manager" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
+                                        {{($user->collaborators->area_manager) ? 'checked' : ''}}>
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">
+                                        Director o Jefe de área </label>
+                                </div>
+                            </div>
 
                             <!-- Company -->
                             <div class="col-6 mb-3">

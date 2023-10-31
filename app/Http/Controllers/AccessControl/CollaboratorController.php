@@ -71,6 +71,7 @@ class CollaboratorController extends Controller
             "area_id" => $data["area_id"],
             "job_title_id" => $data["job_title_id"],
             "location_id" => $data["location_id"],
+            'area_manager' => isset($data['area_manager']),
         ];
 
         $isValidCollaborator = Collaborator::validateCollaborator($collaborator);
