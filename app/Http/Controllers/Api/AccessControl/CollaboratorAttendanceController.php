@@ -121,4 +121,40 @@ class CollaboratorAttendanceController extends Controller
             return PJsonResponse::error("No se pudo registrar" . self::EXIT);
         }
     }
+
+    public function getCollaboratorAttendanceByDay(): JsonResponse
+    {
+        $collaboratorsByDay = Collaborator::getIncomeExitCollaboratorsByDay();
+
+        $collaboratorData = [];
+
+        if(sizeof($collaboratorsByDay) > 0){
+
+            foreach ($collaboratorsByDay as $collaborator) {
+
+                $auxData = [
+                    'identification' => $collaborator->collaborator->user->identification,
+                    'full_name' => $collaborator->collaborator->user->name . ' ' . $collaborator->collaborator->user->last_name,
+                    'user_id' => $collaborator->collaborator->user->id,
+                    'collaborator_id' => $collaborator->collaborator->id,
+                    'income_exit_id' => $collaborator->id,
+                    'date_time_in' => $collaborator->date_time_in,
+                ];
+
+                $collaboratorData[] = $auxData;
+            }
+
+        }
+
+        return PJsonResponse::success(
+            $collaboratorData,
+            (sizeof($collaboratorsByDay) == 0) ? 'empty' : 'success',
+            sizeof($collaboratorsByDay),
+        );
+    }
+
+    public function getCollaboratorAttendanceCountByDay()
+    {
+
+    }
 }

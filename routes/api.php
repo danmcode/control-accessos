@@ -36,3 +36,17 @@ Route::middleware('auth:sanctum')->group(function () {
         'setCollaboratorAttendance'
     ]);
 });
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/v1/collaborator/attendance/by-day', [
+        App\Http\Controllers\Api\AccessControl\CollaboratorAttendanceController::class,
+        'getCollaboratorAttendanceByDay'
+    ]);
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/v1/collaborator/attendance/count-by-day', [
+        App\Http\Controllers\Api\AccessControl\CollaboratorAttendanceController::class,
+        'getCollaboratorAttendanceCountByDay'
+    ]);
+});

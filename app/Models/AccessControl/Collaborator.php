@@ -3,6 +3,7 @@
 namespace App\Models\AccessControl;
 
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
@@ -46,6 +47,22 @@ class Collaborator extends Model
             ->with('collaborator.user')
             ->orderByRaw('ISNULL(date_time_out) DESC, date_time_out DESC')
             ->limit(30)
+            ->get();
+    }
+
+    public static function getIncomeExitCollaboratorsByDay()
+    {
+        $currentDate = Carbon::today();
+
+        return IncomeExitCollaborators::with('collaborator')
+            ->with('collaborator.company')
+            ->with('collaborator.area')
+            ->with('collaborator.jobTitle')
+            ->with('collaborator.location')
+            ->with('collaborator.user')
+            ->whereDate('date_time_in', $currentDate)
+            ->whereNull('date_time_out')
+            ->orderByRaw('ISNULL(date_time_out) DESC, date_time_out DESC')
             ->get();
     }
 

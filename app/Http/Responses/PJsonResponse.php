@@ -6,11 +6,12 @@ use Illuminate\Http\JsonResponse;
 
 class PJsonResponse
 {
-    public static function success($data = [], $message = 'Success', $status = 200): JsonResponse
+    public static function success($data = [], $message = 'Success', $count = 0, $status = 200): JsonResponse
     {
         return response()->json([
             'status' => $status,
             'message' => $message,
+            'count' => $count,
             'data' => $data,
         ], $status);
     }
