@@ -11,6 +11,8 @@ use App\Models\AccessControl\IdentificationType;
 use App\Models\AccessControl\JobTitle;
 use App\Models\AccessControl\Location;
 use App\Models\AccessControl\VehicleTypes;
+use App\Models\AccessControl\WorkingHours;
+use App\Models\AccessControl\EmailConfig;
 use App\Models\AccessControl\VisitorTypes;
 use Illuminate\Http\Request;
 
@@ -21,48 +23,31 @@ class ConfigurationController extends Controller
      */
     public function index()
     {
-        //get all companies
         $companies = Company::where('is_active', '=', true)
             ->get();
 
-        //get all areas
         $areas = Area::where('is_active', '=', true)
             ->with('company')
             ->get();
         
-        //get all Job Titles
         $jobTitles = JobTitle::where('is_active', '=', true)
             ->with('area')
             ->with('company')
             ->get();
 
-        //get all Job Titles
         $locations = Location::where('is_active', '=', true)
             ->with('company')
             ->get();
         
-        //get all identifications types
-        $identificationTypes = IdentificationType::where('is_active', '=', true)
-            ->get();
+        $identificationTypes = IdentificationType::where('is_active', '=', true)->get();
 
-        //get all arls
-        $visitorTypes = VisitorTypes::where('is_active', '=', true)
-            ->get();
-        
-        //get all arls
-        $arls = Arl::where('is_active', '=', true)
-            ->get();
-        
-        //get all Equipments types
-        $equipmentsTypes = EquipmentTypes::where('is_active','=',true)
-        ->get();
+        $visitorTypes = VisitorTypes::where('is_active', '=', true)->get();
+        $arls = Arl::where('is_active', '=', true)->get();
+        $equipmentsTypes = EquipmentTypes::where('is_active','=',true)->get();
+        $vehiclesTypes = VehicleTypes::where('is_active','=',true)->get();
+        $workingHours = WorkingHours::getWorkingHours();
+        $emailConfig = EmailConfig::getEmailConfig();
 
-        //get all vehicles types
-        $vehiclesTypes = VehicleTypes::where('is_active','=',true)
-        ->get();
-        
-    
-        //return to view
         return view('AccessControl.Configuration.index', [
             'companies' => $companies,
             'areas' => $areas,
@@ -72,56 +57,9 @@ class ConfigurationController extends Controller
             'visitorTypes' => $visitorTypes,
             'arls' => $arls,
             'vehiclestypes'=> $vehiclesTypes,
-            'equipmentstypes'=>$equipmentsTypes
+            'equipmentstypes'=> $equipmentsTypes,
+            'workingHours' => $workingHours,
+            'emailConfig' => $emailConfig,
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     * SHOW THE DROPDOWN LIST
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

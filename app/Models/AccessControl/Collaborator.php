@@ -3,11 +3,12 @@
 namespace App\Models\AccessControl;
 
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
-
+use Ramsey\Collection\Collection;
 
 
 class Collaborator extends Model
@@ -38,8 +39,7 @@ class Collaborator extends Model
 
     public static function getIncomeExitCollaborators()
     {
-
-        $incomeOutputs = IncomeExitCollaborators::with('collaborator')
+        return IncomeExitCollaborators::with('collaborator')
             ->with('collaborator.company')
             ->with('collaborator.area')
             ->with('collaborator.jobTitle')
@@ -48,8 +48,35 @@ class Collaborator extends Model
             ->orderByRaw('ISNULL(date_time_out) DESC, date_time_out DESC')
             ->limit(30)
             ->get();
+    }
 
-        return $incomeOutputs;
+    public static function getIncomeExitCollaboratorsByDay()
+    {
+        $currentDate = Carbon::today();
+
+        return IncomeExitCollaborators::with('collaborator')
+            ->with('collaborator.company')
+            ->with('collaborator.area')
+            ->with('collaborator.jobTitle')
+            ->with('collaborator.location')
+            ->with('collaborator.user')
+            ->whereDate('date_time_in', $currentDate)
+            ->whereNull('date_time_out')
+            ->orderByRaw('ISNULL(date_time_out) DESC, date_time_out DESC')
+            ->get();
+    }
+
+    public static function getIncomeExitCollaboratorsById($id)
+    {
+        return IncomeExitCollaborators::with('collaborator')
+            ->with('collaborator.company')
+            ->with('collaborator.area')
+            ->with('collaborator.jobTitle')
+            ->with('collaborator.location')
+            ->with('collaborator.user')
+            ->orderByRaw('ISNULL(date_time_out) DESC, date_time_out DESC')
+            ->where('collaborator_id', $id)
+            ->get();
     }
 
 

@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Validator;
+use Ramsey\Collection\Collection;
 
 class User extends Authenticatable
 {
@@ -69,6 +70,11 @@ class User extends Authenticatable
         return $isValidUser;
     }
 
+    public static function validateIdentification(array $user)
+    {
+        return  Validator::make($user, ['identification' => 'required']);
+    }
+
     /**
      * Get the collaborator associated with the user
      */
@@ -90,13 +96,13 @@ class User extends Authenticatable
     {
         $chars = '0123456789*#abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$%&';
         $aleatoryString = '';
-    
+
         for ($i = 0; $i < $length; $i++) {
             $aleatoryIndex = mt_rand(0, strlen($chars) - 1);
             $aleatoryChar = $chars[$aleatoryIndex];
             $aleatoryString .= $aleatoryChar;
         }
-    
+
         return $aleatoryString;
     }
 
@@ -127,8 +133,21 @@ class User extends Authenticatable
             ->with('collaborators.location')
             ->get();
 
-        $user = [ 'user' => $user[0] ] ;
+        return [ 'user' => $user[0] ];
+    }
 
-        return $user;
+    public static function getUserRelationByIdentification($identification)
+    {
+        $user = User::where('is_active', '=', true)
+            ->where('identification', '=', $identification)
+            ->with('identificationTypes')
+            ->with('collaborators.company')
+            ->with('collaborators.area')
+            ->with('collaborators.jobTitle')
+            ->with('collaborators.location')
+            ->get();
+
+        if(sizeOf($user) === 0) return  [];
+        return $user[0];
     }
 }

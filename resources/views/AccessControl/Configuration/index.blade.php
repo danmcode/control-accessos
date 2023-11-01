@@ -13,6 +13,129 @@
 <!-- End Page Title -->
 
 <section class="section profile">
+
+    <div class="configuration-title">
+        <span> Hora de ingreso y Salida </span>
+        <hr>
+    </div>
+
+    <div class="card">
+
+        <div class="card-body pt-3">
+            <form method="POST" 
+            action="{{ (isset($workingHours->id)) ? route('horario.update', $workingHours->id) : route('horario.store') }}" class="row needs-validation" novalidate>
+                @csrf
+                @if(isset($workingHours->id))
+                @method('PATCH')
+                @endif
+                <div class="col-auto">
+                    <label class="form-label fw-bold" for="autoSizingInputGroup">Hora de ingreso: </label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="bi bi-clock"></i></div>
+                        <input type="time" name="time_in" value="{{ $workingHours->time_in }}" class="form-control"
+                            id="autoSizingInputGroup" required>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <label class="form-label fw-bold" for="autoSizingInputGroup">Hora de salida: </label>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="bi bi-clock"></i></div>
+                        <input type="time" name="time_out" value="{{ $workingHours->time_out }}" class="form-control"
+                            id="autoSizingInputGroup" required>
+                    </div>
+                </div>
+
+                <div class="col-auto d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary">{{ (isset($workingHours->id)) ? __('Actualizar') : __('Guardar') }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="configuration-title">
+        <span> Configuración de Correo Eléctronico </span>
+        <hr>
+    </div>
+
+    <div class="card">
+        <div class="card-body pt-3">
+            <form method="POST" 
+                action="{{ (isset($emailConfig->id)) ? route('configuracion-correo.update', $emailConfig->id) : route('configuracion-correo.store') }}" class="row needs-validation" novalidate>
+                @csrf
+                <div class="col-md-6">
+                    <label for="inputEmail4" class="form-label fw-bold">Correo electrónico: </label>
+                    <input type="email" name="email" value="{{ $emailConfig->email }}" class="form-control" id="inputEmail4" required>
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ __('El correo es requerido') }}</strong>
+                    </span>
+                </div>
+                <div class="col-md-6">
+                    <label for="inputPassword4" class="form-label fw-bold">Contraseña: </label>
+                    <input type="password" name="password" value="{{ $emailConfig->password }}" class="form-control" id="inputPassword4" required>
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ __('La contraseña es requerida') }}</strong>
+                    </span>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="inputState" class="form-label fw-bold">Protocolo: </label>
+                    <select id="inputState" name="protocol" class="form-select" required>
+                        <option value="">Seleccione...</option>
+                        <option>SMTP</option>
+                        <option>IMAP</option>
+                        <option>POP3</option>
+                    </select>
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ __('El protocolo es requerido') }}</strong>
+                    </span>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="inputState" class="form-label fw-bold">Cifrado: </label>
+                    <select id="inputState" name="encryption" class="form-select" required>
+                        <option value="" selected>Seleccione...</option>
+                        <option>TLS</option>
+                    </select>
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ __('El cifrado es requerido') }}</strong>
+                    </span>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="inputEmail4" class="form-label fw-bold">Puerto: </label>
+                    <input type="number" name="port" value="{{ $emailConfig->port }}" class="form-control" id="inputEmail4" required>
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ __('El puerto es requerido') }}</strong>
+                    </span>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="inputEmail4" class="form-label fw-bold">Host: </label>
+                    <input type="text" name="host" value="{{ $emailConfig->host }}" class="form-control" id="inputEmail4" required>
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ __('El host es requerido') }}</strong>
+                    </span>
+                </div>
+                <div class="col-md-6">
+                    <label for="inputPassword4" class="form-label fw-bold">Nombre de usuario: </label>
+                    <input type="text" name="username" value="{{ $emailConfig->username }}" class="form-control" id="inputPassword4" required>
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ __('El usuario es requerido') }}</strong>
+                    </span>
+                </div>
+
+                <div class="col-12 mt-2">
+                    <button type="submit" class="btn btn-primary">{{ (isset($emailConfig->id)) ? __('Actualizar') : __('Guardar') }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="configuration-title">
+        <span> Listas Desplegables </span>
+        <hr>
+    </div>
+
     <div class="card">
         <div class="card-body pt-3">
             <!-- Bordered Tabs -->
@@ -72,18 +195,6 @@
 
 
             </ul>
-
-            @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @elseif(session('error'))
-            <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                {{ session('error') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
 
             <div class="tab-content" id="myTabContent">
                 <!-- Companies -->
@@ -176,7 +287,7 @@
 
 @section('scripts')
 <script>
-    /**
+/**
  * Manage the tabs
  */
 document.addEventListener('DOMContentLoaded', function() {
@@ -195,6 +306,51 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+@if (session('success'))
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    Swal.fire({
+        icon: 'success',
+        title: '¡Éxito!',
+        text: ` {{ session('success') }} `,
+        showConfirmButton: false,
+        timer: 1500
+    });
+});
+</script>
+@elseif( session('error') )
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    Swal.fire({
+        icon: 'error',
+        title: '¡Error!',
+        text: ` {{ session('error') }} `,
+        showConfirmButton: true,
+        confirmButtonColor: '#0d489a',
+        confirmButtonText: 'Aceptar'
+    });
+});
+</script>
+@endif
+
+@if( $errors->any() )
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error de validación de campos',
+            text: `             
+            @foreach ($errors->all() as $error)
+                - {{ $error}}
+            @endforeach `,
+            showConfirmButton: true,
+            confirmButtonColor: '#0d489a',
+            confirmButtonText: 'Aceptar'     
+        });
+    });
+    </script>
+@endif
 
 <script src="js/modals/updateCompanyModal.js"></script>
 <script src="js/modals/updateAreaModal.js"></script>

@@ -17,3 +17,36 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/v1/auth',[
+    App\Http\Controllers\Auth\LoginApiController::class,
+    'apiAuth'
+]);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/v1/collaborators', [
+        App\Http\Controllers\AccessControl\CollaboratorController::class,
+        'getCollaboratorByIdentification'
+    ]);
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/v1/collaborator/attendance', [
+        App\Http\Controllers\Api\AccessControl\CollaboratorAttendanceController::class,
+        'setCollaboratorAttendance'
+    ]);
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/v1/collaborator/attendance/by-day', [
+        App\Http\Controllers\Api\AccessControl\CollaboratorAttendanceController::class,
+        'getCollaboratorAttendanceByDay'
+    ]);
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/v1/collaborator/attendance/count-by-day', [
+        App\Http\Controllers\Api\AccessControl\CollaboratorAttendanceController::class,
+        'getCollaboratorAttendanceCountByDay'
+    ]);
+});

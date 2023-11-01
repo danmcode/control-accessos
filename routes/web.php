@@ -127,3 +127,9 @@ Route::resource('tipo-vehiculos', 'App\Http\Controllers\AccessControl\VehicleTyp
 //arls
 Route::resource('arls', 'App\Http\Controllers\AccessControl\ArlController')
     ->middleware('auth');
+
+//working hours
+Route::resource('horario', 'App\Http\Controllers\AccessControl\WorkingHoursController');
+
+//email config
+Route::resource('configuracion-correo', 'App\Http\Controllers\AccessControl\EmailConfigController');
