@@ -78,6 +78,7 @@ class DatabaseSeeder extends Seeder
             'created_by' => 1,
             'updated_by' => 1,
             'password' => Hash::make('password'),
+            'rol_id' => 1,
         ]);
     }
 
