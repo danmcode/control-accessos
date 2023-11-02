@@ -250,7 +250,7 @@
     <aside id="sidebar" class="sidebar">
 
         <ul class="sidebar-nav" id="sidebar-nav">
-            @can('accessAGSJC', $user)
+            @can('accessAGSJC', Auth::user())
             <li class="nav-item">
                 <a class="nav-link " href=" {{ route('home') }} ">
                     <i class="bi bi-house"></i>
