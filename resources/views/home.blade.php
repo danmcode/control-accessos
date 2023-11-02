@@ -115,6 +115,7 @@
             </div><!-- End Customers Card -->
         </div>
         <!--  -->
+
         <!-- Left side columns -->
         <div class="container col-6 col-lg-6 col-md-12 col-sm-12">
             <div class="row">
@@ -201,11 +202,14 @@
                                     <!-- End user information -->
                                     <hr>
                                     <div class="d-flex justify-content-center">
+
                                         <a class="dashboard-user-action user-action-primary m-1" data-bs-toggle="modal"
                                             data-bs-target="#modalValidate" href="#" id="btnCreateVisitor">
                                             <div class="content-icon"> <i class="bi bi-person-fill-add"></i> </div>
                                             <div class="content-text"> {{ __('Registrar visitante') }} </div>
                                         </a>
+
+
                                         <a href="" class="dashboard-user-action user-action-warning m-1">
                                             <div class="content-icon"> <i class="bi bi-person-video"></i> </div>
                                             <div class="content-text"> {{ __('Ver colaborador') }} </div>
@@ -215,6 +219,7 @@
                                             <div class="content-icon"> <i class="bi bi-person-fill-check"></i> </div>
                                             <div class="content-text"> {{ __('Ver permisos') }} </div>
                                         </a>
+
                                     </div>
                                 </div>
 
@@ -254,7 +259,6 @@
             </div>
         </div>
         <!-- End Left side columns -->
-
         <!-- Right side columns -->
         <div class="container col-6 col-lg-6 col-md-12 col-sm-12">
             <!-- Visitors today -->
@@ -350,6 +354,7 @@
         </div>
         <!-- End Right side columns -->
     </div>
+
 
     <!-- Modal -->
     <div class="modal fade" id="modalInCollaborator" tabindex="-1" aria-labelledby="modalTitle" data-type="income"
@@ -473,7 +478,7 @@
     <script src="{{asset('js/modals/outputVisitorModal.js')}}"></script>
     @if (session('success'))
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function() {
         Swal.fire({
             icon: 'success',
             title: '¡Éxito!',
@@ -485,7 +490,7 @@
     </script>
     @elseif( session('error') )
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function() {
         Swal.fire({
             icon: 'error',
             title: '¡Error!',

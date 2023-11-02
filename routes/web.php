@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccessControl\RolController;
 use App\Http\Controllers\AccessControl\validateVisitorController;
 use App\Http\Controllers\AccessControl\VisitorController;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +26,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 
 Route::resource('configuration', 'App\Http\Controllers\AccessControl\Configuration\ConfigurationController')
     ->middleware('auth');
@@ -74,6 +75,9 @@ Route::get('/crear-visitante/{id}', [VisitorController::class, 'create'])->name(
 //Create and Login a First Time Visitor
 Route::post('/crear-visitante', [VisitorController::class, 'store'])->name('crear-visitante.store')->middleware('auth');
 
+
+
+
 Route::post(
     'registrar-salida-visitante/{id}',
     [
@@ -117,6 +121,9 @@ Route::resource('tipo-indentificaciones', 'App\Http\Controllers\AccessControl\Id
 
 //Visitors Types
 Route::resource('tipo-visitantes', 'App\Http\Controllers\AccessControl\VisitorTypesController');
+
+//Visitors Types
+Route::resource('rols', 'App\Http\Controllers\AccessControl\RolController')->middleware('auth');
 
 //Equipaments Types
 Route::resource('tipo-equipos', 'App\Http\Controllers\AccessControl\EquipmentTypeController');

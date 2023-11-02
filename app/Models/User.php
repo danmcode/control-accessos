@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Models\AccessControl\Collaborator;
 use App\Models\AccessControl\IdentificationType;
+use App\Models\AccessControl\Rol;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -35,6 +36,7 @@ class User extends Authenticatable
         'created_by',
         'updated_by',
         'password',
+        'rol_id',
     ];
 
     /**
@@ -65,6 +67,7 @@ class User extends Authenticatable
             'name' => 'required|string',
             'last_name' => 'required|string',
             'email' => 'required|email|unique:users',
+            "rol_id" => 'required'
         ]);
 
         return $isValidUser;
@@ -88,6 +91,16 @@ class User extends Authenticatable
         return $this->belongsTo(IdentificationType::class, 'identification_type');
     }
 
+    public function rol()
+    {
+        return $this->belongsTo(Rol::class);
+    }
+
+    public function hasRole($roleName)
+    {
+        return $this->roles->contains('name', $roleName);
+    }
+
 
     /**
      * Generate a new user password
@@ -106,23 +119,25 @@ class User extends Authenticatable
         return $aleatoryString;
     }
 
-    public static function getAllUsersRelations() : array{
+    public static function getAllUsersRelations(): array
+    {
 
         $users = User::where('is_active', true)
-        ->where('id', '!=', 1)
-        ->with('identificationTypes')
-        ->with('collaborators.company')
-        ->with('collaborators.area')
-        ->with('collaborators.jobTitle')
-        ->with('collaborators.location')
-        ->get();
+            ->where('id', '!=', 1)
+            ->with('identificationTypes')
+            ->with('collaborators.company')
+            ->with('collaborators.area')
+            ->with('collaborators.jobTitle')
+            ->with('collaborators.location')
+            ->get();
 
-        $users = [ 'users' => $users ] ;
+        $users = ['users' => $users];
 
         return $users;
     }
 
-    public static function getUserRelationById($collaborator) : array {
+    public static function getUserRelationById($collaborator): array
+    {
 
         $user = User::where('is_active', '=', true)
             ->where('id', '=', $collaborator)
@@ -133,7 +148,7 @@ class User extends Authenticatable
             ->with('collaborators.location')
             ->get();
 
-        return [ 'user' => $user[0] ];
+        return ['user' => $user[0]];
     }
 
     public static function getUserRelationByIdentification($identification)
@@ -147,7 +162,7 @@ class User extends Authenticatable
             ->with('collaborators.location')
             ->get();
 
-        if(sizeOf($user) === 0) return  [];
+        if (sizeOf($user) === 0) return  [];
         return $user[0];
     }
 }

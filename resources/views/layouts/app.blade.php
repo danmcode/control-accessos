@@ -215,7 +215,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-
+                        @can('accessConfiguration', Auth::user())
                         <li>
                             <a class="dropdown-item d-flex align-items-center"
                                 href="{{ route('configuration.index') }}">
@@ -223,8 +223,7 @@
                                 <span>Configuración</span>
                             </a>
                         </li>
-
-
+                        @endcan
                         <li>
                             <hr class="dropdown-divider">
                         </li>
@@ -251,15 +250,15 @@
     <aside id="sidebar" class="sidebar">
 
         <ul class="sidebar-nav" id="sidebar-nav">
-
+            @can('accessAGSJC', $user)
             <li class="nav-item">
                 <a class="nav-link " href=" {{ route('home') }} ">
                     <i class="bi bi-house"></i>
                     <span>Inicio</span>
                 </a>
             </li><!-- End Dashboard Nav -->
-            <li class="nav-heading">Control de accesos</li>
 
+            <li class="nav-heading">Control de accesos</li>
             <!-- Colaborators -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#colaborators-nav" data-bs-toggle="collapse" href="#">
@@ -301,8 +300,10 @@
                     </li>
                 </ul>
             </li>
-            <!-- End visitors Colaboradores -->
+            @endcan
 
+            <!-- End visitors Colaboradores -->
+            @can('accessAGSJCDJAC', Auth::user())
             <li class="nav-heading">Permisos</li>
 
             <!-- permissions -->
@@ -325,8 +326,7 @@
                 </a>
             </li>
             <!-- End autorizations -->
-
-
+            @endcan
         </ul>
 
     </aside><!-- End Sidebar-->

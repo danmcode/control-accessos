@@ -9,6 +9,7 @@ use App\Models\AccessControl\Vehicles;
 use App\Models\AccessControl\Visitors;
 use App\Models\AccessControl\Collaborator;
 use App\Models\AccessControl\IncomeExitVisitors;
+use App\Models\AccessControl\Rol;
 
 class HomeController extends Controller
 {

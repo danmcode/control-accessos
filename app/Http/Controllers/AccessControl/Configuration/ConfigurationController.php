@@ -13,6 +13,7 @@ use App\Models\AccessControl\Location;
 use App\Models\AccessControl\VehicleTypes;
 use App\Models\AccessControl\WorkingHours;
 use App\Models\AccessControl\EmailConfig;
+use App\Models\AccessControl\Rol;
 use App\Models\AccessControl\VisitorTypes;
 use Illuminate\Http\Request;
 
@@ -29,7 +30,7 @@ class ConfigurationController extends Controller
         $areas = Area::where('is_active', '=', true)
             ->with('company')
             ->get();
-        
+
         $jobTitles = JobTitle::where('is_active', '=', true)
             ->with('area')
             ->with('company')
@@ -38,13 +39,14 @@ class ConfigurationController extends Controller
         $locations = Location::where('is_active', '=', true)
             ->with('company')
             ->get();
-        
+
         $identificationTypes = IdentificationType::where('is_active', '=', true)->get();
 
         $visitorTypes = VisitorTypes::where('is_active', '=', true)->get();
+        $rols = Rol::where('is_active', '=', true)->get();
         $arls = Arl::where('is_active', '=', true)->get();
-        $equipmentsTypes = EquipmentTypes::where('is_active','=',true)->get();
-        $vehiclesTypes = VehicleTypes::where('is_active','=',true)->get();
+        $equipmentsTypes = EquipmentTypes::where('is_active', '=', true)->get();
+        $vehiclesTypes = VehicleTypes::where('is_active', '=', true)->get();
         $workingHours = WorkingHours::getWorkingHours();
         $emailConfig = EmailConfig::getEmailConfig();
 
@@ -56,8 +58,9 @@ class ConfigurationController extends Controller
             'identificationTypes' => $identificationTypes,
             'visitorTypes' => $visitorTypes,
             'arls' => $arls,
-            'vehiclestypes'=> $vehiclesTypes,
-            'equipmentstypes'=> $equipmentsTypes,
+            'rols' => $rols,
+            'vehiclestypes' => $vehiclesTypes,
+            'equipmentstypes' => $equipmentsTypes,
             'workingHours' => $workingHours,
             'emailConfig' => $emailConfig,
         ]);

@@ -52,13 +52,14 @@ class CollaboratorController extends Controller
             'role_id' => 2,
             'created_by' => auth()->user()->id,
             'password' =>  $data['password'],
+            'rol_id' => $data['rol_id']
         ];
 
         $isValidUser = User::validateUser($user);
 
-        if($isValidUser->fails()){
+        if ($isValidUser->fails()) {
             return redirect()->route('colaboradores.create')
-            ->withErrors($isValidUser);
+                ->withErrors($isValidUser);
         }
 
         $newUser = User::create($user);
@@ -73,33 +74,34 @@ class CollaboratorController extends Controller
 
         $isValidCollaborator = Collaborator::validateCollaborator($collaborator);
 
-        if($isValidCollaborator->fails()){
+        if ($isValidCollaborator->fails()) {
             return redirect()->route('colaboradores.create')
-            ->withErrors($isValidCollaborator);
+                ->withErrors($isValidCollaborator);
         }
 
         $newCollaborator = Collaborator::create($collaborator);
 
-        if($newUser && $newCollaborator){
+        if ($newUser && $newCollaborator) {
 
             $saveImage = $this->saveImage($newUser, $data['photoDataInput']);
 
             return redirect()->route('colaboradores.index')
                 ->with('success', 'Se ha creado el colaborador con exito');
-        }else{
+        } else {
             return redirect()->route('colaboradores.index')
                 ->with('error', 'No se pudo crear el colaborador');
         }
     }
 
-    private function saveImage($user, $image, $update = false){
+    private function saveImage($user, $image, $update = false)
+    {
 
-        if( $update && $image == "/images/default.png"){
+        if ($update && $image == "/images/default.png") {
             unlink($user->photo_path);
             $user->photo_path = '/images/default.png';
         }
 
-        if( $image == null ){
+        if ($image == null) {
             $user->photo_path = '/images/default.png';
             return $user->update();
         }
@@ -155,14 +157,13 @@ class CollaboratorController extends Controller
                 break;
         }
 
-        if($userUpdated){
+        if ($userUpdated) {
             return redirect()->route('colaboradores.index')
-            ->with('success', 'Se actualizó el colaborador correctamente');
-        }else{
+                ->with('success', 'Se actualizó el colaborador correctamente');
+        } else {
             return redirect()->route('colaboradores.index')
-            ->with('error', 'No se actualizó el colaborador correctamente');
+                ->with('error', 'No se actualizó el colaborador correctamente');
         }
-
     }
 
     /**
@@ -172,20 +173,20 @@ class CollaboratorController extends Controller
     {
         $collaboratorToDelete = User::find($collaborator);
 
-        if( $collaboratorToDelete ){
+        if ($collaboratorToDelete) {
             $collaboratorToDelete->is_active = false;
             $collaboratorToDelete->update();
 
             return redirect()->route('colaboradores.index')
-            ->with('success', 'Se eliminó el colaborador correctamente');
-
-        }else{
+                ->with('success', 'Se eliminó el colaborador correctamente');
+        } else {
             return redirect()->route('colaboradores.index')
-            ->with('error', 'No se encontró el usuario');
+                ->with('error', 'No se encontró el usuario');
         }
     }
 
-    public function getCollaboratorByIdentification(Request $request){
+    public function getCollaboratorByIdentification(Request $request)
+    {
         $data = $request->all();
         $identification = $data['collaborator']['identification'];
         $collaborator = User::where('identification', $identification)->get();
@@ -197,6 +198,4 @@ class CollaboratorController extends Controller
 
         return response()->json($response);
     }
-
-
 }

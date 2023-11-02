@@ -22,8 +22,9 @@
     <div class="card">
 
         <div class="card-body pt-3">
-            <form method="POST" 
-            action="{{ (isset($workingHours->id)) ? route('horario.update', $workingHours->id) : route('horario.store') }}" class="row needs-validation" novalidate>
+            <form method="POST"
+                action="{{ (isset($workingHours->id)) ? route('horario.update', $workingHours->id) : route('horario.store') }}"
+                class="row needs-validation" novalidate>
                 @csrf
                 @if(isset($workingHours->id))
                 @method('PATCH')
@@ -46,7 +47,8 @@
                 </div>
 
                 <div class="col-auto d-flex align-items-end">
-                    <button type="submit" class="btn btn-primary">{{ (isset($workingHours->id)) ? __('Actualizar') : __('Guardar') }}</button>
+                    <button type="submit" class="btn btn-primary">{{ (isset($workingHours->id)) ? __('Actualizar') :
+                        __('Guardar') }}</button>
                 </div>
             </form>
         </div>
@@ -59,19 +61,22 @@
 
     <div class="card">
         <div class="card-body pt-3">
-            <form method="POST" 
-                action="{{ (isset($emailConfig->id)) ? route('configuracion-correo.update', $emailConfig->id) : route('configuracion-correo.store') }}" class="row needs-validation" novalidate>
+            <form method="POST"
+                action="{{ (isset($emailConfig->id)) ? route('configuracion-correo.update', $emailConfig->id) : route('configuracion-correo.store') }}"
+                class="row needs-validation" novalidate>
                 @csrf
                 <div class="col-md-6">
                     <label for="inputEmail4" class="form-label fw-bold">Correo electrónico: </label>
-                    <input type="email" name="email" value="{{ $emailConfig->email }}" class="form-control" id="inputEmail4" required>
+                    <input type="email" name="email" value="{{ $emailConfig->email }}" class="form-control"
+                        id="inputEmail4" required>
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ __('El correo es requerido') }}</strong>
                     </span>
                 </div>
                 <div class="col-md-6">
                     <label for="inputPassword4" class="form-label fw-bold">Contraseña: </label>
-                    <input type="password" name="password" value="{{ $emailConfig->password }}" class="form-control" id="inputPassword4" required>
+                    <input type="password" name="password" value="{{ $emailConfig->password }}" class="form-control"
+                        id="inputPassword4" required>
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ __('La contraseña es requerida') }}</strong>
                     </span>
@@ -103,7 +108,8 @@
 
                 <div class="col-md-4">
                     <label for="inputEmail4" class="form-label fw-bold">Puerto: </label>
-                    <input type="number" name="port" value="{{ $emailConfig->port }}" class="form-control" id="inputEmail4" required>
+                    <input type="number" name="port" value="{{ $emailConfig->port }}" class="form-control"
+                        id="inputEmail4" required>
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ __('El puerto es requerido') }}</strong>
                     </span>
@@ -111,21 +117,24 @@
 
                 <div class="col-md-6">
                     <label for="inputEmail4" class="form-label fw-bold">Host: </label>
-                    <input type="text" name="host" value="{{ $emailConfig->host }}" class="form-control" id="inputEmail4" required>
+                    <input type="text" name="host" value="{{ $emailConfig->host }}" class="form-control"
+                        id="inputEmail4" required>
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ __('El host es requerido') }}</strong>
                     </span>
                 </div>
                 <div class="col-md-6">
                     <label for="inputPassword4" class="form-label fw-bold">Nombre de usuario: </label>
-                    <input type="text" name="username" value="{{ $emailConfig->username }}" class="form-control" id="inputPassword4" required>
+                    <input type="text" name="username" value="{{ $emailConfig->username }}" class="form-control"
+                        id="inputPassword4" required>
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ __('El usuario es requerido') }}</strong>
                     </span>
                 </div>
 
                 <div class="col-12 mt-2">
-                    <button type="submit" class="btn btn-primary">{{ (isset($emailConfig->id)) ? __('Actualizar') : __('Guardar') }}</button>
+                    <button type="submit" class="btn btn-primary">{{ (isset($emailConfig->id)) ? __('Actualizar') :
+                        __('Guardar') }}</button>
                 </div>
             </form>
         </div>
@@ -264,6 +273,17 @@
             <!-- End Bordered Tabs -->
         </div>
     </div>
+
+    <div class="configuration-title">
+        <span> Configuración de Roles </span>
+        <hr>
+    </div>
+
+    <div class="card">
+        <div class="card-body pt-3">
+            @include('AccessControl.Configuration.components.create-show-rols')
+        </div>
+    </div>
 </section>
 <!-- Modals -->
 <!-- Modal update company -->
@@ -287,7 +307,7 @@
 
 @section('scripts')
 <script>
-/**
+    /**
  * Manage the tabs
  */
 document.addEventListener('DOMContentLoaded', function() {
@@ -309,7 +329,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 @if (session('success'))
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
     Swal.fire({
         icon: 'success',
         title: '¡Éxito!',
@@ -321,7 +341,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 @elseif( session('error') )
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
     Swal.fire({
         icon: 'error',
         title: '¡Error!',
@@ -335,7 +355,7 @@ document.addEventListener('DOMContentLoaded', function() {
 @endif
 
 @if( $errors->any() )
-    <script>
+<script>
     document.addEventListener('DOMContentLoaded', function() {
         Swal.fire({
             icon: 'error',
@@ -349,7 +369,7 @@ document.addEventListener('DOMContentLoaded', function() {
             confirmButtonText: 'Aceptar'     
         });
     });
-    </script>
+</script>
 @endif
 
 <script src="js/modals/updateCompanyModal.js"></script>
@@ -361,4 +381,5 @@ document.addEventListener('DOMContentLoaded', function() {
 <script src="js/modals/updateTypeVisitorModal.js"></script>
 <script src="js/modals/updateVehiclesTypesModal.js"></script>
 <script src="js/modals/updateEquipmentsTypesModal.js"></script>
+<script src="js/modals/updateRolModal.js"></script>
 @endsection

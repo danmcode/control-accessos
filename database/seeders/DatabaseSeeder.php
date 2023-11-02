@@ -15,6 +15,7 @@ use App\Models\AccessControl\VisitorTypes;
 use App\Models\AccessControl\EquipmentTypes;
 use App\Models\AccessControl\VehicleTypes;
 use App\Models\AccessControl\Arl;
+use App\Models\AccessControl\Rol;
 
 class DatabaseSeeder extends Seeder
 {
@@ -35,7 +36,8 @@ class DatabaseSeeder extends Seeder
         $this->generateArls();
     }
 
-    private function generateIdentificationTypes():void {
+    private function generateIdentificationTypes(): void
+    {
         $identificationsTypes = [
             [
                 'initials' => 'CC',
@@ -55,7 +57,7 @@ class DatabaseSeeder extends Seeder
             ]
         ];
 
-        foreach($identificationsTypes as $identificationType) {
+        foreach ($identificationsTypes as $identificationType) {
             IdentificationType::create([
                 'initials' => $identificationType['initials'],
                 'name' => $identificationType['name']
@@ -63,7 +65,8 @@ class DatabaseSeeder extends Seeder
         }
     }
 
-    private function generateAdminUser() : void {
+    private function generateAdminUser(): void
+    {
         User::create([
             'username' => 'admin',
             'identification' => '12313113',
@@ -78,7 +81,8 @@ class DatabaseSeeder extends Seeder
         ]);
     }
 
-    private function generateCompanies() : void {
+    private function generateCompanies(): void
+    {
 
         $companies = [
             [
@@ -104,7 +108,8 @@ class DatabaseSeeder extends Seeder
         }
     }
 
-    private function generateAreas() : void {
+    private function generateAreas(): void
+    {
         $areas = [
             ['name' => "Gestión Humana"],
             ['name' => 'Tecnología'],
@@ -120,7 +125,8 @@ class DatabaseSeeder extends Seeder
         }
     }
 
-    private function generateJobTitles() : void {
+    private function generateJobTitles(): void
+    {
 
         $jobTitles = [
             [
@@ -150,8 +156,9 @@ class DatabaseSeeder extends Seeder
             ]);
         }
     }
-    
-    private function generateLocations() :void {
+
+    private function generateLocations(): void
+    {
         $locations = [
             ['name' => 'Edificio Viejo'],
             ['name' => 'Edificio Nuevo'],
@@ -169,7 +176,8 @@ class DatabaseSeeder extends Seeder
         }
     }
 
-    private function generateVisitorsTypes() :void {
+    private function generateVisitorsTypes(): void
+    {
         $visitorsTypes = [
             ['name' => 'Visitante'],
             ['name' => 'Entrevista'],
@@ -185,7 +193,8 @@ class DatabaseSeeder extends Seeder
         }
     }
 
-    private function generateEquipmentTypes() :void {
+    private function generateEquipmentTypes(): void
+    {
         $equipmentsTypes = [
             ['name' => 'Computador'],
             ['name' => 'Tablet'],
@@ -200,7 +209,8 @@ class DatabaseSeeder extends Seeder
         }
     }
 
-    private function generateVehicleTypes() :void {
+    private function generateVehicleTypes(): void
+    {
         $vehiclesTypes = [
             ['name' => 'Automóvil'],
             ['name' => 'Camioneta'],
@@ -216,7 +226,8 @@ class DatabaseSeeder extends Seeder
         }
     }
 
-    private function generateArls() :void {
+    private function generateArls(): void
+    {
         $arls = [
             ['name' => 'AXA COLPATRIA S.A.'],
             ['name' => 'COLMENA SEGUROS	'],
@@ -228,6 +239,39 @@ class DatabaseSeeder extends Seeder
             Arl::create([
                 'name' => $arl['name'],
                 'created_by' => 1,
+            ]);
+        }
+    }
+
+    private function generateRols(): void
+    {
+        $rols = [
+            [
+                'name' => 'Administrador',
+                'created_by'  => 1
+            ],
+            [
+                'name' => 'Guarda de seguridad',
+                'created_by'  => 1
+            ],
+            [
+                'name' => 'Jefe de seguridad / Cordinador de seguridad',
+                'created_by'  => 1
+            ],
+            [
+                'name' => 'Directores / Jefes de area',
+                'created_by'  => 1
+            ],
+            [
+                'name' => 'Colaborador',
+                'created_by'  => 1
+            ],
+        ];
+
+        foreach ($rols as $rol) {
+            Rol::create([
+                'name' => $rol['name'],
+                'created_by' => $rol['created_by']
             ]);
         }
     }

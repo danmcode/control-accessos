@@ -103,7 +103,7 @@
                                     <option value="" selected> {{ __('Seleccione...') }} </option>
                                     @if( isset($identificationTypes) && sizeof($identificationTypes) > 0 )
                                     @foreach( $identificationTypes as $key => $identificationType )
-                                    <option value="{{ $identificationType->id }}"> {{ $identificationType->name  }}
+                                    <option value="{{ $identificationType->id }}"> {{ $identificationType->name }}
                                     </option>
                                     @endforeach
                                     @endif
@@ -167,13 +167,24 @@
 
                             <hr>
                             <div class="form-heading mt-2 mb-2">Información de colaborador</div>
-
-                            <div class="col-12 mb-2">
-                                <div class="form-check form-switch">
-                                    <input name="area_manager" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">
-                                        Director o Jefe de área </label>
+                            <div class="row g-3 align-items-center mt-0 mb-3">
+                                <div class="col-auto mb-2">
+                                    <label for="Rol fw-bold" class="form-label">
+                                        {{ __('Rol:') }} <small> * </small>
+                                    </label>
                                 </div>
+                                <div class="col-auto mb-2"> <select name="rol_id" id="rol_id" class="form-select"
+                                        required>
+                                        <option value="" selected> {{ __('Seleccione...') }} </option>
+                                        @if( isset($rols) && sizeof($rols) > 0 )
+                                        @foreach( $rols as $key => $rol )
+                                        <option value="{{ $rol->id }}"> {{ $rol->name }} </option>
+                                        @endforeach
+                                        @endif
+                                    </select></div>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ __('El rol es requerido') }}</strong>
+                                </span>
                             </div>
 
 
@@ -186,7 +197,7 @@
                                     <option value="" selected> {{ __('Seleccione...') }} </option>
                                     @if( isset($companies) && sizeof($companies) > 0 )
                                     @foreach( $companies as $key => $company )
-                                    <option value="{{ $company->id }}"> {{ $company->name  }} </option>
+                                    <option value="{{ $company->id }}"> {{ $company->name }} </option>
                                     @endforeach
                                     @endif
                                 </select>
@@ -204,7 +215,7 @@
                                     <option value="" selected> {{ __('Seleccione...') }} </option>
                                     @if( isset($areas) && sizeof($areas) > 0 )
                                     @foreach( $areas as $key => $area )
-                                    <option value="{{ $area->id }}"> {{ $area->name  }} </option>
+                                    <option value="{{ $area->id }}"> {{ $area->name }} </option>
                                     @endforeach
                                     @endif
                                 </select>
@@ -222,7 +233,7 @@
                                     <option value="" selected> {{ __('Seleccione...') }} </option>
                                     @if( isset($jobTitles) && sizeof($jobTitles) > 0 )
                                     @foreach( $jobTitles as $key => $jobTitle )
-                                    <option value="{{ $jobTitle->id }}"> {{ $jobTitle->name  }} </option>
+                                    <option value="{{ $jobTitle->id }}"> {{ $jobTitle->name }} </option>
                                     @endforeach
                                     @endif
                                 </select>
@@ -240,7 +251,7 @@
                                     <option value="" selected> {{ __('Seleccione...') }} </option>
                                     @if( isset($locations) && sizeof($locations) > 0 )
                                     @foreach( $locations as $key => $location )
-                                    <option value="{{ $location->id }}"> {{ $location->name  }} </option>
+                                    <option value="{{ $location->id }}"> {{ $location->name }} </option>
                                     @endforeach
                                     @endif
                                 </select>
@@ -269,7 +280,7 @@
 
 @section('scripts')
 @if( $errors->any() )
-    <script>
+<script>
     document.addEventListener('DOMContentLoaded', function() {
         Swal.fire({
             icon: 'error',
@@ -283,7 +294,7 @@
             confirmButtonText: 'Aceptar'     
         });
     });
-    </script>
+</script>
 @endif
 <script src="{{ asset('js/components/camera.js') }}"></script>
 <script src="{{ asset('js/components/inputsControl.js') }}"></script>
