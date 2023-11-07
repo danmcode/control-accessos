@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\AccessControl\RolController;
-use App\Http\Controllers\AccessControl\validateVisitorController;
+use App\Http\Controllers\AccessControl\PermissionController;
 use App\Http\Controllers\AccessControl\VisitorController;
+use App\Http\Controllers\AccessControl\AuthorizationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +19,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     if (Auth::guest() != 1) {
-        return view('home');
+        $userRole = Auth::user()->rol_id;
+        if ($userRole == 1 || $userRole == 2 || $userRole == 3) {
+            return view('home');
+        } else {
+            return view('AccessControl.Permissions.index');
+        }
     }
     return view('auth.login');
 });
@@ -27,6 +32,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/permissions', [PermissionController::class, 'index'])->name('permission')->middleware('auth');
+Route::get('/authorizations', [AuthorizationController::class, 'index'])->name('authorization')->middleware('auth');
 
 Route::resource('configuration', 'App\Http\Controllers\AccessControl\Configuration\ConfigurationController')
     ->middleware('auth');

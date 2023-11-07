@@ -299,6 +299,13 @@
                                                 </span>
                                             </div>
                                             @endif
+                                            <div>
+                                                <i class="bi bi-person-fill-lock"></i>
+                                                <span>
+                                                    {{ $incomeExitVisitor->collaborator->user->name }}
+                                                    {{ $incomeExitVisitor->collaborator->user->last_name }}
+                                                </span>
+                                            </div>
                                         </div>
 
                                         <div class="col-5">
@@ -314,13 +321,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <div>
-                                            <i class="bi bi-person-fill-lock"></i>
-                                            <span>
-                                                {{ $incomeExitVisitor->collaborator->user->name }}
-                                                {{ $incomeExitVisitor->collaborator->user->last_name }}
-                                            </span>
-                                        </div>
+
                                     </div>
                                 </div>
                                 @if(!isset($incomeExitVisitor->date_time_out))

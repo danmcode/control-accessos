@@ -96,11 +96,6 @@ class User extends Authenticatable
         return $this->belongsTo(Rol::class);
     }
 
-    public function hasRole($roleName)
-    {
-        return $this->roles->contains('name', $roleName);
-    }
-
 
     /**
      * Generate a new user password

@@ -11,6 +11,7 @@ class IncomeExitCollaboratorsController extends Controller
 {
     public function index()
     {
+        $this->authorize('accessAGSJC', auth()->user());
         return view('AccessControl.IncomeOutput.index', [
             'incomeOutputs' => Collaborator::getIncomeExitCollaborators(),
         ]);
@@ -95,19 +96,18 @@ class IncomeExitCollaboratorsController extends Controller
             }
 
             $observation = isset($request->all()['observation'])
-            ? $request->all()['observation']
-            : '';
+                ? $request->all()['observation']
+                : '';
 
             $incomeOutPut[0]->date_time_out = date_create()->format('Y-m-d H:i:s');
             $incomeOutPut[0]->observation = $incomeOutPut[0]->observation .
-            "\nSalida: \n" . $observation;
+                "\nSalida: \n" . $observation;
             $incomeOutPut[0]->updated_by = auth()->user()->id;
             $incomeOutPut[0]->update();
 
-            if($view) return redirect()->route('ingresos-salidas.index')->with('success', 'Se ha registrado la salida');
+            if ($view) return redirect()->route('ingresos-salidas.index')->with('success', 'Se ha registrado la salida');
 
             return redirect()->route('home')->with('success', 'Se ha registrado la salida');
-
         }
     }
 }

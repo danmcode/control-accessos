@@ -21,6 +21,7 @@ class CollaboratorController extends Controller
      */
     public function index()
     {
+        $this->authorize('accessAGSJC', auth()->user());
         return view('AccessControl.Collaborators.index', User::getAllUsersRelations());
     }
 
@@ -29,6 +30,7 @@ class CollaboratorController extends Controller
      */
     public function create()
     {
+        $this->authorize('accessAGSJC', auth()->user());
         return view('AccessControl.Collaborators.create', getDropdownsList());
     }
 
@@ -49,7 +51,6 @@ class CollaboratorController extends Controller
             'name' => $data['name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
-            'role_id' => 2,
             'created_by' => auth()->user()->id,
             'password' =>  $data['password'],
             'rol_id' => $data['rol_id']

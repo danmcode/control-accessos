@@ -230,17 +230,28 @@
                     </div>
 
                     <!-- photo info -->
-                    <div class="col-4 mb-3">
+                    <div class="col-4 ">
                         <input type="hidden" name="photoDataInput" id="photoDataInput" value="/images/default.png"
                             class="form-control">
                     </div>
 
                     <!-- id-collaborator -->
-                    <div class="col-4 mb-3">
+                    <div class="col-4 ">
                         @foreach ($collaborator as $collaborato)
                         <input type="hidden" value={{$collaborato->id}} name="id_collaborator" id="id_collaborator"
                         class="form-control">
                         @endforeach
+                    </div>
+
+                    <!-- last name -->
+                    <div class="col-12 mb-3">
+                        <label for="serial_visitor fw-bold" class="form-label">
+                            {{ __('Serial:') }} <small> * </small>
+                        </label>
+                        <input type="text" name="serial_visitor" id="serial_visitor" class="form-control" required>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ __('El Numero Serial es requerido') }}</strong>
+                        </span>
                     </div>
 
                     <hr>

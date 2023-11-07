@@ -29,6 +29,7 @@ class VisitorController extends Controller
      */
     public function index()
     {
+        $this->authorize('accessAGSJC', auth()->user());
         $incomeExitVisitors = IncomeExitVisitors::with('Visitor')
             ->with('VisitorType')
             ->with('Vehicle')
@@ -67,6 +68,7 @@ class VisitorController extends Controller
      */
     public function create($id)
     {
+        $this->authorize('accessAGSJC', auth()->user());
         //Get all identifications types
         $identificationTypes = IdentificationType::where('is_active', '=', true)
             ->get();
@@ -172,8 +174,7 @@ class VisitorController extends Controller
                 $visitor->identification = $data['identification'];
                 $visitor->name = $data['name_Visitor'];
                 $visitor->last_name = $data['lastname_Visitor'];
-
-
+                $visitor->serial_visitor = $data['serial_visitor'];
 
                 //Save in DB
                 $visitor->save();
@@ -274,7 +275,7 @@ class VisitorController extends Controller
      */
     public function createVisitorToColabollator()
     {
-
+        $this->authorize('accessAGSJC', auth()->user());
         return view('AccessControl.Visitors.create');
     }
 }

@@ -30,6 +30,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $this->authorize('accessAGSJC', auth()->user());
         $users = User::where('is_active', '=', true)
             ->where('id', '!=', 1)
             ->with('identificationTypes')

@@ -30,10 +30,18 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a href="{{ route('home') }}" class="logo d-flex align-items-center">
+            @can('accessJCDJAC',Auth::user())
+            <a href="{{route('permission') }}" class="logo d-flex align-items-center">
                 <img src="{{ asset('images/pisa.png') }}" alt="">
                 <span class=""> Protécnica Ingeniería </span>
             </a>
+            @endcan
+            @can('accessAGSJC',Auth::user())
+            <a href="{{route('home') }}" class="logo d-flex align-items-center">
+                <img src="{{ asset('images/pisa.png') }}" alt="">
+                <span class=""> Protécnica Ingeniería </span>
+            </a>
+            @endcan
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div>
         <!-- End Logo -->
@@ -47,7 +55,7 @@
                     </a>
                 </li><!-- End Search Icon-->
 
-                <li class="nav-item dropdown">
+                {{-- <li class="nav-item dropdown">
 
                     <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                         <i class="bi bi-bell"></i>
@@ -120,9 +128,10 @@
 
                     </ul><!-- End Notification Dropdown Items -->
 
-                </li><!-- End Notification Nav -->
+                </li> --}}
+                <!-- End Notification Nav -->
 
-                <li class="nav-item dropdown">
+                {{-- <li class="nav-item dropdown">
 
                     <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                         <i class="bi bi-chat-left-text"></i>
@@ -186,12 +195,12 @@
 
                     </ul><!-- End Messages Dropdown Items -->
 
-                </li><!-- End Messages Nav -->
+                </li><!-- End Messages Nav --> --}}
 
                 <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="{{ asset('images/daniel_muelas.jpg') }}" alt="Profile" class="rounded-circle">
+                        <img src="{{ asset(Auth::user()->photo_path) }}" alt="Profile" class="rounded-circle">
                         <span class="d-none d-md-block dropdown-toggle ps-2">
                             {{ Auth::user()->name }}
                         </span>
@@ -200,22 +209,22 @@
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
                             <h6>{{ Auth::user()->name }} {{ Auth::user()->last_name }}</h6>
-                            <span>Administrador del sistema</span>
+                            <span>{{Auth::user()->rol->name}}</span>
                         </li>
-                        <li>
+                        {{-- <li>
                             <hr class="dropdown-divider">
-                        </li>
+                        </li> --}}
 
-                        <li>
+                        {{-- <li>
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <i class="bi bi-person"></i>
                                 <span>Mi perfil</span>
                             </a>
-                        </li>
+                        </li> --}}
+                        @can('accessConfiguration', Auth::user())
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        @can('accessConfiguration', Auth::user())
                         <li>
                             <a class="dropdown-item d-flex align-items-center"
                                 href="{{ route('configuration.index') }}">
@@ -308,7 +317,7 @@
 
             <!-- permissions -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" href="{{route('permission')}}">
                     <i class="bi bi-person-check"></i>
                     <span>Permisos</span>
                 </a>
@@ -320,7 +329,7 @@
 
             <!-- autorizations -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" href="{{route('authorization')}}">
                     <i class="bi bi-building-add"></i>
                     <span>Autorizaciones</span>
                 </a>

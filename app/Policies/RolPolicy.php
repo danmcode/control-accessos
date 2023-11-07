@@ -20,4 +20,9 @@ class RolPolicy
     {
         return $user->rol_id === 1 || $user->rol_id === 2 || $user->rol_id === 3 || $user->rol_id === 4 || $user->rol_id === 5;
     }
+
+    public function accessJCDJAC(User $user)
+    {
+        return $user->rol_id === 4 || $user->rol_id === 5;
+    }
 }

@@ -24,6 +24,7 @@ class ConfigurationController extends Controller
      */
     public function index()
     {
+        $this->authorize('accessAGSJC', auth()->user());
         $companies = Company::where('is_active', '=', true)
             ->get();
 
