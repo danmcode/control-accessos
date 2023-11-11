@@ -11,10 +11,10 @@
     </div>
 
     <div class="col-auto">
-        <label for="name" class="form-label fw-bold"> Empresa:
+        <label for="company_id_locations" class="form-label fw-bold"> Empresa:
             <small class="required">*</small>
         </label>
-        <select name="company_id" id="company_id" class="form-select" required>
+        <select name="company_id" id="company_id_locations" class="form-select" required>
             <option value="" selected>Seleccione...</option>
             @if( isset($companies) && sizeof($companies) > 0 )
             @foreach( $companies as $key => $company )

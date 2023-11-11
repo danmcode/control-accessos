@@ -3,8 +3,8 @@
 <form class="row needs-validation" action="{{ route('areas.store') }}" method="POST" novalidate>
     @csrf
     <div class="col-auto">
-        <label for="name" class="form-label fw-bold"> Nombre del área: <small class="required">*</small></label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Área" required>
+        <label for="area_name" class="form-label fw-bold"> Nombre del área: <small class="required">*</small></label>
+        <input type="text" class="form-control" id="area_name" name="name" placeholder="Área" required>
         <span class="invalid-feedback" role="alert">
             <strong>{{ __('El nombre del área es requerido') }}</strong>
         </span>
@@ -13,7 +13,7 @@
     <div class="col-auto">
         <label for="name" class="form-label fw-bold"> Empresa:
             <small class="required">*</small></label>
-        <select name="company_id" id="company_id" class="form-select" required>
+        <select name="company_id" id="company_id_areas" class="form-select" required>
             <option value="" selected>Seleccione...</option>
             @if( isset($companies) && sizeof($companies) > 0 )
             @foreach( $companies as $key => $company )
@@ -55,11 +55,11 @@
                     <div class="row">
                         <div class="col-4">
                             <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#modalUpdateArea" 
+                                data-bs-target="#modalUpdateArea"
                                 data-bs-area-id="{{ $area->id }}"
-                                data-bs-area-name="{{ $area->name }}" 
+                                data-bs-area-name="{{ $area->name }}"
                                 data-bs-company-id="{{ $area->company_id }}"
-                                data-bs-company-name="{{ $area->company->name}}"> 
+                                data-bs-company-name="{{ $area->company->name}}">
                                 <i class="bi bi-pencil-fill"></i>
                                 {{ __('Editar') }}
                             </a>

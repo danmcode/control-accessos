@@ -23,8 +23,7 @@
 
         <div class="card-body pt-3">
             <form method="POST"
-                action="{{ (isset($workingHours->id)) ? route('horario.update', $workingHours->id) : route('horario.store') }}"
-                class="row needs-validation" novalidate>
+            action="{{ (isset($workingHours->id)) ? route('horario.update', $workingHours->id) : route('horario.store') }}" class="row needs-validation" novalidate>
                 @csrf
                 @if(isset($workingHours->id))
                 @method('PATCH')
@@ -33,16 +32,16 @@
                     <label class="form-label fw-bold" for="autoSizingInputGroup">Hora de ingreso: </label>
                     <div class="input-group">
                         <div class="input-group-text"><i class="bi bi-clock"></i></div>
-                        <input type="time" name="time_in" value="{{ $workingHours->time_in }}" class="form-control"
-                            id="autoSizingInputGroup" required>
+                        <input type="time" id="time_in" name="time_in" value="{{ $workingHours->time_in }}" class="form-control"
+                             required>
                     </div>
                 </div>
                 <div class="col-auto">
                     <label class="form-label fw-bold" for="autoSizingInputGroup">Hora de salida: </label>
                     <div class="input-group">
                         <div class="input-group-text"><i class="bi bi-clock"></i></div>
-                        <input type="time" name="time_out" value="{{ $workingHours->time_out }}" class="form-control"
-                            id="autoSizingInputGroup" required>
+                        <input type="time" name="time_out"  value="{{ $workingHours->time_out }}" class="form-control"
+                            id="time_out" required>
                     </div>
                 </div>
 
@@ -62,29 +61,26 @@
     <div class="card">
         <div class="card-body pt-3">
             <form method="POST"
-                action="{{ (isset($emailConfig->id)) ? route('configuracion-correo.update', $emailConfig->id) : route('configuracion-correo.store') }}"
-                class="row needs-validation" novalidate>
+                action="{{ (isset($emailConfig->id)) ? route('configuracion-correo.update', $emailConfig->id) : route('configuracion-correo.store') }}" class="row needs-validation" novalidate>
                 @csrf
                 <div class="col-md-6">
-                    <label for="inputEmail4" class="form-label fw-bold">Correo electrónico: </label>
-                    <input type="email" name="email" value="{{ $emailConfig->email }}" class="form-control"
-                        id="inputEmail4" required>
+                    <label for="email" class="form-label fw-bold">Correo electrónico: </label>
+                    <input type="email" name="email" value="{{ $emailConfig->email }}" class="form-control" id="email" required>
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ __('El correo es requerido') }}</strong>
                     </span>
                 </div>
                 <div class="col-md-6">
-                    <label for="inputPassword4" class="form-label fw-bold">Contraseña: </label>
-                    <input type="password" name="password" value="{{ $emailConfig->password }}" class="form-control"
-                        id="inputPassword4" required>
+                    <label for="password" class="form-label fw-bold">Contraseña: </label>
+                    <input type="password" name="password" value="{{ $emailConfig->password }}" class="form-control" id="password" required>
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ __('La contraseña es requerida') }}</strong>
                     </span>
                 </div>
 
                 <div class="col-md-4">
-                    <label for="inputState" class="form-label fw-bold">Protocolo: </label>
-                    <select id="inputState" name="protocol" class="form-select" required>
+                    <label for="protocol" class="form-label fw-bold">Protocolo: </label>
+                    <select id="protocol" name="protocol" class="form-select" required>
                         <option value="">Seleccione...</option>
                         <option>SMTP</option>
                         <option>IMAP</option>
@@ -96,8 +92,8 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label for="inputState" class="form-label fw-bold">Cifrado: </label>
-                    <select id="inputState" name="encryption" class="form-select" required>
+                    <label for="encryption" class="form-label fw-bold">Cifrado: </label>
+                    <select id="encryption" name="encryption" class="form-select" required>
                         <option value="" selected>Seleccione...</option>
                         <option>TLS</option>
                     </select>
@@ -301,11 +297,13 @@
     @include('AccessControl.Configuration.components.modals.edit-job-title-modal')
 </div>
 
-
-
 @endsection
 
 @section('scripts')
+
+    <script>
+
+    </script>
 <script>
     /**
  * Manage the tabs
@@ -360,13 +358,13 @@ document.addEventListener('DOMContentLoaded', function() {
         Swal.fire({
             icon: 'error',
             title: 'Error de validación de campos',
-            text: `             
+            text: `
             @foreach ($errors->all() as $error)
                 - {{ $error}}
             @endforeach `,
             showConfirmButton: true,
             confirmButtonColor: '#0d489a',
-            confirmButtonText: 'Aceptar'     
+            confirmButtonText: 'Aceptar'
         });
     });
 </script>
@@ -381,5 +379,4 @@ document.addEventListener('DOMContentLoaded', function() {
 <script src="js/modals/updateTypeVisitorModal.js"></script>
 <script src="js/modals/updateVehiclesTypesModal.js"></script>
 <script src="js/modals/updateEquipmentsTypesModal.js"></script>
-<script src="js/modals/updateRolModal.js"></script>
 @endsection

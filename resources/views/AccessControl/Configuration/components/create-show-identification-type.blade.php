@@ -1,8 +1,8 @@
 <!-- Company Form -->
-<h5 class="card-title mb-3"> {{__('Crear tipos de identificación')}} </h5> 
+<h5 class="card-title mb-3"> {{__('Crear tipos de identificación')}} </h5>
 <form class="row needs-validation" action="{{ route('tipo-indentificaciones.store') }}" method="POST" novalidate>
     @csrf
-    
+
     <div class="col-auto">
         <label for="initials" class="form-label fw-bold"> Sigla: <small class="required">*</small></label>
         <input type="text" class="form-control" id="initials" name="initials" placeholder="Sigla" required>
@@ -12,8 +12,8 @@
     </div>
 
     <div class="col-auto">
-        <label for="name" class="form-label fw-bold"> Tipo de identificación: <small class="required">*</small></label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Tipo de identificación" required>
+        <label for="type_identification_name" class="form-label fw-bold"> Tipo de identificación: <small class="required">*</small></label>
+        <input type="text" class="form-control" id="type_identification_name" name="name" placeholder="Tipo de identificación" required>
         <span class="invalid-feedback" role="alert">
             <strong>{{ __('El Tipo de identificación es requerido') }}</strong>
         </span>
@@ -49,7 +49,7 @@
                     <div class="row">
                         <div class="col-4">
                             <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#modalUpdateIdentificationType" 
+                                data-bs-target="#modalUpdateIdentificationType"
                                 data-bs-identification-type-id="{{ $identificationType->id }}"
                                 data-bs-identification-type-initials="{{ $identificationType->initials }}"
                                 data-bs-identification-type-name="{{ $identificationType->name }}"

@@ -3,8 +3,8 @@
 <form class="row needs-validation" action="{{ route('arls.store') }}" method="POST" novalidate>
     @csrf
     <div class="col-auto">
-        <label for="name" class="form-label fw-bold"> Nombre de la ARL: <small class="required">*</small></label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="ARL" required>
+        <label for="arl_name" class="form-label fw-bold"> Nombre de la ARL: <small class="required">*</small></label>
+        <input type="text" class="form-control" id="arl_name" name="name" placeholder="ARL" required>
         <span class="invalid-feedback" role="alert">
             <strong>{{ __('El nombre de la ARL es requerido') }}</strong>
         </span>
@@ -37,7 +37,7 @@
                     <div class="row">
                         <div class="col-4">
                             <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#modalUpdateArl" 
+                                data-bs-target="#modalUpdateArl"
                                 data-bs-arl-id="{{ $arl->id }}"
                                 data-bs-arl-name="{{ $arl->name }}">
                                 <i class="bi bi-pencil-fill"></i>

@@ -1,11 +1,11 @@
 <!-- Company Form -->
-<h5 class="card-title mb-3"> {{__('Crear tipo de equipo')}} </h5> 
+<h5 class="card-title mb-3"> {{__('Crear tipo de equipo')}} </h5>
 <form class="row needs-validation" action="{{ route('tipo-equipos.store') }}" method="POST" novalidate>
     @csrf
-    
+
     <div class="col-auto">
-        <label for="name" class="form-label fw-bold"> Tipo de equipo: <small class="required">*</small></label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Tipo de equipo" required>
+        <label for="equipments_name" class="form-label fw-bold"> Tipo de equipo: <small class="required">*</small></label>
+        <input type="text" class="form-control" id="equipments_name" name="name" placeholder="Tipo de equipo" required>
         <span class="invalid-feedback" role="alert">
             <strong>{{ __('El Tipo de equipo es requerido') }}</strong>
         </span>
@@ -37,7 +37,7 @@
                     <div class="row">
                         <div class="col-4">
                             <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#modalUpdatetypeEquipment" 
+                                data-bs-target="#modalUpdatetypeEquipment"
                                 data-bs-id="{{ $EquipmentTypes->id }}"
                                 data-bs-name="{{ $EquipmentTypes->name }}"
                                 >
