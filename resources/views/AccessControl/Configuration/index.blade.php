@@ -263,8 +263,6 @@
                     <!-- Contenido de la Tab 3 -->
                     @include('AccessControl.Configuration.components.create-show-arl')
                 </div>
-
-
             </div>
             <!-- End Bordered Tabs -->
         </div>
