@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder
     {
 
         $this->generateIdentificationTypes();
-        $this->generateAdminUser();
         $this->generateRols();
+        $this->generateAdminUser();
         $this->generateCompanies();
         $this->generateAreas();
         $this->generateJobTitles();
@@ -76,7 +76,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Administrador',
             'last_name' => '',
             'email' => 'administrador@protecnicaing.com',
-            'role_id' => 1,
+            'rol_id' => 1,
             'created_by' => 1,
             'updated_by' => 1,
             'password' => Hash::make('password'),
@@ -249,31 +249,25 @@ class DatabaseSeeder extends Seeder
     {
         $rols = [
             [
-                'name' => 'Administrador',
-                'created_by'  => 1
+                'name' => 'Administrador'
             ],
             [
-                'name' => 'Guarda de seguridad',
-                'created_by'  => 1
+                'name' => 'Guarda de seguridad'
             ],
             [
-                'name' => 'Jefe de seguridad / Cordinador de seguridad',
-                'created_by'  => 1
+                'name' => 'Jefe de seguridad / Cordinador de seguridad'
             ],
             [
-                'name' => 'Directores / Jefes de area',
-                'created_by'  => 1
+                'name' => 'Directores / Jefes de area'
             ],
             [
-                'name' => 'Colaborador',
-                'created_by'  => 1
+                'name' => 'Colaborador'
             ],
         ];
 
         foreach ($rols as $rol) {
             Rol::create([
-                'name' => $rol['name'],
-                'created_by' => $rol['created_by']
+                'name' => $rol['name']
             ]);
         }
     }
