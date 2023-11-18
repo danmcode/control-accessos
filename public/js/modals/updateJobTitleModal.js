@@ -1,12 +1,6 @@
-/**
- * Code for modals
- * dmr
- */
 let modalUpdateJobTitle = document.getElementById('modalUpdateJobTitle')
 modalUpdateJobTitle.addEventListener('show.bs.modal', function(event) {
-    // Button that triggered the modal
     let button = event.relatedTarget
-    // Extract info from data-bs-* attributes
     let jobTitleId = button.getAttribute('data-bs-job-title-id');
     let jobTitleName = button.getAttribute('data-bs-job-title-name');
     let areaId = button.getAttribute('data-bs-area-id');
@@ -16,15 +10,16 @@ modalUpdateJobTitle.addEventListener('show.bs.modal', function(event) {
 
     let modalTitle = modalUpdateJobTitle.querySelector('.modal-title');
 
-    let inputJobTitleName = modalUpdateJobTitle.querySelector('#name');
-    let selectArea = modalUpdateJobTitle.querySelector('#area_id');
-    let selectCompany = modalUpdateJobTitle.querySelector('#company_id');
+    let inputJobTitleName = modalUpdateJobTitle.querySelector('#job_title_name');
+    let selectArea = modalUpdateJobTitle.querySelector('#area_id_modal');
+    let selectCompany = modalUpdateJobTitle.querySelector('#company_id_job_title_modal');
 
-    // Area
+    InterfaceHelper.deleteSelectOptionById(selectArea, areaId);
+    InterfaceHelper.deleteSelectOptionById(selectCompany, companyId);
+
     selectArea[0].value = areaId;
     selectArea[0].innerText = areaName;
 
-    // Company
     selectCompany[0].value = companyId;
     selectCompany[0].innerText = companyName;
 
@@ -34,6 +29,4 @@ modalUpdateJobTitle.addEventListener('show.bs.modal', function(event) {
 
     let getFormUpdate = modalUpdateJobTitle.querySelector('.update-job-title-form');
     getFormUpdate.action = `cargos/${jobTitleId}`;
-
-
 });

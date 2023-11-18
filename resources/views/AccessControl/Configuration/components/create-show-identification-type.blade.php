@@ -13,7 +13,7 @@
 
     <div class="col-auto">
         <label for="name" class="form-label fw-bold"> Tipo de identificación: <small class="required">*</small></label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Tipo de identificación" required>
+        <input type="text" class="form-control" id="identification" name="name" placeholder="Tipo de identificación" required>
         <span class="invalid-feedback" role="alert">
             <strong>{{ __('El Tipo de identificación es requerido') }}</strong>
         </span>

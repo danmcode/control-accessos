@@ -1,12 +1,6 @@
-/**
- * Code for modals
- * dmr
- */
 let modalUpdateLocation = document.getElementById('modalUpdateLocation')
 modalUpdateLocation.addEventListener('show.bs.modal', function(event) {
-    // Button that triggered the modal
     let button = event.relatedTarget
-    // Extract info from data-bs-* attributes
 
     let locationId = button.getAttribute('data-bs-location-id');
     let locationName = button.getAttribute('data-bs-location-name');
@@ -15,10 +9,11 @@ modalUpdateLocation.addEventListener('show.bs.modal', function(event) {
 
     let modalTitle = modalUpdateLocation.querySelector('.modal-title');
 
-    let inputLocationName = modalUpdateLocation.querySelector('#name');
-    let selectCompany = modalUpdateLocation.querySelector('#company_id');
+    let inputLocationName = modalUpdateLocation.querySelector('#location_name');
+    let selectCompany = modalUpdateLocation.querySelector('#company_id_locations');
+    
+    InterfaceHelper.deleteSelectOptionById(selectCompany, companyId);
 
-    // Company
     selectCompany[0].value = companyId;
     selectCompany[0].innerText = companyName;
 

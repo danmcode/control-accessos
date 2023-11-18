@@ -14,7 +14,7 @@
                     <div class="col-auto">
                         <label for="initials" class="form-label fw-bold"> Sigla: <small
                                 class="required">*</small></label>
-                        <input type="text" class="form-control" id="initials" name="initials" placeholder="Sigla"
+                        <input type="text" class="form-control" id="initials_modal" name="initials" placeholder="Sigla"
                             required>
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ __('La sigla de la identificación es requerida') }}</strong>
@@ -24,7 +24,7 @@
                     <div class="col-auto">
                         <label for="name" class="form-label fw-bold"> Tipo de identificación: <small
                                 class="required">*</small></label>
-                        <input type="text" class="form-control" id="name" name="name"
+                        <input type="text" class="form-control" id="identification_name" name="name"
                             placeholder="Tipo de identificación" required>
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ __('El Tipo de identificación es requerido') }}</strong>

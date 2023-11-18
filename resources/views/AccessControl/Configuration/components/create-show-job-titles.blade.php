@@ -4,7 +4,7 @@
     @csrf
     <div class="col-auto">
         <label for="name" class="form-label fw-bold"> Nombre del cargo: <small class="required">*</small></label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Cargo" required>
+        <input type="text" class="form-control" id="job_title" name="name" placeholder="Cargo" required>
         <span class="invalid-feedback" role="alert">
             <strong>{{ __('El nombre del cargo es requerido') }}</strong>
         </span>
@@ -29,7 +29,7 @@
     <div class="col-auto">
         <label for="name" class="form-label fw-bold"> Empresa:
             <small class="required">*</small></label>
-        <select name="company_id" id="company_id" class="form-select" required>
+        <select name="company_id" id="company_id_job_title" class="form-select" required>
             <option value="" selected>Seleccione...</option>
             @if( isset($companies) && sizeof($companies) > 0 )
             @foreach( $companies as $key => $company )

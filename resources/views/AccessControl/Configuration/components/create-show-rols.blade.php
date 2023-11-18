@@ -4,7 +4,7 @@
     @csrf
     <div class="col-auto">
         <label for="name" class="form-label fw-bold"> Rol: <small class="required">*</small></label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del Rol" required>
+        <input type="text" class="form-control" id="rol" name="name" placeholder="Nombre del Rol" required>
         <span class="invalid-feedback" role="alert">
             <strong>{{ __('El Campo Rol es Requerido') }}</strong>
         </span>

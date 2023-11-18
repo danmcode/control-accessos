@@ -30,19 +30,19 @@
                 @method('PATCH')
                 @endif
                 <div class="col-auto">
-                    <label class="form-label fw-bold" for="autoSizingInputGroup">Hora de ingreso: </label>
+                    <label class="form-label fw-bold" for="time_in">Hora de ingreso: </label>
                     <div class="input-group">
                         <div class="input-group-text"><i class="bi bi-clock"></i></div>
                         <input type="time" name="time_in" value="{{ $workingHours->time_in }}" class="form-control"
-                            id="autoSizingInputGroup" required>
+                            id="time_in" required>
                     </div>
                 </div>
                 <div class="col-auto">
-                    <label class="form-label fw-bold" for="autoSizingInputGroup">Hora de salida: </label>
+                    <label class="form-label fw-bold" for="time_out">Hora de salida: </label>
                     <div class="input-group">
                         <div class="input-group-text"><i class="bi bi-clock"></i></div>
                         <input type="time" name="time_out" value="{{ $workingHours->time_out }}" class="form-control"
-                            id="autoSizingInputGroup" required>
+                            id="time_out" required>
                     </div>
                 </div>
 
@@ -66,9 +66,9 @@
                 class="row needs-validation" novalidate>
                 @csrf
                 <div class="col-md-6">
-                    <label for="inputEmail4" class="form-label fw-bold">Correo electrónico: </label>
+                    <label for="email" class="form-label fw-bold">Correo electrónico: </label>
                     <input type="email" name="email" value="{{ $emailConfig->email }}" class="form-control"
-                        id="inputEmail4" required>
+                        id="email" required>
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ __('El correo es requerido') }}</strong>
                     </span>
@@ -83,8 +83,8 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label for="inputState" class="form-label fw-bold">Protocolo: </label>
-                    <select id="inputState" name="protocol" class="form-select" required>
+                    <label for="protocol" class="form-label fw-bold">Protocolo: </label>
+                    <select id="protocol" name="protocol" class="form-select" required>
                         <option value="">Seleccione...</option>
                         <option>SMTP</option>
                         <option>IMAP</option>
@@ -96,8 +96,8 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label for="inputState" class="form-label fw-bold">Cifrado: </label>
-                    <select id="inputState" name="encryption" class="form-select" required>
+                    <label for="encryption" class="form-label fw-bold">Cifrado: </label>
+                    <select id="encryption" name="encryption" class="form-select" required>
                         <option value="" selected>Seleccione...</option>
                         <option>TLS</option>
                     </select>
@@ -107,26 +107,26 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label for="inputEmail4" class="form-label fw-bold">Puerto: </label>
+                    <label for="port" class="form-label fw-bold">Puerto: </label>
                     <input type="number" name="port" value="{{ $emailConfig->port }}" class="form-control"
-                        id="inputEmail4" required>
+                        id="port" required>
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ __('El puerto es requerido') }}</strong>
                     </span>
                 </div>
 
                 <div class="col-md-6">
-                    <label for="inputEmail4" class="form-label fw-bold">Host: </label>
+                    <label for="host" class="form-label fw-bold">Host: </label>
                     <input type="text" name="host" value="{{ $emailConfig->host }}" class="form-control"
-                        id="inputEmail4" required>
+                        id="host" required>
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ __('El host es requerido') }}</strong>
                     </span>
                 </div>
                 <div class="col-md-6">
-                    <label for="inputPassword4" class="form-label fw-bold">Nombre de usuario: </label>
+                    <label for="username" class="form-label fw-bold">Nombre de usuario: </label>
                     <input type="text" name="username" value="{{ $emailConfig->username }}" class="form-control"
-                        id="inputPassword4" required>
+                        id="username" required>
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ __('El usuario es requerido') }}</strong>
                     </span>

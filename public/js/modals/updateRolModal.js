@@ -10,7 +10,7 @@ modalUpdateRol.addEventListener("show.bs.modal", function (event) {
     let rol = button.getAttribute("data-bs-rol-name");
 
     let modalTitle = modalUpdateRol.querySelector(".modal-title");
-    let inputname = modalUpdateRol.querySelector("#name");
+    let inputname = modalUpdateRol.querySelector("#rol_name");
 
     modalTitle.textContent = `Editar Nombre del Rol: ${rol}`;
 

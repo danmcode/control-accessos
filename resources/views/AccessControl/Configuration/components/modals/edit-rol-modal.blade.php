@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-6">
                         <label for="name_rol" class="form-label fw-bold"> Rol: <small class="required">*</small></label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del Rol"
+                        <input type="text" class="form-control" id="rol_name" name="name" placeholder="Nombre del Rol"
                             required>
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ __('El campo Rol es requerido') }}</strong>

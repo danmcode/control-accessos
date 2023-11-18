@@ -13,7 +13,7 @@
                     <div class="col-auto mb-3">
                         <label for="name" class="form-label fw-bold"> Nombre de la ubicación:
                             <small class="required">*</small></label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Ubicación" required>
+                        <input type="text" class="form-control" id="location_name" name="name" placeholder="Ubicación" required>
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ __('El nombre de la ubicación es requerido') }}</strong>
                         </span>
@@ -22,7 +22,7 @@
                     <div class="col-auto mb-3">
                         <label for="name" class="form-label fw-bold"> Empresa:
                             <small class="required">*</small></label>
-                        <select name="company_id" id="company_id" class="form-select" required>
+                        <select name="company_id" id="company_id_locations" class="form-select" required>
                             <option value="" selected>Seleccione...</option>
                             @if( isset($companies) && sizeof($companies) > 0 )
                             @foreach( $companies as $key => $company )

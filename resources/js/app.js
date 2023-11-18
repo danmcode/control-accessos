@@ -1,6 +1,7 @@
 import './bootstrap';
 import './formValidations'
 import './main'
+import './helpers.js'
 
 //DataTables
 import './DataTables/jquery-3.5.1'

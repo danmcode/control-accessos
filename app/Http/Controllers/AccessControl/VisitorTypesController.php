@@ -35,7 +35,6 @@ class VisitorTypesController extends Controller
      */
     public function update(Request $request, string $visitorTypes)
     {
-        //update a identification type
         $visitorTypeToUpdate = VisitorTypes::find($visitorTypes);
         $data = $request->all();
 
@@ -46,7 +45,6 @@ class VisitorTypesController extends Controller
 
         return redirect()->route('configuration.index')
             ->with('success', 'Se ha actualizado el tipo de visitante');
-    
     }
 
     /**
@@ -54,7 +52,6 @@ class VisitorTypesController extends Controller
      */
     public function destroy(string $visitorTypes)
     {
-        // Soft delete
         $visitorTypeToDelete = VisitorTypes::find($visitorTypes);
         $visitorTypeToDelete->is_active = false;
         $visitorTypeToDelete->update();

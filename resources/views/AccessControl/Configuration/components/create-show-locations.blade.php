@@ -4,7 +4,7 @@
     @csrf
     <div class="col-auto">
         <label for="name" class="form-label fw-bold"> Nombre de la ubicación: <small class="required">*</small></label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Ubicación" required>
+        <input type="text" class="form-control" id="location" name="name" placeholder="Ubicación" required>
         <span class="invalid-feedback" role="alert">
             <strong>{{ __('El nombre de la ubicación es requerido') }}</strong>
         </span>
