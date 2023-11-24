@@ -17,9 +17,8 @@ modalUpdateCompany.addEventListener('show.bs.modal', function(event) {
     //
     // Update the modal's content.
     let modalTitle = modalUpdateCompany.querySelector('.modal-title');
-    let userId = modalUpdateCompany.querySelector('#id');
-    let inputName = modalUpdateCompany.querySelector('#name');
-    let inputNit = modalUpdateCompany.querySelector('#nit');
+    let inputName = modalUpdateCompany.querySelector('#company_modal');
+    let inputNit = modalUpdateCompany.querySelector('#nit_modal');
 
     modalTitle.textContent = `Editar empresa: ${name}`;
 

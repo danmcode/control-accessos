@@ -14,7 +14,7 @@
     <div class="col-auto">
         <label for="name" class="form-label fw-bold"> Nombre de la empresa:
             <small class="required">*</small></label>
-        <input type="text" class="form-control" id="name" name="name" name="name" placeholder="Nombre de la empresa"
+        <input type="text" class="form-control" id="company_create" name="name" name="name" placeholder="Nombre de la empresa"
             required>
         <span class="invalid-feedback" role="alert">
             <strong>{{ __('El nombre de la empresa es requerido') }}</strong>

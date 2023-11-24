@@ -4,7 +4,7 @@
     @csrf
     <div class="col-auto">
         <label for="name" class="form-label fw-bold"> Nombre de la ARL: <small class="required">*</small></label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="ARL" required>
+        <input type="text" class="form-control" id="arl" name="name" placeholder="ARL" required>
         <span class="invalid-feedback" role="alert">
             <strong>{{ __('El nombre de la ARL es requerido') }}</strong>
         </span>

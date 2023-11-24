@@ -44,7 +44,7 @@
                             </a>
                         </div>
                         <div class="col-4">
-                            <form action="{{ route('tipo-visitantes.destroy', '$visitorType->id') }}" method="post">
+                            <form action="{{ route('tipo-visitantes.destroy', $visitorType->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
 

@@ -1,12 +1,6 @@
-/**
- * Code for modals
- * dmr
- */
 let modalUpdateIdentificationType = document.getElementById('modalUpdateIdentificationType')
 modalUpdateIdentificationType.addEventListener('show.bs.modal', function(event) {
-    // Button that triggered the modal
     let button = event.relatedTarget
-    // Extract info from data-bs-* attributes
 
     let identificationTypeId = button.getAttribute('data-bs-identification-type-id');
     let identificationTypeInitials = button.getAttribute('data-bs-identification-type-initials');
@@ -14,8 +8,8 @@ modalUpdateIdentificationType.addEventListener('show.bs.modal', function(event) 
 
     let modalTitle = modalUpdateIdentificationType.querySelector('.modal-title');
 
-    let inputidentificationTypeName = modalUpdateIdentificationType.querySelector('#name');
-    let inputidentificationTypeInitials = modalUpdateIdentificationType.querySelector('#initials');
+    let inputidentificationTypeName = modalUpdateIdentificationType.querySelector('#identification_name');
+    let inputidentificationTypeInitials = modalUpdateIdentificationType.querySelector('#initials_modal');
 
     modalTitle.textContent = `Editar tipo de identificación: ${identificationTypeName}`;
 

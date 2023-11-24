@@ -5,7 +5,7 @@
     
     <div class="col-auto">
         <label for="name" class="form-label fw-bold"> Tipo de vehiculo: <small class="required">*</small></label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Tipo de vehiculo" required>
+        <input type="text" class="form-control" id="vehicle" name="name" placeholder="Tipo de vehiculo" required>
         <span class="invalid-feedback" role="alert">
             <strong>{{ __('El Tipo de vehiculo es requerido') }}</strong>
         </span>

@@ -15,10 +15,11 @@ modalUpdateArea.addEventListener('show.bs.modal', function(event) {
 
     let modalTitle = modalUpdateArea.querySelector('.modal-title');
 
-    let inputAreaName = modalUpdateArea.querySelector('#name');
-    let selectCompany = modalUpdateArea.querySelector('#company_id');
+    let inputAreaName = modalUpdateArea.querySelector('#area_name');
+    let selectCompany = modalUpdateArea.querySelector('#company_id_modal');
 
-    
+    InterfaceHelper.deleteSelectOptionById(selectCompany, companyId);
+
     selectCompany[0].value = companyId;
     selectCompany[0].innerText = companyName;
 
@@ -28,6 +29,4 @@ modalUpdateArea.addEventListener('show.bs.modal', function(event) {
 
     let getFormUpdate = modalUpdateArea.querySelector('.update-area-form');
     getFormUpdate.action = `areas/${areaId}`;
-
-
 });

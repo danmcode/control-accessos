@@ -1,7 +1,3 @@
-/**
- * Code for modals
- * gmrj
- */
 let modalUpdateTypeVehicle = document.getElementById('modalUpdatetypeVehicle')
 modalUpdateTypeVehicle.addEventListener('show.bs.modal',function(event){
     let button = event.relatedTarget
@@ -10,7 +6,7 @@ modalUpdateTypeVehicle.addEventListener('show.bs.modal',function(event){
     let type_vehicle = button.getAttribute('data-bs-name');
 
     let modalTitle = modalUpdateTypeVehicle.querySelector('.modal-title');
-    let inputname = modalUpdateTypeVehicle.querySelector('#name');
+    let inputname = modalUpdateTypeVehicle.querySelector('#vehicle_name');
 
     modalTitle.textContent = `Editar tipo de vehiculo: ${type_vehicle}`
 
@@ -18,6 +14,4 @@ modalUpdateTypeVehicle.addEventListener('show.bs.modal',function(event){
 
     let getFormUpdate = modalUpdateTypeVehicle.querySelector('.update-vehicle-form');
     getFormUpdate.action = `tipo-vehiculos/${id}`;
-
-    
 })
