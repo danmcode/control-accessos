@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccessControl\PermissionController;
 use App\Http\Controllers\AccessControl\VisitorController;
 use App\Http\Controllers\AccessControl\AuthorizationController;
+use App\Models\AccessControl\Permission;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,12 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::get('/permissions', [PermissionController::class, 'index'])->name('permission')->middleware('auth');
+Route::get('/crear-permissions', [PermissionController::class, 'create'])->name('permission.create')->middleware('auth');
+Route::post('/permissions', [PermissionController::class, 'store'])->name('permission.store')->middleware('auth');
+Route::post('/update-permissions', [PermissionController::class, 'update'])->name('permission.update')->middleware('auth');
+
+
+
 Route::get('/authorizations', [AuthorizationController::class, 'index'])->name('authorization')->middleware('auth');
 
 Route::resource('configuration', 'App\Http\Controllers\AccessControl\Configuration\ConfigurationController')

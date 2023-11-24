@@ -23,7 +23,7 @@
     <div class="col-xl-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title"> {{ __('Permisos') }} </h5>
+                <h5 class="card-title text-center"> {{ __('Informacion de Permisos') }} </h5>
                 <hr>
 
                 <div class="table-responsive">
@@ -31,162 +31,118 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col"></th>
-                                <th scope="col">
-                                    {{ __('Visitante') }}
-                                </th>
-                                <th scope="col">Elemetos de ingreso</th>
-                                <th scope="col">Vehiculo</th>
+                                <th scope="col">Fecha del permiso</th>
+                                <th scope="col">Personal</th>
+                                <th scope="col">Tiempo Solicitado</th>
+                                <th scope="col">Motivo del Permiso</th>
+                                <th scope="col">Estado</th>
+                                @if(session('accion_realizada'))
+                                @can('accessAGSJCDJA',Auth::user())
                                 <th scope="col">Acciones</th>
-                                <th></th>
+                                @endcan
+                                @endif
+                                <th scope="col">Observaciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if( isset($incomeExitVisitors) && sizeof($incomeExitVisitors) > 0 )
-                            @foreach( $incomeExitVisitors as $key => $incomeExitVisitor )
+                            @if( isset($permissions) && sizeof($permissions) > 0 )
+                            @foreach( $permissions as $key => $permission )
                             <tr>
                                 <th scope="row">{{ $key + 1 }}</th>
-                                <td>
-                                    <img src="{{ asset($incomeExitVisitor->visitor->photo_path) }}">
-                                </td>
-                                <td>
-                                    <div>
-                                        <span class="title-sm">
-                                            {{$incomeExitVisitor->visitor->name.'
-                                            '.$incomeExitVisitor->visitor->last_name}}
-                                        </span>
-                                        <div class="row">
-                                            <div class="col-5">
-                                                <div>
-                                                    <i class="bi bi-person-vcard-fill"></i>
-                                                    <span>
-                                                        {{$incomeExitVisitor->visitor->IdentificationType->initials}}
-                                                    </span>
-                                                    <span> {{$incomeExitVisitor->visitor->identification}} </span>
-                                                </div>
-                                                <div>
-                                                    <i class="bi bi-person-workspace"></i>
-                                                    <span> {{$incomeExitVisitor->VisitorType->name}}
-                                                    </span>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-7">
-                                                <div>
-                                                    <i class="bi bi-building"></i>
-                                                    <span> {{$incomeExitVisitor->company}} </span>
-                                                </div>
-                                                <div>
-                                                    <i class="bi bi-person-fill-lock"></i>
-                                                    <span class="fw-bold"> Responsable: </span>
-                                                    {{ $incomeExitVisitor->collaborator->user->name }}
-                                                    {{ $incomeExitVisitor->collaborator->user->last_name }}
-                                                </div>
-                                            </div>
-                                        </div>
+                                <td><i class="bi bi-calendar2-check"></i>
+                                    <span class="title-sm">{{$permission->date_permission}}</span>
                                 </td>
                                 <td>
                                     <div class="row">
                                         <div class="col-12">
                                             <div>
-                                                <i class="bi bi-box-seam"></i>
-                                                <span class="fw-bold"> Tipo de equipo:</span>
-                                                {{isset($incomeExitVisitor->Equipment->EquipmentType->name)?
-                                                $incomeExitVisitor->Equipment->EquipmentType->name :'NA'
-                                                }}
+                                                <i class="bi bi-person-badge"></i>
+                                                <span class="fw-bold">Encargado:</span>
+                                                {{$permission->UserJ->name.' '.$permission->UserJ->last_name}}
                                             </div>
                                             <div>
-                                                <i class="bi bi-badge-tm"></i>
-                                                <span class="fw-bold"> Marca:</span>
-                                                {{isset($incomeExitVisitor->Equipment->mark)?
-                                                $incomeExitVisitor->Equipment->mark :'NA'}}
-                                            </div>
-                                            <div>
-                                                <i class="bi bi-qr-code"></i>
-                                                <span class="fw-bold"> Serial:</span>
-                                                {{isset($incomeExitVisitor->Equipment->serial)?
-                                                $incomeExitVisitor->Equipment->serial :'NA'}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-
-                                <td>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div>
-                                                <i class="bi bi-c-circle-fill"></i>
-                                                <span class="fw-bold"> Marca:</span>
-                                                {{isset($incomeExitVisitor->Vehicle->mark)?
-                                                $incomeExitVisitor->Vehicle->mark:'NA'}}
-                                            </div>
-                                            <div>
-                                                <i class="bi bi-badge-3d"></i>
-                                                <span class="fw-bold"> Placa:</span>
-                                                {{isset($incomeExitVisitor->Vehicle->placa)?
-                                                $incomeExitVisitor->Vehicle->placa:'NA'}}
-                                            </div>
-                                            <div>
-                                                <i class="bi bi-paint-bucket"></i>
-                                                <span class="fw-bold"> Color:</span>
-                                                {{isset($incomeExitVisitor->Vehicle->color)?
-                                                $incomeExitVisitor->Vehicle->color:'NA'}}
-                                            </div>
-                                            <div>
-                                                <i class="bi bi-car-front-fill"></i>
-                                                <span class="fw-bold"> Tipo Vehiculo:</span>
-                                                {{isset($incomeExitVisitor->Vehicle->VehicleType->name)?
-                                                $incomeExitVisitor->Vehicle->VehicleType->name:'NA'}}
+                                                <i class="bi bi-person-bounding-box"></i>
+                                                <span class="fw-bold">Colaborador:</span>
+                                                {{$permission->UserC->name.' '.$permission->UserC->last_name}}
                                             </div>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-
                                     <div class="row">
                                         <div class="col-12">
                                             <div>
-                                                <i class="bi bi-box-arrow-right visitor-in"></i>
-                                                <span class="fw-bold">
-                                                    Entrada:
-                                                </span>
+                                                <i class="bi bi-hourglass-top"></i>
+                                                <span class="fw-bold">Hora Inicio:</span>
+                                                {{$permission->start_hour}}
                                             </div>
-                                            {{$incomeExitVisitor->date_time_in}}
-
-                                            @if($incomeExitVisitor->date_time_out)
                                             <div>
-                                                <i class="bi bi-box-arrow-left"></i>
-                                                <span class="fw-bold">
-                                                    Salida:
-                                                </span>
+                                                <i class="bi bi-hourglass-bottom"></i>
+                                                <span class="fw-bold">Hora Final:</span>
+                                                {{$permission->final_hour}}
                                             </div>
-                                            {{$incomeExitVisitor->date_time_out}}
-                                            @else
-                                            <div class="row">
-                                                <a href="#" class="btn btn-danger" data-bs-toggle="modal"
-                                                    data-bs-target="#modalOutvisitor" id="btnOutvisitor"
-                                                    data-id="{{$incomeExitVisitor->visitor_id}}"
-                                                    data-bs-full-name="{{$incomeExitVisitor->visitor->name.' '.$incomeExitVisitor->visitor->last_name}}">
-                                                    <i class="bi bi-box-arrow-left visitor-out"></i>
-                                                    {{ __('Registrar salida') }}
-                                                </a>
+                                            <div>
+                                                <i class="bi bi-alarm"></i>
+                                                <span class="fw-bold">Duracion:</span>
+                                                <span>{{$permission->diff_hours.' min'}}</span>
                                             </div>
-                                            @endif
+                                        </div>
+                                    </div>
+
+                                </td>
+                                <td>
+                                    <span>{{$permission->reason_permission}}</span>
+                                </td>
+
+                                <td>
+                                    @if($permission->status_auth===0)
+                                    <span class="badge bg-danger"><i class="bi bi-x-octagon"></i> Rechazado</span>
+                                    @elseif ($permission->status_auth===1)
+                                    <span class="badge bg-success"><i class="bi bi-check2-all"></i> Aceptado</span>
+                                    @else
+                                    <span class=" badge bg-warning text-dark rounded-pill"><i
+                                            class="bi bi-pause-circle"></i>Pendiente</span>
+                                    @endif
+                                </td>
+                                @if(session('accion_realizada'))
+                                @can('accessAGSJCDJA',Auth::user())
+                                <td>
+                                    <div class="row">
+                                        <div class="col-12 text-center">
+                                            <form action="{{route('permission.update')}}" method="POST">
+                                                @csrf
+
+                                                <input type="hidden" name="id_permission" id="id_permission"
+                                                    class="form-control" value="{{$permission->id}}"></input>
+                                                <div>
+                                                    <button type="submit" name="action" value="Aceptar"
+                                                        class="btn btn-success btn-sm">Aceptar</button>
+                                                </div>
+                                                <hr>
+                                                <div>
+                                                    <button type="submit" name="action" value="Rechazar"
+                                                        class="btn btn-danger btn-sm">Rechazar</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </td>
-                                <td> <a href="#" id="MostrarObservaciones"
-                                        data-mensaje="{{$incomeExitVisitor->observation}}"><i
-                                            class="bi bi-exclamation-circle"></i></a> </td>
+                                @endcan
+                                @endif
+                                <td>
+                                    <div class="text-center"><a href="#" id="MostrarObservaciones" data-mensaje="#"><i
+                                                class="bi bi-exclamation-circle"></i></a> </div>
+                                </td>
                             </tr>
                             @endforeach
                             @endif
                         </tbody>
                     </table>
                 </div>
-
             </div>
+
         </div>
+    </div>
     </div>
     </div>
 
@@ -221,4 +177,19 @@
     </div>
 
 </section>
+@endsection
+@section('scripts')
+@if (session('success'))
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    Swal.fire({
+        icon: 'success',
+        title: '¡Éxito!',
+        text: ` {{ session('success') }} `,
+        showConfirmButton: false,
+        timer: 3000
+    });
+});
+</script>
+@endif
 @endsection

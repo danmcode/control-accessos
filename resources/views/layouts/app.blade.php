@@ -30,7 +30,7 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            @can('accessJCDJAC',Auth::user())
+            @can('accessDJAC',Auth::user())
             <a href="{{route('permission') }}" class="logo d-flex align-items-center">
                 <img src="{{ asset('images/pisa.png') }}" alt="">
                 <span class=""> Protécnica Ingeniería </span>
@@ -317,10 +317,29 @@
 
             <!-- permissions -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{route('permission')}}">
-                    <i class="bi bi-person-check"></i>
-                    <span>Permisos</span>
+                <a class="nav-link collapsed" data-bs-target="#visitors-nav2" data-bs-toggle="collapse" href="#"">
+                    <i class=" bi bi-person-check"></i>
+                    <span>Permisos</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
+                <ul id="visitors-nav2" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                    <li>
+
+                        <a href="{{ route('permission') }}">
+                            <span>Ver permisos</span>
+                            @if(auth()->user()->unreadNotifications->count()>0)
+                            <span class="badge text-bg-danger">{{auth()->user()->unreadNotifications->count()}}</span>
+                            @endif
+                        </a>
+                    </li>
+                    @can('accessAGSJCC',Auth::user())
+                    <li>
+                        <a href="{{route('permission.create')}}">
+                            <span>Crear permisos</span>
+                        </a>
+                    </li>
+                    @endcan
+                </ul>
+
             </li>
             <!-- End permissions -->
 

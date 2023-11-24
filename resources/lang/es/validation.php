@@ -37,10 +37,11 @@ return [
     'date' => [
         'date_valid' => 'El campo :attribute no es una fecha válida.',
         'after' => 'La fecha debe ser superior a la fecha actual.',
+        'date_after' => 'La fecha debe ser igual o mayor a la fecha actual.'
     ],
     'date_equals' => 'El campo :attribute debe ser una fecha igual a :date.',
     'date_format' => 'El campo :attribute no corresponde con el formato :format.',
-     'decimal' => 'El :attribute debe tener :decimal decimales.',
+    'decimal' => 'El :attribute debe tener :decimal decimales.',
     'declined' => 'El campo :attribute debe marcar como rechazado.',
     'declined_if' => 'El campo :attribute debe marcar como rechazado cuando :other es :value.',
     'different' => 'Los campos :attribute y :other deben ser diferentes.',
@@ -76,7 +77,7 @@ return [
     'ipv4' => 'El campo :attribute debe ser una dirección IPv4 válida.',
     'ipv6' => 'El campo :attribute debe ser una dirección IPv6 válida.',
     'json' => 'El campo :attribute debe ser una cadena JSON válida.',
-     'lowercase' => 'El :attribute debe ser minusculas.', 
+    'lowercase' => 'El :attribute debe ser minusculas.',
     'lt' => [
         'numeric' => 'El campo :attribute debe ser menor que :max.',
         'file' => 'El campo :attribute debe ser menor que :max kilobytes.',
@@ -110,7 +111,7 @@ return [
     'missing_if' => 'El campo :attribute debe faltar cuando :other es :value',
     'missing_unless' => 'El campo :attribute debe faltar a menos que :other sea :value.',
     'missing_with' => 'El campo :attribute debe faltar cuando :values está presente.',
-    'missing_with_all' => 'El campo :attribute debe faltar cuando :values están presentes', 
+    'missing_with_all' => 'El campo :attribute debe faltar cuando :values están presentes',
     'multiple_of' => 'El campo :attribute debe ser un múltiplo de :value.',
     'not_in' => 'El campo :attribute seleccionado es invalido.',
     'not_regex' => 'El formato del campo :attribute no es válido.',
@@ -149,9 +150,9 @@ return [
     'timezone' => 'El campo :attribute debe ser una zona válida.',
     'unique' => 'El campo :attribute ya esta registrado.',
     'uploaded' => 'El campo :attribute no ha podido ser cargado.',
-    'uppercase' => 'El :attribute debe estar en mayúsculas', 
+    'uppercase' => 'El :attribute debe estar en mayúsculas',
     'url' => 'El formato de :attribute no es válido.',
-    'ulid' => 'El :attribute debe ser un ULID valido.', 
+    'ulid' => 'El :attribute debe ser un ULID valido.',
     'uuid' => 'El :attribute debe ser un UUID valido.',
 
     'password.mixed' => 'El :attribute debe contener al menos una letra mayúscula y una minúscula.',
