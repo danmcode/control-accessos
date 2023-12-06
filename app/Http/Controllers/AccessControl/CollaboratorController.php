@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\AccessControl;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\EmailController;
 use App\Mail\SendTemporalPassword;
 use App\Models\User;
 use App\Models\AccessControl\Collaborator;
@@ -85,6 +86,16 @@ class CollaboratorController extends Controller
         if ($newUser && $newCollaborator) {
 
             $saveImage = $this->saveImage($newUser, $data['photoDataInput']);
+
+            EmailController::sendEmail(
+                $newUser->email,
+                'emails.first-password',
+                [
+                    'name' => $newUser->name . ' ' . $newUser->last_name,
+                    'username' => $newUser->username,
+                    'password' => $newUser->password,
+                ]
+            );
 
             return redirect()->route('colaboradores.index')
                 ->with('success', 'Se ha creado el colaborador con exito');
