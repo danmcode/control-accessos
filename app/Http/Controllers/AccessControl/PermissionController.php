@@ -43,6 +43,7 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+
         $start_hour_in = $data['start_hour'];
         $final_hour_in = $data['final_hour'];
 
@@ -51,15 +52,22 @@ class PermissionController extends Controller
 
         $diff_hours = $start_hour_out->diffInMinutes($final_hour_out);
 
-        $validarPermiso = Validator::make($data, [
-            'date_permission' => [
-                'nullable',
-                'after_or_equal:' . now()->format('d-m-Y')
-            ],
-        ]);
+        $reglas = [
+            'final_hour' => 'after:start_hour',
+            'reason_permission' => 'required',
+            'observation' => 'required'
+        ];
 
-        if ($validarPermiso->fails()) {
-            $errorsString = $validarPermiso->errors()->all();
+        $mensajes = [
+            'final_hour.after' => 'La hora final debe ser mayor que la hora inicial.',
+        ];
+
+        $validatePermission = Validator::make($data, $reglas, $mensajes);
+
+
+
+        if ($validatePermission->fails()) {
+            $errorsString = $validatePermission->errors()->all();
             return redirect()->route('permission.create')->withErrors($errorsString);
         }
 
@@ -97,7 +105,7 @@ class PermissionController extends Controller
 
         if ($data === 'Aceptar') {
             $permissions->status_auth = true;
-        } else {
+        } elseif ($data === 'Rechazar') {
             $permissions->status_auth = false;
         }
 
@@ -107,7 +115,7 @@ class PermissionController extends Controller
 
         // Establece un mensaje de éxito en la sesión
         session()->flash('success', 'Estado de Permiso Actualizado');
-        session()->flash('accion_realizada');
+
 
         return redirect()->route('permission');
     }

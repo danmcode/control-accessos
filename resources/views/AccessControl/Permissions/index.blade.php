@@ -36,11 +36,11 @@
                                 <th scope="col">Tiempo Solicitado</th>
                                 <th scope="col">Motivo del Permiso</th>
                                 <th scope="col">Estado</th>
-                                @if(session('accion_realizada'))
+
                                 @can('accessAGSJCDJA',Auth::user())
                                 <th scope="col">Acciones</th>
                                 @endcan
-                                @endif
+
                                 <th scope="col">Observaciones</th>
                             </tr>
                         </thead>
@@ -104,14 +104,14 @@
                                             class="bi bi-pause-circle"></i>Pendiente</span>
                                     @endif
                                 </td>
-                                @if(session('accion_realizada'))
+
                                 @can('accessAGSJCDJA',Auth::user())
+                                @if($permission->status_auth === null)
                                 <td>
                                     <div class="row">
                                         <div class="col-12 text-center">
                                             <form action="{{route('permission.update')}}" method="POST">
                                                 @csrf
-
                                                 <input type="hidden" name="id_permission" id="id_permission"
                                                     class="form-control" value="{{$permission->id}}"></input>
                                                 <div>
@@ -127,8 +127,18 @@
                                         </div>
                                     </div>
                                 </td>
-                                @endcan
+                                @else
+                                <td>
+                                    <div class="text-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="green"
+                                            class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                        </svg>
+                                    </div>
+                                </td>
                                 @endif
+                                @endcan
                                 <td>
                                     <div class="text-center"><a href="#" id="MostrarObservaciones" data-mensaje="#"><i
                                                 class="bi bi-exclamation-circle"></i></a> </div>

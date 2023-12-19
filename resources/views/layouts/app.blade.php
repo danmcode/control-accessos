@@ -238,6 +238,17 @@
                         </li>
 
                         <li>
+                            <a class="dropdown-item d-flex align-items-center"
+                                href="{{ route('change-password.index') }}">
+                                <i class="bi bi-lock"></i>
+                                <span>Cambiar Contraseña</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
                             <form action="{{route('logout')}}" method="post">
                                 @csrf
                                 <a class="dropdown-item" href="route('logout')" onclick="event.preventDefault();

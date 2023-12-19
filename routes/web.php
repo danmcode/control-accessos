@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccessControl\PermissionController;
 use App\Http\Controllers\AccessControl\VisitorController;
 use App\Http\Controllers\AccessControl\AuthorizationController;
+use App\Http\Controllers\Auth\PasswordController;
 use App\Models\AccessControl\Permission;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -24,7 +25,7 @@ Route::get('/', function () {
         if ($userRole == 1 || $userRole == 2 || $userRole == 3) {
             return view('home');
         } else {
-            return view('AccessControl.Permissions.index');
+            return redirect('/permissions');
         }
     }
     return view('auth.login');
@@ -37,6 +38,9 @@ Route::get('/permissions', [PermissionController::class, 'index'])->name('permis
 Route::get('/crear-permissions', [PermissionController::class, 'create'])->name('permission.create')->middleware('auth');
 Route::post('/permissions', [PermissionController::class, 'store'])->name('permission.store')->middleware('auth');
 Route::post('/update-permissions', [PermissionController::class, 'update'])->name('permission.update')->middleware('auth');
+
+Route::get('/change-password', [PasswordController::class, 'index'])->name('change-password.index')->middleware('auth');
+Route::post('/change-password', [PasswordController::class, 'store'])->name('change-password.store')->middleware('auth');
 
 
 

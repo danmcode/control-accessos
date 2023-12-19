@@ -63,7 +63,14 @@
                                 <i class="bi bi-person-check"></i>
                             </div>
                             <div class="ps-3">
-                                <h6> 5 <span class="text-muted small pt-2 ps-1"> Permisos </span></h6>
+                                @if(isset($count_permisos))
+                                <h6> {{$count_permisos}} <span
+                                        class="text-muted small pt-2 ps-1">@choice('Permiso|Permisos',$count_permisos)</span>
+                                </h6>
+                                @else
+                                <h6>0 <span class="text-muted small pt-2 ps-1">Permisos</span>
+                                </h6>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -106,7 +113,15 @@
                                 <i class="bi bi-clock"></i>
                             </div>
                             <div class="ps-3">
-                                <h6>5 <span class="text-muted small pt-2 ps-1"> permisos</span></h6>
+                                @if(isset($count_permisos_pending))
+                                <h6>{{$count_permisos_pending}}<span class="text-muted small pt-2 ps-1">
+                                        @choice('Permiso|Permisos',$count_permisos_pending)</span>
+                                </h6>
+                                @else
+                                <h6>0<span class="text-muted small pt-2 ps-1">
+                                        Permisos</span>
+                                </h6>
+                                @endif
                             </div>
                         </div>
                     </div>

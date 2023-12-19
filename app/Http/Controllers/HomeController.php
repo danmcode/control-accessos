@@ -9,6 +9,7 @@ use App\Models\AccessControl\Vehicles;
 use App\Models\AccessControl\Visitors;
 use App\Models\AccessControl\Collaborator;
 use App\Models\AccessControl\IncomeExitVisitors;
+use App\Models\AccessControl\Permission;
 use App\Models\AccessControl\Rol;
 
 class HomeController extends Controller
@@ -59,12 +60,18 @@ class HomeController extends Controller
 
         $count = $incomeExitVisitors->count();
 
+        $count_permisos = Permission::whereDate('created_at', '=', Carbon::today())->count();
+
+        $count_permisos_pending = Permission::where('status_auth', '=', null)->count();
+
 
         return view('home', [
             'users' => $users,
             'incomeExitVisitors' => $incomeExitVisitors,
             'count' => $count,
-            'collaborator' => isset($collaborator) ? $collaborator : null
+            'collaborator' => isset($collaborator) ? $collaborator : null,
+            'count_permisos' => $count_permisos,
+            'count_permisos_pending' => $count_permisos_pending
         ]);
     }
 }

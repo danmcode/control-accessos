@@ -86,8 +86,11 @@
                                 <label for="reason_permission fw-bold" class="form-label">
                                     {{ __('Motivo del Permiso:') }} <small> * </small>
                                 </label>
-                                <textarea name="reason_permission" id="reason_permission"
-                                    class="form-control"></textarea>
+                                <textarea name="reason_permission" id="reason_permission" class="form-control"
+                                    required></textarea>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ __('El campo motivo del permiso es requerido') }}</strong>
+                                </span>
                             </div>
 
                             <!-- observation -->
@@ -95,7 +98,10 @@
                                 <label for="observation fw-bold" class="form-label">
                                     {{ __('Observación:') }} <small> * </small>
                                 </label>
-                                <textarea name="observation" id="observation" class="form-control"></textarea>
+                                <textarea name="observation" id="observation" class="form-control" required></textarea>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ __('El campo observaciones es requerido') }}</strong>
+                                </span>
                             </div>
 
                         </div>
@@ -143,6 +149,26 @@
         timer: 3000
     });
 });
+</script>
+@endif
+<script src="{{ asset('js/permission/configuration.js') }}"></script>
+
+
+@if( $errors->any() )
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error de validación de campos',
+            text:`             
+            @foreach ($errors->all() as $error)
+                - {{ $error}}
+            @endforeach`,
+            showConfirmButton: true,
+            confirmButtonColor: '#0d489a',
+            confirmButtonText: 'Aceptar'     
+        });
+    });
 </script>
 @endif
 @endsection
