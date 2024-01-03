@@ -6,17 +6,22 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Models\EmailConfig;
+use Illuminate\Mail\Mailables\Content;
 
 class EmailSender extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function build(String $template, array $args = []): EmailSender
-    {
-        $config = EmailConfig::getEmailConfig();
+    public function __construct(
+        public $view,
+        public $data = []
+    ){}
 
-        return $this->view($template)
-            ->with($args);
+    public function content(): Content
+    {
+        return new Content(
+            view: $this->view,
+            with: $this->data,
+        );
     }
 }

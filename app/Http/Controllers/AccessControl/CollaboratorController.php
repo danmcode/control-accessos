@@ -148,8 +148,6 @@ class CollaboratorController extends Controller
         $user = User::getUserRelationById($collaborator)["user"];
         $data = $request->all();
 
-        //$userUpdated;
-
         $user->name = $data["name"];
         $user->last_name = $data["last_name"];
 

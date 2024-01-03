@@ -14,7 +14,11 @@ class EmailController extends Controller
         ) : bool
     {
         try {
+            
+            $message = "Testing Email";
+
             Mail::to($mailTo)->send(new EmailSender($template, $args));
+            
             return true;
         } catch (\Throwable $th) {
             Log::error("Error enviando correo:, Mensaje de error: {$th->getMessage()}");
