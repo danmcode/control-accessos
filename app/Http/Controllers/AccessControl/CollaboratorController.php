@@ -41,7 +41,8 @@ class CollaboratorController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $data['password'] = Hash::make(User::generatePassword(8));
+        $password = User::generatePassword(8);
+        $data['password'] = Hash::make($password);
         $imagePath = "/images/default.png";
 
         $user = [
@@ -93,7 +94,7 @@ class CollaboratorController extends Controller
                 [
                     'name' => $newUser->name . ' ' . $newUser->last_name,
                     'username' => $newUser->username,
-                    'password' => $newUser->password,
+                    'password' => $password,
                 ]
             );
 

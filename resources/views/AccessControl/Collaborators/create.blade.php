@@ -118,7 +118,7 @@
                                 <label for="identification fw-bold" class="form-label">
                                     {{ __('Identificación:') }} <small> * </small>
                                 </label>
-                                <input type="text" name="identification" id="identification" class="form-control"
+                                <input type="number" name="identification" id="identification" class="form-control"
                                     required>
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ __('La identificación es requerida') }}</strong>

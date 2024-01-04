@@ -37,11 +37,10 @@ class PasswordController extends Controller
             return redirect()->back()->withErrors($errorsString)->withInput();
         }
 
-
         // Encuentra el registro existente por su ID
         $usuario = User::find(Auth()->user()->id);
 
-        $usuario->password = Hash::make('password');
+        $usuario->password = Hash::make($data['password']);
 
         $usuario->update();
 
