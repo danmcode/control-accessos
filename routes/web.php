@@ -154,7 +154,10 @@ Route::resource('arls', 'App\Http\Controllers\AccessControl\ArlController')
     ->middleware('auth');
 
 //working hours
-Route::resource('horario', 'App\Http\Controllers\AccessControl\WorkingHoursController');
+Route::resource('horario', 'App\Http\Controllers\AccessControl\WorkingHoursController')->middleware('auth');
 
 //email config
-Route::resource('configuracion-correo', 'App\Http\Controllers\AccessControl\EmailConfigController');
+Route::resource('configuracion-correo', 'App\Http\Controllers\AccessControl\EmailConfigController')->middleware('auth');
+
+//Loan computers
+Route::resource('prestamos-computadoras', 'App\Http\Controllers\AccessControl\LoanComputerController')->middleware('auth');

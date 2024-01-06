@@ -73,6 +73,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin',
             'identification' => '12313113',
             'identification_type' => 1,
+            'photo_path' => '/images/default.png',
             'name' => 'Administrador',
             'last_name' => '',
             'email' => 'administrador@protecnicaing.com',

@@ -1,4 +1,3 @@
-<!-- Permissions Form -->
 <h5 class="card-title mb-3"> {{__('Crear Roles')}} </h5>
 <form class="row needs-validation" action="{{route('rols.store')}}" method="POST" novalidate>
     @csrf

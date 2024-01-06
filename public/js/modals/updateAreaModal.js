@@ -1,12 +1,6 @@
-/**
- * Code for modals
- * dmr
- */
 let modalUpdateArea = document.getElementById('modalUpdateArea')
 modalUpdateArea.addEventListener('show.bs.modal', function(event) {
-    // Button that triggered the modal
     let button = event.relatedTarget
-    // Extract info from data-bs-* attributes
 
     let areaId = button.getAttribute('data-bs-area-id');
     let areaName = button.getAttribute('data-bs-area-name');
